@@ -49,7 +49,11 @@ const Home = () => {
       <div className="w-full h-screen absolute top-0 left-0 z-99 pointer-events-none flex flex-col justify-end items-center">
         <div className="w-[90%] h-[60vh] flex items-center justify-center pointer-events-none gap-10">
           {carouselImageData.slice(0, 3).map((img, index) => (
-            <PromotionCard key={index} imageUrl={img.bg} textButton="Visit" />
+            <PromotionCard key={index} imageUrl={img.bg} 
+            title={img.label}
+            subTitle={img.owner}
+            description={img.description}
+            textButton="Visit" />
           ))}
         </div>
       </div>

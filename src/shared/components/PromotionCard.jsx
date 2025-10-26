@@ -5,7 +5,9 @@ const PromotionCard = ({
   title = "Title",
   subTitle = "Subtitle",
   textButton = "Card",
-  imageUrl = ''
+  imageUrl = '',
+  description = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt alias quaerat amet vitae aperiam? Earum, quae, itaque eaque adipisci hic molestiae quibusdam dignissimos omnis deleniti placeat nesciuntinventore deserunt doloremque?",
+
 }) => {
   return (
     <div
@@ -17,7 +19,7 @@ const PromotionCard = ({
       <div className="flex flex-col flex-1 overflow-hidden justify-between">
         <h1 className="text-2xl font-semibold line-clamp-1">{title}</h1>
         <h2 className="text-[1rem] mb-2 line-clamp-1">{subTitle}</h2>
-        <p className="text-[0.9rem] line-clamp-2 mb-2">Description bla bla bal blabalallblsdfbdsf sjdfsdjfkb dfnjskdfsk djakfksjdf </p>
+        <p className="text-[0.9rem] line-clamp-2 mb-2">{description}</p>
         <div className="w-full flex justify-end">
             <FilledButton text={textButton} size="py-2 px-8"/>
         </div>
