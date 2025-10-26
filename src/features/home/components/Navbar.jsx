@@ -1,4 +1,5 @@
 import FilledButton from "../../../shared/buttons/FilledButton";
+import OutlineButton from "../../../shared/buttons/OutlineButton";
 
 const Navbar = () => {
   const items = [
@@ -16,16 +17,19 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="w-full flex justify-between p-5">
-      <h1>Logo</h1>
+    <div className="w-full flex justify-between p-5 fixed text-white z-99">
+      <h1>Logo Kita</h1>
       <div className="flex gap-10">
-        {items.map((item) => (
-          <a key={item.id} href="">
+        {items.map((item, index) => (
+          <a key={index} href="">
             {item.name}
           </a>
         ))}
       </div>
-      <FilledButton text="Login" />
+      <div className="flex gap-3">
+        <OutlineButton text="Regist" color="white"/>
+        <FilledButton text="Login" />
+      </div>
     </div>
   );
 };
