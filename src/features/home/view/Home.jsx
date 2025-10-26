@@ -3,6 +3,8 @@ import Navbar from "../components/navbar";
 import { carouselImageData } from "../data/carouselImageData";
 import BlurBackground from "../../../shared/components/BlurBackground";
 import SearchLocation from "../components/SearchLocation";
+import PromotionCard from "../../../shared/components/PromotionCard";
+import ExplorerPage from "./ExplorerPage";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,32 +17,43 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Navbar />
-      <div className="w-full h-[70vh] relative overflow-hidden">
-        <div className="bg-linear-to-b from-black/90 to-transparent w-full h-full absolute z-50 flex justify-center items-center flex-col">
-          <div className="w-[70%] flex justify-center items-center flex-col text-white">
-            <h1 className="text-[3rem] font-bold mb-1">67Travel</h1>
-            <p className="text-center mb-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-              ab, eligendi dolorum temporibus at et. Rerum, explicabo!
-            </p>
+    <div className="relative">
+      <div>
+        <Navbar />
+        <div className="w-full h-[70vh] relative overflow-hidden">
+          <div className="bg-linear-to-b from-black/95 to-transparent w-full h-full absolute z-50 flex justify-center items-center flex-col">
+            <div className="w-[70%] flex justify-center items-center flex-col text-white">
+              <h1 className="text-[3rem] font-bold mb-1">67Travel</h1>
+              <p className="text-center mb-5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Provident ab, eligendi dolorum temporibus at et. Rerum,
+                explicabo!
+              </p>
+            </div>
+            <SearchLocation />
           </div>
-          <SearchLocation />
-        </div>
-        <BlurBackground className="absolute w-full h-full z-40"></BlurBackground>
-        {carouselImageData.map((img, index) => (
-          <img
-            key={index}
-            src={img.bg}
-            className={`
+          <BlurBackground className="absolute w-full h-full z-40"></BlurBackground>
+          {carouselImageData.map((img, index) => (
+            <img
+              key={index}
+              src={img.bg}
+              className={`
               w-full h-full object-cover absolute top-0 left-0
               transition-opacity duration-1000
               ${index === currentIndex ? "opacity-100" : "opacity-0"}
             `}
-          />
-        ))}
+            />
+          ))}
+        </div>
       </div>
+      <div className="w-full h-screen absolute top-0 left-0 z-99 pointer-events-none flex flex-col justify-end items-center">
+        <div className="w-[90%] h-[60vh] flex items-center justify-center pointer-events-none gap-10">
+          {carouselImageData.slice(0, 3).map((img, index) => (
+            <PromotionCard key={index} imageUrl={img.bg} textButton="Visit" />
+          ))}
+        </div>
+      </div>
+      <ExplorerPage/>
     </div>
   );
 };
