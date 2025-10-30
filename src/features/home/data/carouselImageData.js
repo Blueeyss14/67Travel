@@ -8,10 +8,10 @@ export const carouselImageData = [
   },
   {
     bg: "/images/image2.png",
-    label: "Café Horizon",
+    label: "Cafe Horizon",
     owner: "Horizon Group",
     description:
-      "Café Horizon menghadirkan suasana hangat dengan pemandangan kota Bandung dari ketinggian. Tempat ini cocok untuk bersantai, mengerjakan tugas, atau sekadar menikmati kopi spesial racikan barista profesional.",
+      "Cafe Horizon menghadirkan suasana hangat dengan pemandangan kota Bandung dari ketinggian. Tempat ini cocok untuk bersantai, mengerjakan tugas, atau sekadar menikmati kopi spesial racikan barista profesional.",
   },
   {
     bg: "/images/image3.jpg",

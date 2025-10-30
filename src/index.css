@@ -8,3 +8,12 @@
   mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
+
+.custom-clipper {
+  clip-path: polygon(0% 0%, 100% 0%, 90.82% 7.14%, 90.82% 100%, 13.51% 100%, 13.51% 7.14%);
+  background-color: white
+}
+
+.cu {
+  color: #3aaed1;
+}

@@ -2,14 +2,11 @@ import FilledButton from "../../../shared/buttons/FilledButton";
 
 const SearchLocation = () => {
   return (
-    <div className="w-[80%] p-2 bg-white flex items-center justify-between px-2 rounded-md shadow-sm mb-10">
       <input
         type="text"
         placeholder="Search Your Fav Location"
-        className="w-full h-full outline-none ml-3"
+        className="pl-5 h-full w-80 outline-none ml-3 bg-white rounded-[10px]"
       />
-      <FilledButton text="Search"/>
-    </div>
   );
 };
 

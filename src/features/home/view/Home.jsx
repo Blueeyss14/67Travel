@@ -5,6 +5,7 @@ import BlurBackground from "../../../shared/components/BlurBackground";
 import SearchLocation from "../components/SearchLocation";
 import PromotionCard from "../../../shared/components/PromotionCard";
 import ExplorerPage from "./ExplorerPage";
+import DestionationNav from "../components/DestionationNav";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,17 +21,24 @@ const Home = () => {
     <div className="relative">
       <div>
         <Navbar />
+
+        {/* <div className="fixed bg-amber-200 h-10 w-full z-99 flex justify-center items-center">
+          <div className="custom-clipper h-full w-1/2">
+
+          </div>
+        </div> */}
         <div className="w-full h-[70vh] relative overflow-hidden">
           <div className="bg-linear-to-b from-black/95 to-transparent w-full h-full absolute z-50 flex justify-center items-center flex-col">
-            <div className="w-[70%] flex justify-center items-center flex-col text-white">
+            {/* <div className="w-[70%] flex justify-center items-center flex-col text-white">
               <h1 className="text-[3rem] font-bold mb-1">67Travel</h1>
               <p className="text-center mb-5">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Provident ab, eligendi dolorum temporibus at et. Rerum,
                 explicabo!
               </p>
-            </div>
-            <SearchLocation />
+            </div> */}
+            {/* <SearchLocation /> */}
+            <DestionationNav />
           </div>
           <BlurBackground className="absolute w-full h-full z-40"></BlurBackground>
           {carouselImageData.map((img, index) => (
@@ -48,16 +56,19 @@ const Home = () => {
       </div>
       <div className="w-full h-screen absolute top-0 left-0 z-99 pointer-events-none flex flex-col justify-end items-center">
         <div className="w-[90%] h-[60vh] flex items-center justify-center pointer-events-none gap-10">
-          {carouselImageData.slice(0, 3).map((img, index) => (
-            <PromotionCard key={index} imageUrl={img.bg} 
-            title={img.label}
-            subTitle={img.owner}
-            description={img.description}
-            textButton="Visit" />
+          {carouselImageData.slice(0, 2).map((img, index) => (
+            <PromotionCard
+              key={index}
+              imageUrl={img.bg}
+              title={img.label}
+              subTitle={img.owner}
+              description={img.description}
+              textButton="Visit"
+            />
           ))}
         </div>
       </div>
-      <ExplorerPage/>
+      <ExplorerPage />
     </div>
   );
 };
