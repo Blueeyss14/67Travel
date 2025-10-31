@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { carouselImageData } from "../data/carouselImageData";
 import BlurBackground from "../../../shared/components/BlurBackground";
-import SearchLocation from "../components/SearchLocation";
 import PromotionCard from "../../../shared/components/PromotionCard";
 import ExplorerPage from "./ExplorerPage";
 import DestionationNav from "../components/DestionationNav";
 
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,6 +22,19 @@ const Home = () => {
 
   return (
     <div className="relative">
+      {showCalendar && (
+        <BlurBackground
+          onClick={() => setShowCalendar(false)}
+          className="w-full h-full z-9999 absolute"
+        >
+          <div className="w-fit h-fit" onClick={(e) => e.stopPropagation()}>
+            <Calendar
+              onChange={(date) => console.log("Tanggal dipilih:", date)}
+              className="rounded-xl absolute  top-100 left-115 p-2"
+            />
+          </div>
+        </BlurBackground>
+      )}
       <div>
         <Navbar />
 
@@ -38,7 +54,10 @@ const Home = () => {
               </p>
             </div> */}
             {/* <SearchLocation /> */}
-            <DestionationNav />
+            <DestionationNav
+              showCalendar={showCalendar}
+              setShowCalendar={setShowCalendar}
+            />
           </div>
           <BlurBackground className="absolute w-full h-full z-40"></BlurBackground>
           {carouselImageData.map((img, index) => (
