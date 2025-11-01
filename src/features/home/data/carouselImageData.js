@@ -6,6 +6,7 @@ export const carouselImageData = [
     owner: "Telyu Sigma",
     checkIn: "29/10/2025",
     checkOut: "16/11/2025",
+    guest : "4",
     description:
       "Hotel Telyu Sigma adalah hotel modern yang terletak di kawasan strategis dekat Telkom University, Bandung. Hotel ini dirancang untuk memberikan kenyamanan maksimal bagi mahasiswa, dosen, dan wisatawan bisnis yang mencari tempat menginap dengan suasana tenang namun tetap dekat dengan pusat aktivitas kampus.",
   },
@@ -16,6 +17,7 @@ export const carouselImageData = [
     owner: "Horizon Group",
     checkIn: "29/10/2025",
     checkOut: "16/11/2025",
+    guest : "4",
     description:
       "Cafe Horizon menghadirkan suasana hangat dengan pemandangan kota Bandung dari ketinggian. Tempat ini cocok untuk bersantai, mengerjakan tugas, atau sekadar menikmati kopi spesial racikan barista profesional.",
   },
@@ -26,6 +28,7 @@ export const carouselImageData = [
     owner: "Sigma Property",
     checkIn: "30/10/2025",
     checkOut: "16/11/2025",
+    guest : "4",
     description:
       "Telyu Park Residence adalah hunian eksklusif dengan konsep hijau yang mengutamakan kenyamanan dan privasi. Dikelilingi taman tropis dan akses mudah ke pusat pendidikan serta bisnis.",
   },
@@ -36,6 +39,7 @@ export const carouselImageData = [
     owner: "Telkom Indonesia",
     checkIn: "29/10/2025",
     checkOut: "16/11/2025",
+    guest : "4",
     description:
       "Telkom University merupakan universitas unggulan di Bandung yang berfokus pada bidang teknologi, bisnis, dan seni. Dikenal dengan kampusnya yang hijau dan modern, Telkom University menjadi pusat inovasi dan pendidikan kelas dunia.",
   },
@@ -47,7 +51,8 @@ export function mapImg(rawData) {
     label: item.label,
     owner: item.owner,
     checkIn: item.checkIn,
-    chcheckOuteckIn: item.checkOut,
+    checkOuteckIn: item.checkOut,
+    guest: item.guest,
     description: item.description,
   }));
 }

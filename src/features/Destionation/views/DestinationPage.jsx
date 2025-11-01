@@ -1,16 +1,71 @@
 import useDestinationStore from "../state/destionationStore";
+import Card from "../../../shared/components/Card";
+import FilledButton from "../../../shared/buttons/FilledButton";
+import { Assets } from "../../../res/assets";
+import { useState } from "react";
 
 const DestinationPage = () => {
   const { checkInDate, checkOutDate, searchResults } = useDestinationStore();
+  const [isBookmark, setIsBookmark] = useState({});
+
+  const toggleBookmark = (i) => {
+    setIsBookmark({ ...isBookmark, [i]: !isBookmark[i] });
+  };
 
   return (
     <div className="p-10">
-      <h1 className="text-2xl font-bold mb-4">Destination Page</h1>
+      {/* <h1 className="text-2xl font-bold mb-4">Destination Page</h1>
       <p>Check In: {checkInDate ? checkInDate.toDateString() : "Belum ada"}</p>
-      <p>Check Out: {checkOutDate ? checkOutDate.toDateString() : "Belum ada"}</p>
+      <p>
+        Check Out: {checkOutDate ? checkOutDate.toDateString() : "Belum ada"}
+      </p> */}
 
-      <div className="mt-6 grid grid-cols-2 gap-5">
+      <div className="mt-2 grid grid-cols-3 gap-5 bg">
         {searchResults.length > 0 ? (
+          searchResults.map((item, i) => (
+            <div className="flex flex-col p-5 shadow-[2px_2px_5px_rgba(0,0,0,0.1)] rounded-2xl">
+              <div className="w-full h-70 overflow-hidden rounded-2xl">
+                <img
+                  key={i}
+                  src={item.bg}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="w-full flex items-center justify-between mt-3 ">
+                <h1 className="font-bold text-[1.2rem]">{item.label}</h1>
+                <img
+                  onClick={() => toggleBookmark(i)}
+                  src={isBookmark[i] ? Assets.HeartFilled : Assets.HeartOutline}
+                  className="w-5 h-5 cursor-pointer"
+                />
+              </div>
+              <p>{item.location}</p>
+              <div className="flex justify-between items-center">
+                <div className="flex justify-center items-center gap-2">
+                  <p>{item.guest}</p>
+                  <img className="w-5 h-5" src={Assets.GroupIcon} />
+                </div>
+
+                <FilledButton text="Visit" />
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>Tidak ada hasil ditemukan.</p>
+        )}
+        {/* {searchResults.length > 0 ? (
+          searchResults.map((item, i) => (
+            <Card key={i} 
+            subTitle={item.owner}
+            imageUrl={item.bg}
+            title={item.label} description={item.description}
+            />
+          ))
+        ) : (
+          <p>Tidak ada hasil ditemukan.</p>
+        )} */}
+
+        {/* {searchResults.length > 0 ? (
           searchResults.map((item, i) => (
             <div
               key={i}
@@ -29,7 +84,7 @@ const DestinationPage = () => {
           ))
         ) : (
           <p>Tidak ada hasil ditemukan.</p>
-        )}
+        )} */}
       </div>
     </div>
   );
