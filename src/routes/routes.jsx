@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from 'react';
+import DestinationPage from "../features/Destionation/views/DestinationPage";
 
 const HomePage = lazy(() => import("../features/home/view/Home"));
 
@@ -14,6 +15,7 @@ const AppRoutes = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/destination-page" element={<DestinationPage />} />
       </Routes>
     </Suspense>
   );

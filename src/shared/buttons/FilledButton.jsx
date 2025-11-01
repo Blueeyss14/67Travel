@@ -7,9 +7,11 @@ const FilledButton = ({
   size = "px-6 py-2",
   margin = "m-0",
   textSize = "text-base",
+  onClick,
 }) => {
   return (
     <button
+    onClick={onClick}
       style={{ backgroundColor: color, color: textColor }}
       className={`${color} ${textColor} ${size} ${textSize} ${margin} rounded-lg cursor-pointer`}
     >

@@ -5,6 +5,7 @@ import BlurBackground from "../../../shared/components/BlurBackground";
 import PromotionCard from "../../../shared/components/PromotionCard";
 import ExplorerPage from "./ExplorerPage";
 import DestionationNav from "../components/DestionationNav";
+import useDestinationStore from "../../Destionation/state/destionationStore";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -12,6 +13,8 @@ import "react-calendar/dist/Calendar.css";
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [calendarType, setCalendarType] = useState(null);
+  const { setCheckInDate, setCheckOutDate } = useDestinationStore();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,8 +32,23 @@ const Home = () => {
         >
           <div className="w-fit h-fit" onClick={(e) => e.stopPropagation()}>
             <Calendar
-              onChange={(date) => console.log("Tanggal dipilih:", date)}
-              className="rounded-xl absolute  top-100 left-115 p-2"
+              onChange={(date) => {
+                if (calendarType === "checkIn") {
+                  setCheckInDate(date);
+                }
+
+                if (calendarType === "checkOut") {
+                  const { checkInDate } = useDestinationStore.getState();
+                  if (checkInDate && date < checkInDate) {
+                    alert("Tanggal check-out tidak boleh sebelum check-in!");
+                    return;
+                  }
+                  setCheckOutDate(date);
+                }
+
+                setShowCalendar(false);
+              }}
+              className="rounded-xl absolute top-100 left-115 p-2"
             />
           </div>
         </BlurBackground>
@@ -57,6 +75,7 @@ const Home = () => {
             <DestionationNav
               showCalendar={showCalendar}
               setShowCalendar={setShowCalendar}
+              setCalendarType={setCalendarType}
             />
           </div>
           <BlurBackground className="absolute w-full h-full z-40"></BlurBackground>

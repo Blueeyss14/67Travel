@@ -1,4 +1,12 @@
 @import "tailwindcss";
+@theme {
+  --color-homeBg: brightness(0) saturate(100%) invert(54%) sepia(23%) saturate(22%) hue-rotate(319deg) brightness(93%) contrast(81%);
+}
+
+.gray-filter {
+  filter: var(--color-homeBg);
+}
+
 
 * {
     font-family: 'Poppins', sans-serif;
@@ -17,3 +25,4 @@
 .cu {
   color: #fdfdfd;
 }
+
