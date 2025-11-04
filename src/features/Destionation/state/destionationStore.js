@@ -54,6 +54,9 @@ const useDestinationStore = create((set, get) => ({
 
     set({ searchResults: filtered });
   },
+
+  selectedDestination: null,
+  setSelectedDestination: (destination) => set({ selectedDestination: destination }),
 }));
 
 export default useDestinationStore;

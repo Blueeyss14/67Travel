@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from 'react';
 import DestinationPage from "../features/Destionation/views/DestinationPage";
+import BookingPage from "../features/Booking/views/BookingPage";
 
 const HomePage = lazy(() => import("../features/home/view/Home"));
 
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/destination-page" element={<DestinationPage />} />
+        <Route path="/booking-page" element={<BookingPage />} />
       </Routes>
     </Suspense>
   );

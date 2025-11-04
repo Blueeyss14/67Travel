@@ -21,7 +21,6 @@ const MapViews = ({ userLocation }) => {
   };
   return (
     <div className="w-full h-80 relative">
-      {/* MAP container - di bawah */}
       <MapContainer
         center={[userLocation.lat, userLocation.lng]}
         zoom={10}

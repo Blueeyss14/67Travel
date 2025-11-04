@@ -6,9 +6,12 @@ import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MapViews from "../components/MapViews";
 import useGeolocation from "../hook/useGeolocation";
+import { useNavigate } from "react-router-dom";
 
 const DestinationPage = () => {
-  const { checkInDate, checkOutDate, searchResults } = useDestinationStore();
+  const navigate = useNavigate();
+  const { checkInDate, checkOutDate, searchResults, setSelectedDestination } =
+    useDestinationStore();
   const [isBookmark, setIsBookmark] = useState({});
   const { userLocation, loading } = useGeolocation();
 
@@ -22,6 +25,11 @@ const DestinationPage = () => {
 
   const toggleBookmark = (i) => {
     setIsBookmark({ ...isBookmark, [i]: !isBookmark[i] });
+  };
+
+  const visitLocation = (item) => {
+    setSelectedDestination(item.label);
+    navigate("/booking-page");
   };
 
   return (
@@ -59,7 +67,11 @@ const DestinationPage = () => {
                   <img className="w-5 h-5 gray-filter" src={Assets.GroupIcon} />
                 </div>
 
-                <FilledButton text="Visit" />
+                <FilledButton
+                  key={i}
+                  text="Visit"
+                  onClick={() => visitLocation(item)}
+                />
               </div>
             </div>
           ))
