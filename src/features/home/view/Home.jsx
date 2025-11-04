@@ -27,6 +27,7 @@ const Home = () => {
     <div className="relative">
       {showCalendar && (
         <BlurBackground
+        background="bg-black/20"
           onClick={() => setShowCalendar(false)}
           className="w-full h-full z-9999 absolute"
         >
