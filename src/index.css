@@ -1,12 +1,15 @@
 @import "tailwindcss";
 @theme {
-  --color-homeBg: brightness(0) saturate(100%) invert(54%) sepia(23%) saturate(22%) hue-rotate(319deg) brightness(93%) contrast(81%);
+  --color-gray: brightness(0) saturate(100%) invert(54%) sepia(23%) saturate(22%) hue-rotate(319deg) brightness(93%) contrast(81%);
+  --color-red: brightness(0) saturate(100%) invert(47%) sepia(24%) saturate(1491%) hue-rotate(313deg) brightness(86%) contrast(94%);
 }
 
 .gray-filter {
-  filter: var(--color-homeBg);
+  filter: var(--color-gray);
 }
-
+.red-filter {
+  filter: var(--color-red);
+}
 
 * {
     font-family: 'Poppins', sans-serif;
@@ -23,6 +26,6 @@
 }
 
 .cu {
-  color: #fdfdfd;
+  color: #f5c73d;
 }
 
