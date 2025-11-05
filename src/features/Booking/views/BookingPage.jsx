@@ -43,9 +43,10 @@ const BookingPage = () => {
       </div>
       {isOpen && (
         <BlurBackground 
+         onClick={()=> setIsOpen(false)}
         blur="backdrop-blur-[10px]"
         background="bg-black/5"
-        className="absolute w-full h-full z-9999 overflow-hidden" />
+        className="absolute w-full h-full z-9999 overflow-hidden " />
       )}
 
       <div className="flex-1 box-border p-0 overflow-hidden flex">

@@ -6,6 +6,7 @@ import StarIcon from "../../assets/icons/star.png"
 import LocationIcon from "../../assets/icons/location.png"
 import CustomerChatIcon from "../../assets/icons/customer-service.png"
 import LeftArrowIcon from "../../assets/icons/left-arrow.png"
+import SendIcon from "../../assets/icons/send.png"
 
 export const Assets = {
     CalendarIcon,
@@ -15,5 +16,6 @@ export const Assets = {
     StarIcon,
     LocationIcon,
     CustomerChatIcon,
-    LeftArrowIcon
+    LeftArrowIcon,
+    SendIcon
 }
