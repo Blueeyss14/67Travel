@@ -1,0 +1,66 @@
+import { useState, useRef, useEffect } from 'react';
+
+const Dropdown = ({ 
+  trigger, 
+  children, 
+  position = "bottom-left",
+  className = "",
+  onOpen,
+  onClose 
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const positions = {
+    "bottom-left": "left-0 top-full mt-2",
+    "bottom-right": "right-0 top-full mt-2",
+    "top-left": "left-0 bottom-full mb-2",
+    "top-right": "right-0 bottom-full mb-2"
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+        onClose?.();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [onClose]);
+
+  const toggleDropdown = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    if (newState) {
+      onOpen?.();
+    } else {
+      onClose?.();
+    }
+  };
+
+  return (
+    <div className={`relative inline-block ${className}`} ref={dropdownRef}>
+      <div onClick={toggleDropdown} className="cursor-pointer">
+        {trigger}
+      </div>
+      
+      {isOpen && (
+        <div className={` overflow-hidden overflow-y-auto
+          absolute z-50 min-w-[200px] max-h-[200px] 
+           dark:bg-gray-800 
+          border border-gray-200 dark:border-gray-700 
+          rounded-lg shadow-lg 
+          backdrop-blur-sm bg-white/95
+          animate-in fade-in-0 zoom-in-95
+          ${positions[position]}
+        `}>
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Dropdown;

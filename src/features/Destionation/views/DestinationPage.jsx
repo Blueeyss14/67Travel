@@ -55,25 +55,25 @@ const DestinationPage = () => {
                     <img
                       key={i}
                       src={item.bg}
-                      className="w-full h-full object-cover opacity-70"
+                      className="w-full h-full object-cover opacity-70 pointer-events-none"
                     />
                   </div>
-                  <div className="absolute h-full w-full flex justify-end items-start p-5 bg-black/10">
+                  <div className="absolute h-full w-full flex justify-end items-start p-5 bg-black/10 pointer-events-none">
                     <BlurBackground
-                    blur="backdrop-blur-[5px]"
-                    background="bg-white/30"
-                    className="rounded-full w-fit p-2 shadow-[1px_1px_5px_rgba(0,0,0,0.1)] border border-white/20"
+                      onClick={() => toggleBookmark(i)}
+                      blur="backdrop-blur-[5px]"
+                      background="bg-white/30"
+                      className="rounded-full w-fit p-2 shadow-[1px_1px_5px_rgba(0,0,0,0.1)] border cursor-pointer border-white/20 pointer-events-auto"
                     >
                       <img
                         key={i}
-                        onClick={() => toggleBookmark(i)}
                         src={
                           isBookmark[i]
                             ? Assets.HeartFilled
                             : Assets.HeartOutline
                         }
-                        className={`w-5 h-5 cursor-pointer ${
-                          !isBookmark[i] ? "gray-filter" : "red-filter"
+                        className={`w-5 h-5 ${
+                          !isBookmark[i] ? "gray-filter" : "red-filter jitter"
                         }`}
                       />
                     </BlurBackground>
@@ -97,7 +97,7 @@ const DestinationPage = () => {
                       <p className="gray-filter">{item.rating}</p>
                     </div>
                   </div>
-                  <TagComponent tagName={item.owner}/>
+                  <TagComponent tagName={item.owner} />
                 </div>
 
                 {/* <img

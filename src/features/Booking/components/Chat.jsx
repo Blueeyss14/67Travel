@@ -7,7 +7,7 @@ const Chat = ({ isOpen, openChat }) => {
     <div
       onClick={(e) => e.stopPropagation()}
       className={`absolute bg-white w-[30%] h-[90%] z-999 top-0 shadow-[1px_1px_50px_rgba(0,0,0,0.1)] flex flex-col rounded-l-2xl overflow-hidden pointer-events-auto ${
-        !isOpen ? "-right-200" : "right-0"
+        !isOpen ? "-right-[35vw]" : "right-0"
       } transition-all duration-300`}
     >
       <div
@@ -20,7 +20,7 @@ const Chat = ({ isOpen, openChat }) => {
         />
         <h1 className="font-bold text-[1.2rem]">Mimin</h1>
       </div>
-      <div className="w-full flex-1 overflow-hidden overflow-y-auto flex flex-col justify-end ">
+      <div className="w-full flex-1 overflow-hidden overflow-y-auto flex flex-col justify-end bg-blue-200/10">
         {chatData.map((item) => (
           <div
             className={`w-full flex px-5 py-3  ${

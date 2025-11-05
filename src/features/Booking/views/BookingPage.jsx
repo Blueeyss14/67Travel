@@ -9,6 +9,8 @@ import { useState } from "react";
 import Chat from "../components/Chat";
 import TagComponent from "../../../shared/components/TagComponent";
 import BlurBackground from "../../../shared/components/BlurBackground";
+import { carData } from "../data/carData";
+import Dropdown from "../../../shared/dropdown/Dropdown";
 
 const BookingPage = () => {
   const { selectedDestination, searchResults } = useDestinationStore();
@@ -42,11 +44,12 @@ const BookingPage = () => {
         <Chat isOpen={isOpen} openChat={openChat} />
       </div>
       {isOpen && (
-        <BlurBackground 
-         onClick={()=> setIsOpen(false)}
-        blur="backdrop-blur-[10px]"
-        background="bg-black/5"
-        className="absolute w-full h-full z-9999 overflow-hidden " />
+        <BlurBackground
+          onClick={() => setIsOpen(false)}
+          blur="backdrop-blur-[10px]"
+          background="bg-black/5"
+          className="absolute w-full h-full z-9999 overflow-hidden"
+        />
       )}
 
       <div className="flex-1 box-border p-0 overflow-hidden flex">
@@ -70,12 +73,29 @@ const BookingPage = () => {
             <div className="bg-gray-100 w-full h-[60%] overflow-hidden rounded-2xl">
               <PickMap userLocation={userLocation} />
             </div>
-            <h1
-              style={{ color: colors.hytam }}
-              className="font-bold text-2xl mt-5"
-            >
-              {destination.label}
-            </h1>
+            <div className="flex justify-between items-center mt-5">
+              <h1
+                style={{ color: colors.hytam }}
+                className="font-bold text-2xl"
+              >
+                {destination.label}
+              </h1>
+              <div className="flex items-center justify-center gap-2">
+                <div className="border border-black/10 rounded-2xl w-40 h-12 px-3 flex justify-center items-center">
+                  <p style={{ color: colors.hytam }} className="line-clamp-1">
+                    {originText}
+                  </p>
+                </div>
+                <div className="border border-black/10 h-12 w-12 rounded-2xl flex justify-center items-center">
+                  <img src={Assets.PlaneIcon} className="w-8 h-8 gray-filter" />
+                </div>
+                <div className="border border-black/10 rounded-2xl w-40 h-12 px-3 flex justify-center items-center">
+                  <p style={{ color: colors.hytam }} className="line-clamp-1">
+                    {destinationText}
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="flex gap-2 my-3">
               {destination.facility.map((item, i) => (
@@ -96,13 +116,39 @@ const BookingPage = () => {
             {/* <div className="bg-green-200 flex-1 w-full h-full"></div> */}
           </div>
           {/* BUAT DETAIL */}
-          <div className="w-[35%] h-full "></div>
+          <div className="w-[35%] h-full bg-red-100">
+            <Dropdown
+              trigger={
+                <button className="bg-blue-500 text-white px-4 py-2 rounded">
+                  Pilih Mobil
+                </button>
+              }
+            >
+              <div className="p-2">
+                {carData.map((item) => (
+                  <div className="p-2 hover:bg-white">
+                    <p>{item.name}</p>
+                  </div>
+                ))}
+              </div>
+            </Dropdown>
+            {/* <select defaultValue="" className="bg-white">
+              <option value="" disabled>
+                Pilih mobil
+              </option>
+              {carData.map((item) => (
+                <option key={item.name} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select> */}
+          </div>
         </div>
         {/* <p>Awal: {originText}</p>
           <p>Tujuan: {destinationText}</p> */}
         {/* </div> */}
       </div>
-      <div className="bg-white w-full h-20 flex justify-end z-99999 items-center gap-2.5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)]">
+      <div className="bg-white w-full h-20 flex justify-end z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border px-10">
         <img
           src={Assets.CustomerChatIcon}
           className="w-10 h-10 cursor-pointer"
