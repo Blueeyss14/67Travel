@@ -1,14 +1,13 @@
 import useDestinationStore from "../state/destionationStore";
-import Card from "../../../shared/components/Card";
 import FilledButton from "../../../shared/buttons/FilledButton";
 import { Assets } from "../../../res/assets";
 import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MapViews from "../components/MapViews";
 import useGeolocation from "../hook/useGeolocation";
 import { useNavigate } from "react-router-dom";
 import colors from "../../../res/colors";
 import BlurBackground from "../../../shared/components/BlurBackground";
+import TagComponent from "../../../shared/components/TagComponent";
 
 const DestinationPage = () => {
   const navigate = useNavigate();
@@ -48,7 +47,7 @@ const DestinationPage = () => {
           searchResults.map((item, i) => (
             <div
               key={i}
-              className="flex flex-col p-5 shadow-[1px_1px_1px_rgba(0,0,0,0.1)] rounded-2xl gap-2"
+              className="flex flex-col p-5 border border-black/8 rounded-2xl gap-2"
             >
               <div className="w-full h-70 overflow-hidden rounded-2xl">
                 <div className="h-full w-full relative">
@@ -98,10 +97,7 @@ const DestinationPage = () => {
                       <p className="gray-filter">{item.rating}</p>
                     </div>
                   </div>
-
-                  <div className="px-3 py-1 bg-blue-300/20 rounded-full w-fit border border-blue-200 mb-1">
-                    <p className="m-0 text-[0.8rem]">{item.owner}</p>
-                  </div>
+                  <TagComponent tagName={item.owner}/>
                 </div>
 
                 {/* <img
