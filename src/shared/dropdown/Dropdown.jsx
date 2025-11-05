@@ -40,6 +40,11 @@ const Dropdown = ({
     }
   };
 
+  const handleItemClick = () => {
+    setIsOpen(false);
+    onClose?.();
+  };
+
   return (
     <div className={`relative inline-block ${className}`} ref={dropdownRef}>
       <div onClick={toggleDropdown} className="cursor-pointer">
@@ -47,15 +52,18 @@ const Dropdown = ({
       </div>
       
       {isOpen && (
-        <div className={` overflow-hidden overflow-y-auto
-          absolute z-50 min-w-[200px] max-h-[200px] 
+        <div
+          onClick={handleItemClick}
+          className={` overflow-hidden overflow-y-auto
+          absolute z-9999 w-full max-h-[200px] 
            dark:bg-gray-800 
           border border-gray-200 dark:border-gray-700 
           rounded-lg shadow-lg 
           backdrop-blur-sm bg-white/95
           animate-in fade-in-0 zoom-in-95
           ${positions[position]}
-        `}>
+        `}
+        >
           {children}
         </div>
       )}

@@ -10,7 +10,7 @@ export const carouselImageData = [
     rating: "4.5",
     price: "800.000",
     facility: ["Kolam Berenang", "Restaurant", "Ac"],
-    imgs: ["images/image1.jpg","images/image1.jpg", "images/image1.jpg","images/image1.jpg","images/image1.jpg"],
+    imgs: ["images/image1.jpg","images/image2.png", "images/image3.jpg","images/image4.png"],
     description:
       "Hotel Telyu Sigma adalah hotel modern yang terletak di kawasan strategis dekat Telkom University, Bandung. Hotel ini dirancang untuk memberikan kenyamanan maksimal bagi mahasiswa, dosen, dan wisatawan bisnis yang mencari tempat menginap dengan suasana tenang namun tetap dekat dengan pusat aktivitas kampus.",
   },
@@ -25,7 +25,7 @@ export const carouselImageData = [
     rating: "4.5",
     price: "800.000",
     facility: ["Kolam Berenang", "Restaurant", "Ac"],
-    imgs: ["images/image1.jpg","images/image1.jpg", "images/image1.jpg","images/image1.jpg","images/image1.jpg"],
+    imgs: ["images/image1.jpg","images/image2.png", "images/image3.jpg","images/image4.png"],
     description:
       "Cafe Horizon menghadirkan suasana hangat dengan pemandangan kota Bandung dari ketinggian. Tempat ini cocok untuk bersantai, mengerjakan tugas, atau sekadar menikmati kopi spesial racikan barista profesional.",
   },
@@ -40,7 +40,7 @@ export const carouselImageData = [
     rating: "4.5",
     price: "800.000",
     facility: ["Kolam Berenang", "Restaurant", "Ac"],
-    imgs: ["images/image1.jpg","images/image1.jpg", "images/image1.jpg","images/image1.jpg","images/image1.jpg"],
+    imgs: ["images/image1.jpg","images/image2.png", "images/image3.jpg","images/image4.png"],
     description:
       "Telyu Park Residence adalah hunian eksklusif dengan konsep hijau yang mengutamakan kenyamanan dan privasi. Dikelilingi taman tropis dan akses mudah ke pusat pendidikan serta bisnis.",
   },
@@ -55,7 +55,7 @@ export const carouselImageData = [
     rating: "4.5",
     price: "800.000",
     facility: ["Kolam Berenang", "Restaurant", "Ac"],
-    imgs: ["images/image1.jpg","images/image1.jpg", "images/image1.jpg","images/image1.jpg","images/image1.jpg"],
+    imgs: ["images/image1.jpg","images/image2.png", "images/image3.jpg","images/image4.png"],
     description:
       "Telkom University merupakan universitas unggulan di Bandung yang berfokus pada bidang teknologi, bisnis, dan seni. Dikenal dengan kampusnya yang hijau dan modern, Telkom University menjadi pusat inovasi dan pendidikan kelas dunia.",
   },

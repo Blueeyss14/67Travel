@@ -9,13 +9,14 @@ import { useState } from "react";
 import Chat from "../components/Chat";
 import TagComponent from "../../../shared/components/TagComponent";
 import BlurBackground from "../../../shared/components/BlurBackground";
-import { carData } from "../data/carData";
-import Dropdown from "../../../shared/dropdown/Dropdown";
+import DetailBooking from "../../Booking/views/DetailBooking";
+
 
 const BookingPage = () => {
   const { selectedDestination, searchResults } = useDestinationStore();
   const { originText, destinationText } = useMapStore();
   const { userLocation } = useGeolocation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const destination = searchResults.find(
     (item) => item.label === selectedDestination
@@ -43,7 +44,7 @@ const BookingPage = () => {
       <div className="absolute w-full h-full z-99999 overflow-hidden pointer-events-none">
         <Chat isOpen={isOpen} openChat={openChat} />
       </div>
-      {isOpen && (
+      {(isOpen || dropdownOpen) && (
         <BlurBackground
           onClick={() => setIsOpen(false)}
           blur="backdrop-blur-[10px]"
@@ -115,34 +116,7 @@ const BookingPage = () => {
             </div>
             {/* <div className="bg-green-200 flex-1 w-full h-full"></div> */}
           </div>
-          {/* BUAT DETAIL */}
-          <div className="w-[35%] h-full bg-red-100">
-            <Dropdown
-              trigger={
-                <button className="bg-blue-500 text-white px-4 py-2 rounded">
-                  Pilih Mobil
-                </button>
-              }
-            >
-              <div className="p-2">
-                {carData.map((item) => (
-                  <div className="p-2 hover:bg-white">
-                    <p>{item.name}</p>
-                  </div>
-                ))}
-              </div>
-            </Dropdown>
-            {/* <select defaultValue="" className="bg-white">
-              <option value="" disabled>
-                Pilih mobil
-              </option>
-              {carData.map((item) => (
-                <option key={item.name} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </select> */}
-          </div>
+          <DetailBooking setDropdownOpen={setDropdownOpen}/>
         </div>
         {/* <p>Awal: {originText}</p>
           <p>Tujuan: {destinationText}</p> */}
