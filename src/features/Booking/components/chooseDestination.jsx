@@ -2,6 +2,7 @@ import Dropdown from "../../../shared/dropdown/Dropdown";
 import { Assets } from "../../../res/assets";
 import { useBookingStore } from "../state/useBookingStore";
 import { locationData } from "../data/locationData";
+import colors from "../../../res/colors";
 
 const ChooseDestination = ({ setDropdownOpen }) => {
   const { currentDay, days, setSelectedDestination } = useBookingStore();
@@ -21,58 +22,82 @@ const ChooseDestination = ({ setDropdownOpen }) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4">
-      {/* From */}
-      <Dropdown
-        onOpen={() => setDropdownOpen(true)}
-        onClose={() => setDropdownOpen(false)}
-        className="w-full"
-        trigger={
-          <button className="bg-white px-4 py-2 rounded-2xl w-full border border-black/40">
-            {selectedDestination.from.name}
-          </button>
-        }
+    <div className="w-full">
+      <h1
+        style={{ color: colors.hytam }}
+        className="font-bold text-[1.2rem] mb-3"
       >
-        <div className="bg-gray-100 p-2">
-          {locationData.map((loc) => (
-            <div
-              key={loc.id}
-              onClick={() => handleSelect("from", loc)}
-              className={`p-2 cursor-pointer ${
-                selectedDestination.from.id === loc.id ? "bg-gray-200" : "bg-gray-50"
-              } ${selectedDestination.to.id === loc.id ? "opacity-50 cursor-not-allowed" : ""}`}
-            >
-              {loc.name}
-            </div>
-          ))}
-        </div>
-      </Dropdown>
+        Pilih Destinasi
+      </h1>
+      <div className="w-full flex gap-2 justify-between items-center h-12 text-black/60 cursor-pointer">
+        {/* From */}
+        <Dropdown
+          onOpen={() => setDropdownOpen(true)}
+          onClose={() => setDropdownOpen(false)}
+          className="w-full"
+          trigger={
+            <button className="bg-white px-4 py-3 rounded-2xl w-full border border-black/10">
+              {selectedDestination.from.name}
+            </button>
+          }
+        >
+          <div className="bg-gray-100 p-2">
+            {locationData.map((loc) => (
+              <div
+                key={loc.id}
+                onClick={() => handleSelect("from", loc)}
+                className={`p-2 cursor-pointer ${
+                  selectedDestination.from.id === loc.id
+                    ? "bg-gray-200"
+                    : "bg-gray-50"
+                } ${
+                  selectedDestination.to.id === loc.id
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+              >
+                {loc.name}
+              </div>
+            ))}
+          </div>
+        </Dropdown>
 
-      {/* To */}
-      <Dropdown
-        onOpen={() => setDropdownOpen(true)}
-        onClose={() => setDropdownOpen(false)}
-        className="w-full"
-        trigger={
-          <button className="bg-white px-4 py-2 rounded-2xl w-full border border-black/40">
-            {selectedDestination.to.name}
-          </button>
-        }
-      >
-        <div className="bg-gray-100 p-2">
-          {locationData.map((loc) => (
-            <div
-              key={loc.id}
-              onClick={() => handleSelect("to", loc)}
-              className={`p-2 cursor-pointer ${
-                selectedDestination.to.id === loc.id ? "bg-gray-200" : "bg-gray-50"
-              } ${selectedDestination.from.id === loc.id ? "opacity-50 cursor-not-allowed" : ""}`}
-            >
-              {loc.name}
-            </div>
-          ))}
+        <div className="border border-black/10 h-12 w-30 rounded-2xl flex justify-center items-center">
+          <img src={Assets.PlaneIcon} className="w-8 h-8 gray-filter" />
         </div>
-      </Dropdown>
+
+        {/* To */}
+        <Dropdown
+          onOpen={() => setDropdownOpen(true)}
+          onClose={() => setDropdownOpen(false)}
+          className="w-full"
+          trigger={
+            <button className="bg-white px-4 py-3 rounded-2xl w-full border border-black/10">
+              {selectedDestination.to.name}
+            </button>
+          }
+        >
+          <div className="bg-gray-100 p-2">
+            {locationData.map((loc) => (
+              <div
+                key={loc.id}
+                onClick={() => handleSelect("to", loc)}
+                className={`p-2 cursor-pointer ${
+                  selectedDestination.to.id === loc.id
+                    ? "bg-gray-200"
+                    : "bg-gray-50"
+                } ${
+                  selectedDestination.from.id === loc.id
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+              >
+                {loc.name}
+              </div>
+            ))}
+          </div>
+        </Dropdown>
+      </div>
     </div>
   );
 };

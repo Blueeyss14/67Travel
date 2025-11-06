@@ -4,12 +4,12 @@ import useGeolocation from "../../Destionation/hook/useGeolocation";
 import useMapStore from "../state/useMapStore";
 import colors from "../../../res/colors";
 import { Assets } from "../../../res/assets";
-import FilledButton from "../../../shared/buttons/FilledButton";
 import { useState } from "react";
 import Chat from "../components/Chat";
 import TagComponent from "../../../shared/components/TagComponent";
 import BlurBackground from "../../../shared/components/BlurBackground";
 import DetailBooking from "../../Booking/views/DetailBooking";
+import BottomBar from "../components/BottomBar";
 
 const BookingPage = () => {
   const { selectedDestination, searchResults } = useDestinationStore();
@@ -124,15 +124,7 @@ const BookingPage = () => {
           <p>Tujuan: {destinationText}</p> */}
         {/* </div> */}
       </div>
-      <div className="bg-white w-full h-20 flex justify-end z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border px-10">
-        <img
-          src={Assets.CustomerChatIcon}
-          className="w-10 h-10 cursor-pointer"
-          onClick={openChat}
-        />
-
-        <FilledButton size="h-fit w-fit px-4 py-2" text="Check Out" />
-      </div>
+      <BottomBar isOpen={isOpen} setIsOpen={setIsOpen}/>
     </div>
   );
 };
