@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from 'react';
-import BookingPage from "../features/Booking/views/BookingPage";
 
 const HomePage = lazy(() => import("../features/home/view/Home"));
 const DestinationView = lazy(() => import("../features/Destionation/views/DestinationPage"));
+const BookingPage = lazy(() => import("../features/Booking/views/BookingPage"));
+const OnTheWay = lazy(() => import("../features/Booking/views/OnTheWay"));
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-screen">
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/destination-page" element={<DestinationView />} />
         <Route path="/booking-page" element={<BookingPage />} />
+        <Route path="/on-the-way" element={<OnTheWay />} />
       </Routes>
     </Suspense>
   );

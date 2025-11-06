@@ -95,4 +95,18 @@ export const useBookingStore = create((set) => ({
 
       return { ...store, days: reIndexedDays, currentDay: newCurrentDay };
     }),
+  resetBooking: () =>
+    set({
+      currentDay: 1,
+      days: {
+        1: {
+          selectedCar: { id: null, name: "Pilih Kendaraan" },
+          selectedLocation: { id: null, name: "Pilih Lokasi" },
+          selectedDestination: {
+            from: { id: null, name: "Pilih Wisata Asal" },
+            to: { id: null, name: "Pilih Wisata Tujuan" },
+          },
+        },
+      },
+    }),
 }));
