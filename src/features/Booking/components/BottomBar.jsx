@@ -5,14 +5,11 @@ import { carouselImageData } from "../../home/data/carouselImageData";
 import { carData } from "../data/carData";
 import { locationData } from "../data/locationData";
 import { useBookingStore } from "../state/useBookingStore";
+import toast, { Toaster } from "react-hot-toast";
 
 const BottomBar = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
-  const { currentDay, days } = useBookingStore();
-
-  const selectedCar = days[currentDay]?.selectedCar;
-  const selectedLocation = days[currentDay]?.selectedLocation;
-  const selectedDestination = days[currentDay]?.selectedDestination;
+  const { days } = useBookingStore();
 
   const startDestination = () => {
     const allFilled = Object.values(days).every((day) => {
@@ -26,7 +23,16 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
     });
 
     if (!allFilled) {
-      alert("Isi terlebih dahulu semua Day sebelum Check Out");
+      toast.error("Isi terlebih dahulu semua Day sebelum Check Out", {
+        position: "top-center",
+        style: {
+          borderRadius: "12px",
+          background: "#333",
+          color: "#fff",
+          padding: "12px 16px",
+          fontSize: "14px",
+        },
+      });
       return;
     }
 
@@ -65,20 +71,22 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
   }, 0);
 
   return (
-    <div className="bg-white w-full h-20 flex justify-end z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border px-10">
-      <h1 className="font-bold text-lg">Rp.{totalPrice.toLocaleString()}</h1>
-      <img
-        src={Assets.CustomerChatIcon}
-        className="w-10 h-10 cursor-pointer"
-        onClick={openChat}
-      />
-
-      <FilledButton
-        onClick={startDestination}
-        size="h-fit w-fit px-4 py-2"
-        text="Check Out"
-      />
-    </div>
+    <>
+      <Toaster />
+      <div className="bg-white w-full h-20 flex justify-end z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border px-10">
+        <h1 className="font-bold text-lg">Rp.{totalPrice.toLocaleString()}</h1>
+        <img
+          src={Assets.CustomerChatIcon}
+          className="w-10 h-10 cursor-pointer"
+          onClick={openChat}
+        />
+        <FilledButton
+          onClick={startDestination}
+          size="h-fit w-fit px-4 py-2"
+          text="Check Out"
+        />
+      </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import toast, { Toaster } from "react-hot-toast";
 
 export const useBookingStore = create((set) => ({
   currentDay: 1,
@@ -16,9 +17,24 @@ export const useBookingStore = create((set) => ({
   nextDay: () =>
     set((store) => {
       const current = store.days[store.currentDay];
+      const { selectedCar, selectedLocation, selectedDestination } = current;
 
-      if (!current.selectedCar?.id || !current.selectedLocation?.id) {
-        alert(`Selesaikan Day ${store.currentDay} dulu`);
+      if (
+        !selectedCar?.id ||
+        !selectedLocation?.id ||
+        !selectedDestination?.from?.id ||
+        !selectedDestination?.to?.id
+      ) {
+        toast.error(`Selesaikan Day ${store.currentDay} dulu`, {
+          position: "top-center",
+          style: {
+            borderRadius: "12px",
+            background: "#333",
+            color: "#fff",
+            padding: "12px 16px",
+            fontSize: "14px",
+          },
+        });
         return store;
       }
 
