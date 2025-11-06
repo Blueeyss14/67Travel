@@ -3,14 +3,21 @@ import { create } from "zustand";
 export const useBookingStore = create((set) => ({
   currentDay: 1,
   days: {
-    1: { selectedCar: { id: null, name: "Pilih Kendaraan" } },
+    1: {
+      selectedCar: { id: null, name: "Pilih Kendaraan" },
+      selectedLocation: { id: null, name: "Pilih Lokasi" },
+      selectedDestination: {
+        from: { id: null, name: "Pilih Wisata Asal" },
+        to: { id: null, name: "Pilih Wisata Tujuan" },
+      },
+    },
   },
 
   nextDay: () =>
     set((store) => {
       const current = store.days[store.currentDay];
 
-      if (!current.selectedCar || !current.selectedCar.id) {
+      if (!current.selectedCar?.id || !current.selectedLocation?.id) {
         alert(`Selesaikan Day ${store.currentDay} dulu`);
         return store;
       }
@@ -22,10 +29,18 @@ export const useBookingStore = create((set) => ({
           currentDay: next,
           days: {
             ...store.days,
-            [next]: { selectedCar: { id: null, name: "Pilih Kendaraan" } },
+            [next]: {
+              selectedCar: { id: null, name: "Pilih Kendaraan" },
+              selectedLocation: { id: null, name: "Pilih Lokasi" },
+              selectedDestination: {
+                from: { id: null, name: "Pilih Wisata Asal" },
+                to: { id: null, name: "Pilih Wisata Tujuan" },
+              },
+            },
           },
         };
       }
+
       return { ...store, currentDay: next };
     }),
 
@@ -34,21 +49,50 @@ export const useBookingStore = create((set) => ({
       currentDay: store.currentDay > 1 ? store.currentDay - 1 : 1,
     })),
 
-  goToDay: (day) =>
-    set({ currentDay: day }),
-
   setSelectedCar: (day, car) =>
     set((store) => ({
-      days: { ...store.days, [day]: { ...store.days[day], selectedCar: car } },
+      days: {
+        ...store.days,
+        [day]: { ...store.days[day], selectedCar: car },
+      },
+    })),
+
+  setSelectedLocation: (day, location) =>
+    set((store) => ({
+      days: {
+        ...store.days,
+        [day]: { ...store.days[day], selectedLocation: location },
+      },
+    })),
+
+  setSelectedDestination: (day, destination) =>
+    set((store) => ({
+      days: {
+        ...store.days,
+        [day]: { ...store.days[day], selectedDestination: destination },
+      },
     })),
 
   deleteDay: (day) =>
     set((store) => {
       if (day === 1) return store;
+
       const newDays = { ...store.days };
       delete newDays[day];
 
-      const newCurrentDay = store.currentDay === day ? day - 1 : store.currentDay;
-      return { ...store, days: newDays, currentDay: newCurrentDay };
+      const dayKeys = Object.keys(newDays)
+        .map(Number)
+        .sort((a, b) => a - b);
+
+      const reIndexedDays = {};
+      dayKeys.forEach((key, idx) => {
+        reIndexedDays[idx + 1] = newDays[key];
+      });
+
+      let newCurrentDay = store.currentDay;
+      if (store.currentDay === day) newCurrentDay = day - 1;
+      else if (store.currentDay > day) newCurrentDay = store.currentDay - 1;
+
+      return { ...store, days: reIndexedDays, currentDay: newCurrentDay };
     }),
 }));

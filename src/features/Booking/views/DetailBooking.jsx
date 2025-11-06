@@ -2,6 +2,8 @@ import { Assets } from "../../../res/assets";
 import colors from "../../../res/colors";
 import { useBookingStore } from "../state/useBookingStore";
 import ChooseVehicle from "../components/ChooseVehicle";
+import ChooseLocation from "../components/ChooseLocation";
+import ChooseDestination from "../components/chooseDestination";
 
 const DetailBooking = ({ setDropdownOpen }) => {
   const { currentDay, days, nextDay, prevDay, deleteDay } = useBookingStore();
@@ -12,7 +14,10 @@ const DetailBooking = ({ setDropdownOpen }) => {
       {/* Header Day */}
       <div className="w-full justify-between items-center flex mb-3">
         <div className="flex justify-center items-center gap-3">
-          <h1 style={{ color: colors.hytam }} className="text-[1.5rem] font-bold">
+          <h1
+            style={{ color: colors.hytam }}
+            className="text-[1.5rem] font-bold"
+          >
             Day {currentDay}
           </h1>
           <div className="flex gap-3">
@@ -49,8 +54,9 @@ const DetailBooking = ({ setDropdownOpen }) => {
         </div>
       </div>
 
-      {/* Pilih Kendaraan */}
       <ChooseVehicle setDropdownOpen={setDropdownOpen} />
+      <ChooseLocation setDropdownOpen={setDropdownOpen} />
+      <ChooseDestination setDropdownOpen={setDropdownOpen} />
     </div>
   );
 };

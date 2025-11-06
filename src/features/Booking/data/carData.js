@@ -29,8 +29,12 @@ export const carData = [
   },
 ];
 
-export function mapCarChat(rawData) {
+export function mapCar(rawData) {
   return rawData.map((item) => ({
+    uuid: item.uiid,
     name: item.name,
+    img: item.img,
+    price: item.price,
+    maxPassenger: item.maxPassenger,
   }));
 }

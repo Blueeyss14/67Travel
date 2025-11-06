@@ -9,7 +9,7 @@ export const chatData = [
     profile: "/images/image1.jpg",
     message: "Halo! Ada yang bisa kami bantu?",
     isUser: false,
-    role : "Admin"
+    role : "Mimin"
   },
   {
     profile: "/images/image1.jpg",

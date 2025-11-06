@@ -11,7 +11,6 @@ import TagComponent from "../../../shared/components/TagComponent";
 import BlurBackground from "../../../shared/components/BlurBackground";
 import DetailBooking from "../../Booking/views/DetailBooking";
 
-
 const BookingPage = () => {
   const { selectedDestination, searchResults } = useDestinationStore();
   const { originText, destinationText } = useMapStore();
@@ -46,7 +45,10 @@ const BookingPage = () => {
       </div>
       {(isOpen || dropdownOpen) && (
         <BlurBackground
-          onClick={() => setIsOpen(false)}
+          onClick={() => {
+            setIsOpen(false);
+            setDropdownOpen(false);
+          }}
           blur="backdrop-blur-[10px]"
           background="bg-black/5"
           className="absolute w-full h-full z-9999 overflow-hidden"
@@ -116,7 +118,7 @@ const BookingPage = () => {
             </div>
             {/* <div className="bg-green-200 flex-1 w-full h-full"></div> */}
           </div>
-          <DetailBooking setDropdownOpen={setDropdownOpen}/>
+          <DetailBooking setDropdownOpen={setDropdownOpen} />
         </div>
         {/* <p>Awal: {originText}</p>
           <p>Tujuan: {destinationText}</p> */}
