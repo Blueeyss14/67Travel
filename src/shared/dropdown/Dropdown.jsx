@@ -55,11 +55,11 @@ const Dropdown = ({
         <div
           onClick={handleItemClick}
           className={` overflow-hidden overflow-y-auto
-          absolute z-9999 w-full max-h-[200px] 
-           dark:bg-gray-800 
-          border border-gray-200 dark:border-gray-700 
-          rounded-lg shadow-lg 
-          backdrop-blur-sm bg-white/95
+          absolute z-9999 w-full max-h-[300px] 
+           bg-white 
+          border border-gray-200 
+          rounded-2xl shadow-lg 
+          backdrop-blur-sm 
           animate-in fade-in-0 zoom-in-95
           ${positions[position]}
         `}

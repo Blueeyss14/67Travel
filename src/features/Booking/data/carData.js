@@ -1,12 +1,31 @@
 export const carData = [
   {
-    name : "Nissan GTR"
+    uuid: "dsfgdfg",
+    img: "images/skyline.png",
+    name: "Nissan GTR",
+    price: 200000,
+    maxPassenger: 4,
   },
   {
-    name : "Mazda"
+    uuid: "ddfgd",
+    img: "images/skyline.png",
+    name: "Mazda",
+    price: 200000,
+    maxPassenger: 4,
   },
   {
-    name : "Supra"
+    uuid: "dsfgdswg",
+    img: "images/skyline.png",
+    name: "Supra",
+    price: 200000,
+    maxPassenger: 4,
+  },
+  {
+    uuid: "webvw",
+    img: "images/skyline.png",
+    name: "Supra",
+    price: 200000,
+    maxPassenger: 4,
   },
 ];
 

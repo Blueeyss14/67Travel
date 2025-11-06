@@ -8,6 +8,8 @@ import CustomerChatIcon from "../../assets/icons/customer-service.png"
 import LeftArrowIcon from "../../assets/icons/left-arrow.png"
 import SendIcon from "../../assets/icons/send.png"
 import PlaneIcon from "../../assets/icons/plane.png"
+import PlusIcon from "../../assets/icons/plus.png"
+import MinusIcon from "../../assets/icons/minus.png"
 
 export const Assets = {
     CalendarIcon,
@@ -19,5 +21,7 @@ export const Assets = {
     CustomerChatIcon,
     LeftArrowIcon,
     SendIcon,
-    PlaneIcon
+    PlaneIcon,
+    PlusIcon,
+    MinusIcon
 }

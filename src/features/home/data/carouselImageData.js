@@ -69,6 +69,10 @@ export function mapImg(rawData) {
     checkIn: item.checkIn,
     checkOuteckIn: item.checkOut,
     guest: item.guest,
+    rating: item.rating,
+    price : item.price,
+    facility: item.facility,
+    img: item.imgs,
     description: item.description,
   }));
 }
