@@ -8,11 +8,17 @@ const ChooseLocation = ({ setDropdownOpen }) => {
   const { currentDay, days, setSelectedLocation } = useBookingStore();
   const isDay1 = currentDay === 1;
 
-  const selectedLocation = days[currentDay]?.selectedLocation || { id: null, name: "Pilih Lokasi" };
+  const selectedLocation = days[currentDay]?.selectedLocation || {
+    id: null,
+    name: "Pilih Lokasi",
+  };
 
   return (
     <div className="w-full mb-5">
-      <h1 style={{ color: colors.primary }} className="font-bold text-[1rem] mb-3">
+      <h1
+        style={{ color: colors.primary }}
+        className="font-bold text-[1rem] mb-3"
+      >
         Pilih Lokasi
       </h1>
 
@@ -22,13 +28,18 @@ const ChooseLocation = ({ setDropdownOpen }) => {
         className="w-full"
         trigger={
           <button
-          style={{color : isDay1 ? "gray" : colors.hytam}}
-            className={`bg-white px-4 py-2 rounded-2xl w-full border border-black/20 cursor-pointer ${isDay1 ? "" : "hover:bg-gray-50"}`}
+            style={{ color: isDay1 ? "gray" : colors.hytam }}
+            className={`bg-white px-4 py-2 rounded-2xl w-full border border-black/20 cursor-pointer ${
+              isDay1 ? "" : "hover:bg-gray-50"
+            }`}
             disabled={isDay1}
           >
             <div className="flex justify-between items-center">
               <p>{selectedLocation.name}</p>
-              <img src={Assets.LeftArrowIcon} className={`w-3 h-3 -rotate-90 gray-filter`} />
+              <img
+                src={Assets.LeftArrowIcon}
+                className={`w-3 h-3 -rotate-90 gray-filter`}
+              />
             </div>
           </button>
         }
@@ -39,7 +50,10 @@ const ChooseLocation = ({ setDropdownOpen }) => {
               <div
                 key={item.id}
                 onClick={() =>
-                  setSelectedLocation(currentDay, { id: item.id, name: item.label })
+                  setSelectedLocation(currentDay, {
+                    id: item.id,
+                    name: item.label,
+                  })
                 }
                 className={`p-5 hover:bg-gray-200 cursor-pointer flex flex-col w-full ${
                   selectedLocation.id === item.id ? "bg-gray-200" : "bg-gray-50"
@@ -50,10 +64,26 @@ const ChooseLocation = ({ setDropdownOpen }) => {
                     <img src={item.bg} className="w-full h-full object-cover" />
                   </div>
                   <div className="w-full">
-                    <p className="font-semibold">{item.label}</p>
+                    <p
+                      style={{ color: colors.hytam }}
+                      className="font-semibold"
+                    >
+                      {item.label}
+                    </p>
                     <div className="w-full justify-between flex items-center">
-                      <p className="text-[0.9rem]">Rp.{item.price}</p>
-                      <p className="text-[0.9rem]">Max: {item.guest}</p>
+                      <p
+                        c
+                        style={{ color: colors.primary }}
+                        lassName="text-[0.9rem]"
+                      >
+                        Rp.{item.price}
+                      </p>
+                      <p
+                        style={{ color: colors.hytam }}
+                        className="text-[0.9rem]"
+                      >
+                        Max: {item.guest}
+                      </p>
                     </div>
                   </div>
                 </div>
