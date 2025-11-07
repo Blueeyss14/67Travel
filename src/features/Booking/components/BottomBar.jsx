@@ -6,6 +6,7 @@ import { carData } from "../data/carData";
 import { locationData } from "../data/locationData";
 import { useBookingStore } from "../state/useBookingStore";
 import toast, { Toaster } from "react-hot-toast";
+import colors from "../../../res/colors";
 
 const BottomBar = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
@@ -73,18 +74,28 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
   return (
     <>
       <Toaster />
-      <div className="bg-white w-full h-20 flex justify-end z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border px-10">
-        <h1 className="font-bold text-lg">Rp.{totalPrice.toLocaleString()}</h1>
-        <img
-          src={Assets.CustomerChatIcon}
-          className="w-10 h-10 cursor-pointer"
-          onClick={openChat}
-        />
-        <FilledButton
-          onClick={startDestination}
-          size="h-fit w-fit px-4 py-2"
-          text="Check Out"
-        />
+      <div className="bg-white w-full h-20 flex justify-between z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border pr-10">
+        <div 
+        style={{backgroundColor: colors.primary}}
+        className="h-full justify-center flex flex-col items-start px-15 box-border">
+          <p style={{ color: colors.secondary }}>Total:</p>
+          <h1 style={{ color: colors.secondary }} className="font-bold text-lg">
+            Rp.{totalPrice.toLocaleString()}
+          </h1>
+        </div>
+
+        <div className="flex justify-center items-center gap-10">
+          <img
+            src={Assets.CustomerChatIcon}
+            className="w-8 h-8 cursor-pointer blue-filter"
+            onClick={openChat}
+          />
+          <FilledButton
+            onClick={startDestination}
+            size="h-fit w-fit px-4 py-2"
+            text="Check Out"
+          />
+        </div>
       </div>
     </>
   );

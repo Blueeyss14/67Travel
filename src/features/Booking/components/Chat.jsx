@@ -16,9 +16,14 @@ const Chat = ({ isOpen, openChat }) => {
       >
         <img
           src={Assets.LeftArrowIcon}
-          className="w-5 h-5 pointer-events-auto"
+          className="w-4 h-4 pointer-events-auto blue-filter"
         />
-        <h1 className="font-bold text-[1.2rem]">Mimin</h1>
+        <h1
+          style={{ color: colors.primary }}
+          className="font-bold text-[1.2rem]"
+        >
+          Mimin
+        </h1>
       </div>
       <div className="w-full flex-1 overflow-hidden overflow-y-auto flex flex-col justify-end bg-blue-200/10">
         {chatData.map((item) => (
@@ -35,8 +40,10 @@ const Chat = ({ isOpen, openChat }) => {
                   <img src={item.profile} />
                 </div>
                 <div className="bg-white p-3 rounded-2xl shadow text-[0.9rem]">
-                  <p className="font-bold">{item.role}</p>
-                  <p>{item.message}</p>
+                  <p style={{ color: colors.hytam }} className="font-bold">
+                    {item.role}
+                  </p>
+                  <p style={{ color: colors.hytam }}>{item.message}</p>
                 </div>
               </div>
             )}
@@ -45,8 +52,10 @@ const Chat = ({ isOpen, openChat }) => {
               <div className="flex justify-center items-center gap-3">
                 {/* PROFILE */}
                 <div className="bg-white p-3 rounded-2xl shadow text-[0.9rem]">
-                  <p className="font-bold">{item.role}</p>
-                  <p>{item.message}</p>
+                  <p style={{ color: colors.hytam }} className="font-bold">
+                    {item.role}
+                  </p>
+                  <p style={{ color: colors.hytam }}>{item.message}</p>
                 </div>
                 <div className="h-10 w-10 rounded-full bg-gray-300 overflow-hidden">
                   <img src={item.profile} />
@@ -59,13 +68,12 @@ const Chat = ({ isOpen, openChat }) => {
       <div className="w-full h-20 justify-center items-center flex shadow-[1px_1px_10px_rgba(0,0,0,0.1)] box-border px-5">
         <div className="flex justify-center items-center w-full gap-3">
           <input
-            style={{ backgroundColor: colors.secondary }}
+            style={{ backgroundColor: colors.secondary, borderColor : colors.primary, color: colors.hytam }}
             type="text"
             placeholder="Send a message"
             className={`p-3 w-full outline-none border rounded-[20px]`}
           />
-            <img src={Assets.SendIcon} className="ml-1 w-8 h-8 cursor-pointer"/>
-
+          <img src={Assets.SendIcon} className="ml-1 w-8 h-8 cursor-pointer blue-filter" />
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
 @theme {
   --color-gray: brightness(0) saturate(100%) invert(54%) sepia(23%) saturate(22%) hue-rotate(319deg) brightness(93%) contrast(81%);
   --color-red: brightness(0) saturate(100%) invert(47%) sepia(24%) saturate(1491%) hue-rotate(313deg) brightness(86%) contrast(94%);
+  --color-blue: brightness(0) saturate(100%) invert(43%) sepia(32%) saturate(947%) hue-rotate(174deg) brightness(83%) contrast(94%);
 }
 
 .gray-filter {
@@ -10,6 +11,11 @@
 .red-filter {
   filter: var(--color-red);
 }
+.blue-filter {
+  filter: var(--color-blue);
+}
+
+
 
 * {
     font-family: 'Poppins', sans-serif;
@@ -26,7 +32,7 @@
 }
 
 .cu {
-  color: #f5c73d;
+  color: #398a4a;
 }
 
 
@@ -39,4 +45,32 @@
 
 .jitter {
   animation: jitter 0.4s linear;
+}
+
+
+.scroll-gray {
+  scrollbar-width: auto;
+  scrollbar-color: #d9d9db #f6f7f8;
+}
+
+.scroll-gray::-webkit-scrollbar {
+  width: 2px;
+}
+
+.scroll-gray::-webkit-scrollbar-track {
+  background: #f6f7f8;
+  border-radius: 10px;
+}
+
+.scroll-gray::-webkit-scrollbar-thumb {
+  background-color: #d9d9db;
+  border-radius: 10px;
+}
+
+.scroll-gray::-webkit-scrollbar-thumb:hover {
+  background-color: #cfcfd1;
+}
+
+.scroll-gray::-webkit-scrollbar-button {
+  display: none;
 }

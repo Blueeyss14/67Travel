@@ -22,10 +22,10 @@ const ChooseDestination = ({ setDropdownOpen }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full cursor-pointer">
       <h1
-        style={{ color: colors.hytam }}
-        className="font-bold text-[1.2rem] mb-3"
+        style={{ color: colors.primary }}
+        className="font-bold text-[1rem] mb-3"
       >
         Pilih Destinasi
       </h1>
@@ -36,17 +36,17 @@ const ChooseDestination = ({ setDropdownOpen }) => {
           onClose={() => setDropdownOpen(false)}
           className="w-full"
           trigger={
-            <button className="bg-white px-4 py-3 rounded-2xl w-full border border-black/10">
+            <button className="bg-white px-4 py-3 rounded-2xl w-full border border-black/10 cursor-pointer line-clamp-1">
               {selectedDestination.from.name}
             </button>
           }
         >
-          <div className="bg-gray-100 p-2">
+          <div className="bg-gray-100 p-2 overflow-hidden overflow-y-auto max-h-50 scroll-gray">
             {locationData.map((loc) => (
               <div
                 key={loc.id}
                 onClick={() => handleSelect("from", loc)}
-                className={`p-2 cursor-pointer ${
+                className={`p-2 cursor-pointer hover:bg-gray-200 rounded-[5px] ${
                   selectedDestination.from.id === loc.id
                     ? "bg-gray-200"
                     : "bg-gray-50"
@@ -56,7 +56,15 @@ const ChooseDestination = ({ setDropdownOpen }) => {
                     : ""
                 }`}
               >
-                {loc.name}
+                <div>
+                  <h1 style={{ color: colors.hytam }}>{loc.name}</h1>
+                  <p
+                    style={{ color: colors.primary }}
+                    className="text-[0.8rem]"
+                  >
+                    Rp.{loc.price}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -72,17 +80,17 @@ const ChooseDestination = ({ setDropdownOpen }) => {
           onClose={() => setDropdownOpen(false)}
           className="w-full"
           trigger={
-            <button className="bg-white px-4 py-3 rounded-2xl w-full border border-black/10">
+            <button className="bg-white px-4 py-3 rounded-2xl w-full border border-black/10 cursor-pointer line-clamp-1">
               {selectedDestination.to.name}
             </button>
           }
         >
-          <div className="bg-gray-100 p-2">
+          <div className="bg-gray-100 p-2 overflow-hidden overflow-y-auto max-h-50 scroll-gray">
             {locationData.map((loc) => (
               <div
                 key={loc.id}
                 onClick={() => handleSelect("to", loc)}
-                className={`p-2 cursor-pointer ${
+                className={`p-2 cursor-pointer hover:bg-gray-200 rounded-[5px] ${
                   selectedDestination.to.id === loc.id
                     ? "bg-gray-200"
                     : "bg-gray-50"
@@ -92,7 +100,15 @@ const ChooseDestination = ({ setDropdownOpen }) => {
                     : ""
                 }`}
               >
-                {loc.name}
+                <div>
+                  <h1 style={{ color: colors.hytam }}>{loc.name}</h1>
+                  <p
+                    style={{ color: colors.primary }}
+                    className="text-[0.8rem]"
+                  >
+                    Rp.{loc.price}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

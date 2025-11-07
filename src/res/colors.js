@@ -3,6 +3,8 @@ const colors = {
     secondary : "#fdfdfd",
     hytam: "#464646",
     orange: "#dda233",
+    green: "#398a4a",
+    
 };
 
 export default colors;

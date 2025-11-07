@@ -6,11 +6,17 @@ import { useBookingStore } from "../state/useBookingStore";
 
 const ChooseVehicle = ({ setDropdownOpen }) => {
   const { currentDay, days, setSelectedCar } = useBookingStore();
-  const selectedCar = days[currentDay]?.selectedCar || { id: null, name: "Pilih Kendaraan" };
+  const selectedCar = days[currentDay]?.selectedCar || {
+    id: null,
+    name: "Pilih Kendaraan",
+  };
 
   return (
-    <div className="w-full">
-      <h1 style={{ color: colors.hytam }} className="font-bold text-[1.2rem] mb-3">
+    <div className="w-full mb-5">
+      <h1
+        style={{ color: colors.primary }}
+        className="font-bold text-[1rem] mb-3"
+      >
         Pilih Kendaraan
       </h1>
 
@@ -19,10 +25,13 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
         onClose={() => setDropdownOpen(false)}
         className="w-full"
         trigger={
-          <button className="bg-white px-4 py-2 rounded-2xl w-full border border-black/40">
+          <button className="bg-white px-4 py-2 rounded-2xl w-full border border-black/20 cursor-pointer hover:bg-gray-50">
             <div className="flex justify-between items-center">
-              <p>{selectedCar.name}</p>
-              <img src={Assets.LeftArrowIcon} className="w-4 h-4 -rotate-90" />
+              <p style={{ color: colors.hytam }}>{selectedCar.name}</p>
+              <img
+                src={Assets.LeftArrowIcon}
+                className="w-3 h-3 -rotate-90 gray-filter"
+              />
             </div>
           </button>
         }
@@ -31,7 +40,9 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
           {carData.map((item) => (
             <div
               key={item.uuid}
-              onClick={() => setSelectedCar(currentDay, { id: item.uuid, name: item.name })}
+              onClick={() =>
+                setSelectedCar(currentDay, { id: item.uuid, name: item.name })
+              }
               className={`p-5 hover:bg-gray-200 cursor-pointer flex flex-col w-full ${
                 selectedCar.id === item.uuid ? "bg-gray-200" : "bg-gray-50"
               } shadow`}
@@ -41,10 +52,22 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
                   <img src={item.img} className="w-full h-full object-cover" />
                 </div>
                 <div className="w-full">
-                  <p className="font-semibold">{item.name}</p>
+                  <p style={{ color: colors.hytam }} className="font-semibold">
+                    {item.name}
+                  </p>
                   <div className="w-full justify-between flex items-center">
-                    <p className="text-[0.9rem]">Rp.{item.price}</p>
-                    <p className="text-[0.9rem]">Max: {item.maxPassenger}</p>
+                    <p
+                      style={{ color: colors.primary }}
+                      className="text-[0.9rem]"
+                    >
+                      Rp.{item.price}
+                    </p>
+                    <p
+                      style={{ color: colors.hytam }}
+                      className="text-[0.9rem]"
+                    >
+                      Max: {item.maxPassenger}
+                    </p>
                   </div>
                 </div>
               </div>

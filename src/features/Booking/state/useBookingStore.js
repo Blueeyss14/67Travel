@@ -47,7 +47,7 @@ export const useBookingStore = create((set) => ({
             ...store.days,
             [next]: {
               selectedCar: { id: null, name: "Pilih Kendaraan" },
-              selectedLocation: { id: null, name: "Pilih Lokasi" },
+              selectedLocation: { ...selectedLocation },
               selectedDestination: {
                 from: { id: null, name: "Pilih Wisata Asal" },
                 to: { id: null, name: "Pilih Wisata Tujuan" },
