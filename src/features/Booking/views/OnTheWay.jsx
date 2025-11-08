@@ -33,7 +33,7 @@ const OnTheWay = () => {
     if (done) return;
 
     let time = 0;
-    const duration = 60;
+    const duration = 10;
     const interval = setInterval(() => {
       time++;
       setProgress((time / duration) * 100);

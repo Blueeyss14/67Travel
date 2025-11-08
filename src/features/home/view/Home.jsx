@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import { carouselImageData } from "../data/carouselImageData";
 import BlurBackground from "../../../shared/components/BlurBackground";
 import PromotionCard from "../../../shared/components/PromotionCard";
 import ExplorerPage from "./ExplorerPage";
 import DestionationNav from "../components/DestionationNav";
 import useDestinationStore from "../../Destionation/state/destionationStore";
+import FeedbackPage from "./FeedbackPage";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -110,6 +111,7 @@ const Home = () => {
       </div>
 
       <ExplorerPage />
+      <FeedbackPage />
     </div>
   );
 };

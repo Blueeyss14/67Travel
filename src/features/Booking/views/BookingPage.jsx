@@ -57,7 +57,7 @@ const BookingPage = () => {
       <div className="flex-1 box-border p-0 overflow-hidden flex">
         <div className="w-full h-full flex overflow-hidden">
           <div className="flex-1 h-full p-5 box-border flex flex-col overflow-y-auto">
-            <div className="bg-gray-100 w-full h-[400px] shrink-0 overflow-hidden rounded-2xl border border-black/10">
+            <div className="bg-gray-100 w-full h-[50%] shrink-0 overflow-hidden rounded-2xl border border-black/10">
               <PickMap userLocation={userLocation} />
             </div>
 

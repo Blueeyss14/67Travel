@@ -4,6 +4,7 @@
   --color-red: brightness(0) saturate(100%) invert(47%) sepia(24%) saturate(1491%) hue-rotate(313deg) brightness(86%) contrast(94%);
   --color-blue: brightness(0) saturate(100%) invert(43%) sepia(32%) saturate(947%) hue-rotate(174deg) brightness(83%) contrast(94%);
   --color-yellow: brightness(0) saturate(100%) invert(67%) sepia(37%) saturate(1793%) hue-rotate(356deg) brightness(98%) contrast(84%);
+  --color-whitee : brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(337deg) brightness(125%) contrast(106%);
 }
 
 .gray-filter {
@@ -17,6 +18,9 @@
 }
 .yellow-filter {
   filter: var(--color-yellow);
+}
+.whitee-filter {
+  filter: var(--color-whitee);
 }
 
 
