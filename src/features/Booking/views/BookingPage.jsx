@@ -38,7 +38,7 @@ const BookingPage = () => {
   }
 
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div className="flex flex-col w-full h-screen scroll-gray">
       <div className="absolute w-full h-full z-99999 overflow-hidden pointer-events-none">
         <Chat isOpen={isOpen} openChat={openChat} />
       </div>
@@ -55,17 +55,20 @@ const BookingPage = () => {
       )}
 
       <div className="flex-1 box-border p-0 overflow-hidden flex">
-        <div className="w-full h-full flex">
-          <div className="flex-1 h-full p-5 box-border overflow-hidden flex flex-col">
-            <div className="bg-gray-100 w-full h-[60%] overflow-hidden rounded-2xl border border-black/10">
+        <div className="w-full h-full flex overflow-hidden">
+          <div className="flex-1 h-full p-5 box-border flex flex-col overflow-y-auto">
+            <div className="bg-gray-100 w-full h-[400px] shrink-0 overflow-hidden rounded-2xl border border-black/10">
               <PickMap userLocation={userLocation} />
             </div>
 
-            <div className="flex justify-between items-center mt-5">
-              <h1 style={{ color: colors.hytam }} className="font-bold text-2xl">
+            <div className="flex justify-between items-center mt-5 shrink-0">
+              <h1
+                style={{ color: colors.hytam }}
+                className="font-bold text-2xl"
+              >
                 {selectedLocation.name}
               </h1>
-              <div className="flex items-center justify-center gap-2">
+              {/* <div className="flex items-center justify-center gap-2">
                 <div className="border border-black/10 rounded-2xl w-40 h-12 px-3 flex justify-center items-center">
                   <p style={{ color: colors.hytam }} className="line-clamp-1">
                     {originText}
@@ -79,7 +82,7 @@ const BookingPage = () => {
                     {destinationText}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex gap-2 my-3">
@@ -88,7 +91,7 @@ const BookingPage = () => {
               ))}
             </div>
 
-            <div className="w-full flex-1 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
+            <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
               {locationData.imgs.map((item, i) => (
                 <div
                   key={i}
@@ -98,9 +101,20 @@ const BookingPage = () => {
                 </div>
               ))}
             </div>
+
+            <div className="pb-20">
+              <DetailBooking
+              width="w-full"
+                mediaQuery="[@media(min-width:1025px)]:hidden"
+                setDropdownOpen={setDropdownOpen}
+              />
+            </div>
           </div>
 
-          <DetailBooking setDropdownOpen={setDropdownOpen} />
+          <DetailBooking
+            mediaQuery="[@media(max-width:1025px)]:hidden "
+            setDropdownOpen={setDropdownOpen}
+          />
         </div>
       </div>
 

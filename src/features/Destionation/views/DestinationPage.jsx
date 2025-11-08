@@ -37,8 +37,9 @@ const DestinationPage = () => {
   const visitLocation = (item) => {
     setSelectedLocation(1, {
       id: item.id,
-      name: item.label,
+      name: item.label, 
       imgs: item.imgs,
+      bg: item.bg,
       price: item.price,
       guest: item.guest,
       facility: item.facility,
@@ -55,7 +56,7 @@ const DestinationPage = () => {
   return (
     <div>
       <MapViews userLocation={userLocation} />
-      <div className="mt-20 grid grid-cols-4 gap-5 mx-5 mb-5">
+      <div className="mt-20 grid grid-cols-4 [@media(max-width:1288px)]:grid-cols-3 [@media(max-width:950px)]:grid-cols-1 gap-5 mx-5 mb-5">
         {searchResults.length > 0 ? (
           searchResults.map((item, i) => (
             <div

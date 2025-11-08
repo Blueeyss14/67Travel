@@ -26,10 +26,10 @@ const DestionationNav = ({
   };
 
   const handleSearch = () => {
-    if (!checkInDate) {
-      alert("Pilih tanggal check in dulu");
-      return;
-    }
+    // if (!checkInDate) {
+    //   alert("Pilih tanggal check in dulu");
+    //   return;
+    // }
     searchDestinations();
     navigate("/destination-page");
   };
@@ -39,13 +39,10 @@ const DestionationNav = ({
       <BlurBackground
         border=" border border-white/10"
         rounded="rounded-2xl"
-        className="flex justify-center items-center w-fit h-20 p-5 gap-3"
+        className="flex justify-center items-center w-fit [@media(max-width:956px)]:w-full h-20 p-5 gap-3"
       >
         <SearchLocation />
-        <div className="flex h-full overflow-hidden rounded-[10px]">
-          {/* <div className="h-full flex justify-center items-center border-r border-gray-400/50 px-3 hover:shadow-[inset_2px_2px_10px_rgba(0,0,0,0.50)] transition-all duration-200 cursor-pointer">
-            <h1>Check In</h1>
-          </div> */}
+        {/* <div className="flex h-full overflow-hidden rounded-[10px]">
           <IconButton
             onClick={toggleCheckIn}
             rounded="rounded-0"
@@ -68,8 +65,8 @@ const DestionationNav = ({
                 : "Check Out"
             }
           />
-        </div>
-        <IconButton text="Guest" />
+        </div> */}
+        {/* <IconButton text="Guest" /> */}
         <FilledButton onClick={handleSearch} text="Search" />
       </BlurBackground>
     </div>

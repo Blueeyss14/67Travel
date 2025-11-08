@@ -18,7 +18,7 @@ const SearchLocation = () => {
       style={{ backgroundColor: colors.secondary }}
       type="text"
       placeholder="Search Your Fav Location"
-      className={`pl-5 h-full w-80 outline-none ml-3 rounded-[10px]`}
+      className={`box-border px-5 h-full w-150 [@media(max-width:956px)]:w-full outline-none ml-3 rounded-[10px]`}
     />
   );
 };

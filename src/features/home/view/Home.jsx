@@ -14,6 +14,7 @@ const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCalendar, setShowCalendar] = useState(false);
   const [calendarType, setCalendarType] = useState(null);
+  const [isSmall, setIsSmall] = useState(false);
   const { setCheckInDate, setCheckOutDate } = useDestinationStore();
 
   useEffect(() => {
@@ -23,11 +24,24 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmall(window.innerWidth <= 956);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const displayData = isSmall
+    ? carouselImageData.slice(0, 1)
+    : carouselImageData.slice(0, 2);
+
   return (
     <div className="relative">
       {showCalendar && (
         <BlurBackground
-        background="bg-black/20"
+          background="bg-black/20"
           onClick={() => setShowCalendar(false)}
           className="w-full h-full z-9999 absolute"
         >
@@ -57,22 +71,8 @@ const Home = () => {
       <div>
         <Navbar />
 
-        {/* <div className="fixed bg-amber-200 h-10 w-full z-99 flex justify-center items-center">
-          <div className="custom-clipper h-full w-1/2">
-
-          </div>
-        </div> */}
         <div className="w-full h-[70vh] relative overflow-hidden">
           <div className="bg-linear-to-b from-black/95 to-transparent w-full h-full absolute z-50 flex justify-center items-center flex-col">
-            {/* <div className="w-[70%] flex justify-center items-center flex-col text-white">
-              <h1 className="text-[3rem] font-bold mb-1">67Travel</h1>
-              <p className="text-center mb-5">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident ab, eligendi dolorum temporibus at et. Rerum,
-                explicabo!
-              </p>
-            </div> */}
-            {/* <SearchLocation /> */}
             <DestionationNav
               showCalendar={showCalendar}
               setShowCalendar={setShowCalendar}
@@ -85,17 +85,18 @@ const Home = () => {
               key={index}
               src={img.bg}
               className={`
-              w-full h-full object-cover absolute top-0 left-0
-              transition-opacity duration-1000
-              ${index === currentIndex ? "opacity-100" : "opacity-0"}
-            `}
+                w-full h-full object-cover absolute top-0 left-0
+                transition-opacity duration-1000
+                ${index === currentIndex ? "opacity-100" : "opacity-0"}
+              `}
             />
           ))}
         </div>
       </div>
+
       <div className="w-full h-screen absolute top-0 left-0 z-99 pointer-events-none flex flex-col justify-end items-center">
         <div className="w-[90%] h-[60vh] flex items-center justify-center pointer-events-none gap-10">
-          {carouselImageData.slice(0, 2).map((img, index) => (
+          {displayData.map((img, index) => (
             <PromotionCard
               key={index}
               imageUrl={img.bg}
@@ -107,6 +108,7 @@ const Home = () => {
           ))}
         </div>
       </div>
+
       <ExplorerPage />
     </div>
   );

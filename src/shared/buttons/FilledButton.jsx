@@ -13,6 +13,8 @@ const FilledButton = ({
 }) => {
   const [isHover, setIsHover] = useState(false);
 
+  const glowColor = "#55bbdd";
+
   return (
     <button
       onClick={onClick}
@@ -22,6 +24,7 @@ const FilledButton = ({
         backgroundColor: isHover ? hoverColor : color,
         color: textColor,
         transition: "background-color 0.2s ease-in-out",
+        boxShadow: `0 0 10px ${glowColor}33, 0 0 20px ${glowColor}22`,
       }}
       className={`${size} ${textSize} ${margin} rounded-lg cursor-pointer`}
     >

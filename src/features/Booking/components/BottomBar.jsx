@@ -77,14 +77,14 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
       <div className="bg-white w-full h-20 flex justify-between z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border pr-10">
         <div 
         style={{backgroundColor: colors.primary}}
-        className="h-full justify-center flex flex-col items-start px-15 box-border">
+        className="h-full justify-center flex flex-col items-start px-15 box-border [@media(max-width:1050px)]:px-5">
           <p style={{ color: colors.secondary }}>Total:</p>
-          <h1 style={{ color: colors.secondary }} className="font-bold text-lg">
+          <h1 style={{ color: colors.secondary }} className="font-bold text-lg [@media(max-width:800px)]:text-[0.9rem]">
             Rp.{totalPrice.toLocaleString()}
           </h1>
         </div>
 
-        <div className="flex justify-center items-center gap-10">
+        <div className="flex justify-center items-center gap-10 [@media(max-width:800px)]:gap-3">
           <img
             src={Assets.CustomerChatIcon}
             className="w-8 h-8 cursor-pointer blue-filter"
@@ -92,6 +92,7 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
           />
           <FilledButton
             onClick={startDestination}
+            textSize="[@media(max-width:1050px)]:text-[0.9rem]"
             size="h-fit w-fit px-4 py-2"
             text="Check Out"
           />

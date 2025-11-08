@@ -5,12 +5,12 @@ import ChooseVehicle from "../components/ChooseVehicle";
 import ChooseLocation from "../components/ChooseLocation";
 import ChooseDestination from "../components/chooseDestination";
 
-const DetailBooking = ({ setDropdownOpen }) => {
+const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
   const { currentDay, days, nextDay, prevDay, deleteDay } = useBookingStore();
   const maxDay = Math.max(...Object.keys(days).map(Number));
 
   return (
-    <div className="w-[35%] h-full box-border pt-5 px-5 overflow-hidden overflow-y-auto">
+    <div className={`${width} h-full box-border pt-5 px-5 overflow-hidden overflow-y-auto ${mediaQuery}`}>
       {/* Header Day */}
       <div className="w-full justify-between items-center flex mb-5">
         <div className="flex justify-center items-center gap-5">

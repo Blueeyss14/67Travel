@@ -10,6 +10,9 @@ import SendIcon from "../../assets/icons/send.png"
 import PlaneIcon from "../../assets/icons/plane.png"
 import PlusIcon from "../../assets/icons/plus.png"
 import MinusIcon from "../../assets/icons/minus.png"
+import StarFilledIcon from "../../assets/icons/star-filled.png"
+import StarOutlinedIcon from "../../assets/icons/star-outlined.png"
+import CarGif from "../../assets/gif/car.gif"
 
 export const Assets = {
     CalendarIcon,
@@ -23,5 +26,8 @@ export const Assets = {
     SendIcon,
     PlaneIcon,
     PlusIcon,
-    MinusIcon
+    MinusIcon,
+    CarGif,
+    StarFilledIcon,
+    StarOutlinedIcon
 }

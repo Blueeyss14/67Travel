@@ -32,10 +32,10 @@ const Navbar = () => {
               </a>
             ))}
           </div>
-          <div className="flex gap-3">
+          {/* <div className="flex gap-3">
             <OutlineButton text="Regist" color="white" />
             <FilledButton text="Login" />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
