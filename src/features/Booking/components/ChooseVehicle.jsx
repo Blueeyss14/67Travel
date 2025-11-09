@@ -33,7 +33,10 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
 
   return (
     <div className="w-full mb-5">
-      <h1 style={{ color: colors.primary }} className="font-bold text-[1rem] mb-3">
+      <h1
+        style={{ color: colors.primary }}
+        className="font-bold text-[1rem] mb-3"
+      >
         Pilih Kendaraan
       </h1>
 
@@ -71,10 +74,16 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
                     {item.name}
                   </p>
                   <div className="w-full justify-between flex items-center">
-                    <p style={{ color: colors.primary }} className="text-[0.9rem]">
+                    <p
+                      style={{ color: colors.primary }}
+                      className="text-[0.9rem]"
+                    >
                       Rp.{item.price}
                     </p>
-                    <p style={{ color: colors.hytam }} className="text-[0.9rem]">
+                    <p
+                      style={{ color: colors.hytam }}
+                      className="text-[0.9rem]"
+                    >
                       Max: {item.maxPassenger}
                     </p>
                   </div>
