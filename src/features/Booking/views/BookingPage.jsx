@@ -1,6 +1,5 @@
 import PickMap from "../components/PickMap";
 import useGeolocation from "../../Destionation/hook/useGeolocation";
-import useMapStore from "../state/useMapStore";
 import colors from "../../../res/colors";
 import { Assets } from "../../../res/assets";
 import { useState } from "react";
@@ -14,9 +13,9 @@ import { carouselImageData } from "../../home/data/carouselImageData";
 
 const BookingPage = () => {
   const { currentDay, days } = useBookingStore();
-  const { originText, destinationText } = useMapStore();
   const { userLocation } = useGeolocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isBookmark, setIsBookmark] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const openChat = (e) => {
@@ -35,6 +34,10 @@ const BookingPage = () => {
         <p>Belum ada destinasi yang dipilih</p>
       </div>
     );
+  }
+
+  function clickBookmark() {
+    setIsBookmark(!isBookmark);
   }
 
   return (
@@ -68,6 +71,15 @@ const BookingPage = () => {
               >
                 {selectedLocation.name}
               </h1>
+              <img
+                onClick={clickBookmark}
+                src={
+                  isBookmark
+                    ? Assets.BookmarkFilledIcon
+                    : Assets.BookmarkOutlinedIcon
+                }
+                className="h-6 w-6 cursor-pointer"
+              />
               {/* <div className="flex items-center justify-center gap-2">
                 <div className="border border-black/10 rounded-2xl w-40 h-12 px-3 flex justify-center items-center">
                   <p style={{ color: colors.hytam }} className="line-clamp-1">
@@ -91,6 +103,28 @@ const BookingPage = () => {
               ))}
             </div>
 
+            <div className="flex flex-col w-full gap-1 mb-5">
+              <div className="flex items-center gap-2">
+                <img src={Assets.StarIcon} className="w-5 h-5" />
+                <p className="gray-filter">{locationData.rating}</p>
+              </div>
+
+              <div className="flex items-center gap-2 mt-1">
+                <img
+                  src={Assets.LocationIcon}
+                  className="w-4.5 h-4.5 gray-filter"
+                />
+                <p className="gray-filter">{locationData.location}</p>
+              </div>
+              <div className="flex items-center gap-2 mt-1">
+                <img
+                  src={Assets.PriceIcon}
+                  className="w-4.5 h-4.5 gray-filter"
+                />
+                <p className="gray-filter">Rp. {locationData.price}</p>
+              </div>
+            </div>
+
             <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
               {locationData.imgs.map((item, i) => (
                 <div
@@ -104,7 +138,7 @@ const BookingPage = () => {
 
             <div className="pb-20">
               <DetailBooking
-              width="w-full"
+                width="w-full"
                 mediaQuery="[@media(min-width:1025px)]:hidden"
                 setDropdownOpen={setDropdownOpen}
               />

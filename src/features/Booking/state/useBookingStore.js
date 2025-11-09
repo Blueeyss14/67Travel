@@ -111,6 +111,15 @@ export const useBookingStore = create((set) => ({
 
       return { ...store, days: reIndexedDays, currentDay: newCurrentDay };
     }),
+    
+  setVisitorCount: (day, count) =>
+    set((store) => ({
+      days: {
+        ...store.days,
+        [day]: { ...store.days[day], visitorCount: count },
+      },
+    })),
+
   resetBooking: () =>
     set({
       currentDay: 1,

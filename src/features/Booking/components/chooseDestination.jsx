@@ -36,7 +36,7 @@ const ChooseDestination = ({ setDropdownOpen }) => {
           onClose={() => setDropdownOpen(false)}
           className="w-full"
           trigger={
-            <button className="bg-white px-4 py-3 rounded-2xl w-full border border-black/10 cursor-pointer line-clamp-1">
+            <button className="bg-white px-4 py-3 rounded-[10px] w-full border border-black/10 cursor-pointer line-clamp-1">
               {selectedDestination.from.name}
             </button>
           }

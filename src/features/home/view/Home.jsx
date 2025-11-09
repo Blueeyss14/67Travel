@@ -5,18 +5,24 @@ import BlurBackground from "../../../shared/components/BlurBackground";
 import PromotionCard from "../../../shared/components/PromotionCard";
 import ExplorerPage from "./ExplorerPage";
 import DestionationNav from "../components/DestionationNav";
-import useDestinationStore from "../../Destionation/state/destionationStore";
+// import useDestinationStore from "../../Destionation/state/destionationStore";
 import FeedbackPage from "./FeedbackPage";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { Assets } from "../../../res/assets";
+import colors from "../../../res/colors";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [calendarType, setCalendarType] = useState(null);
+  const navigate = useNavigate();
+  // const [calendarType, setCalendarType] = useState(null);
   const [isSmall, setIsSmall] = useState(false);
-  const { setCheckInDate, setCheckOutDate } = useDestinationStore();
+  // const { setCheckInDate, setCheckOutDate } = useDestinationStore();
+
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,7 +46,50 @@ const Home = () => {
 
   return (
     <div className="relative">
-      {showCalendar && (
+      {isProfileOpen && (
+        <BlurBackground
+          background="bg-black/20"
+          onClick={() => setIsProfileOpen(false)}
+          className="w-full h-full z-9999 fixed flex justify-end items-start box-border p-4 cursor-pointer"
+        >
+          <div className="rounded-2xl p-2 mt-3 bg-white">
+            {/* PROFILE */}
+            <div
+              className="flex items-center gap-2 hover:bg-gray-200 p-3 rounded-2xl"
+              onClick={() => document.getElementById("fileInput").click()}
+            >
+              <img src={Assets.UserIcon} className="w-4 h-4 gray-filter" />
+              <p style={{ color: colors.hytam }} className="text-[0.9rem]">
+                Change Profile Picture
+              </p>
+            </div>
+            {/* BOOKMARK */}
+            <div
+              className="flex items-center gap-2 hover:bg-gray-200 p-3 rounded-2xl"
+              onClick={() => navigate("/destination-page")}
+            >
+              <img
+                src={Assets.BookmarkFilledIcon}
+                className="w-4 h-4 gray-filter"
+              />
+              <p style={{ color: colors.hytam }} className="text-[0.9rem]">
+                Bookmark
+              </p>
+            </div>
+            {/* LOGOUT */}
+            <div
+              className="flex items-center gap-2 hover:bg-gray-200 p-3 rounded-2xl"
+              onClick={() => navigate("/", { replace: true })}
+            >
+              <img src={Assets.LogoutIcon} className="w-4 h-4 gray-filter" />
+              <p style={{ color: colors.hytam }} className="text-[0.9rem]">
+                Logout
+              </p>
+            </div>
+          </div>
+        </BlurBackground>
+      )}
+      {/* {showCalendar && (
         <BlurBackground
           background="bg-black/20"
           onClick={() => setShowCalendar(false)}
@@ -68,16 +117,16 @@ const Home = () => {
             />
           </div>
         </BlurBackground>
-      )}
+      )} */}
       <div>
-        <Navbar />
+        <Navbar setIsOpen={() => setIsProfileOpen(!isProfileOpen)} />
 
         <div className="w-full h-[70vh] relative overflow-hidden">
           <div className="bg-linear-to-b from-black/95 to-transparent w-full h-full absolute z-50 flex justify-center items-center flex-col">
             <DestionationNav
-              showCalendar={showCalendar}
-              setShowCalendar={setShowCalendar}
-              setCalendarType={setCalendarType}
+            // showCalendar={showCalendar}
+            // setShowCalendar={setShowCalendar}
+            // setCalendarType={setCalendarType}
             />
           </div>
           <BlurBackground className="absolute w-full h-full z-40"></BlurBackground>

@@ -25,7 +25,18 @@ const DestinationPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p>Mendeteksi lokasi...</p>
+        <BlurBackground
+          background="bg-black/5"
+          blur="backdrop-blur-[40px]"
+          className="absolute z-9999 w-full h-screen flex justify-center items-center"
+        >
+          <p style={{ color: colors.secondary }} className=" text-[1.2rem]">
+            Mencari Lokasi...
+          </p>
+        </BlurBackground>
+        <div className="w-full h-screen">
+          <img src="images/image1.jpg" className="w-full h-full object-cover" />
+        </div>
       </div>
     );
   }
@@ -37,7 +48,7 @@ const DestinationPage = () => {
   const visitLocation = (item) => {
     setSelectedLocation(1, {
       id: item.id,
-      name: item.label, 
+      name: item.label,
       imgs: item.imgs,
       bg: item.bg,
       price: item.price,

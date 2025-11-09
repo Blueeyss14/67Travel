@@ -29,7 +29,7 @@ const ChooseLocation = ({ setDropdownOpen }) => {
         trigger={
           <button
             style={{ color: isDay1 ? "gray" : colors.hytam }}
-            className={`bg-white px-4 py-2 rounded-2xl w-full border border-black/20  ${
+            className={`bg-white px-4 py-2 rounded-[10px] w-full border border-black/20  ${
               isDay1 ? "cursor-not-allowed" : "hover:bg-gray-50 cursor-pointer"
             }`}
             disabled={isDay1}
@@ -78,12 +78,18 @@ const ChooseLocation = ({ setDropdownOpen }) => {
                       >
                         Rp.{item.price}
                       </p>
-                      <p
+
+                      <div className="flex items-center gap-2">
+                        <img src={Assets.StarIcon} className="w-4 h-4" />
+                        <p className="gray-filter text-[0.9rem]">{item.rating}</p>
+                      </div>
+
+                      {/* <p
                         style={{ color: colors.hytam }}
                         className="text-[0.9rem]"
                       >
                         Max: {item.guest}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </div>

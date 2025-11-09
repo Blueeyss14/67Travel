@@ -6,15 +6,21 @@ import ChooseLocation from "../components/ChooseLocation";
 import ChooseDestination from "../components/chooseDestination";
 
 const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
-  const { currentDay, days, nextDay, prevDay, deleteDay } = useBookingStore();
+  const { currentDay, days, nextDay, prevDay, deleteDay, setVisitorCount } =
+    useBookingStore();
   const maxDay = Math.max(...Object.keys(days).map(Number));
 
   return (
-    <div className={`${width} h-full box-border pt-5 px-5 overflow-hidden overflow-y-auto ${mediaQuery}`}>
+    <div
+      className={`${width} h-full box-border pt-5 px-5 overflow-hidden overflow-y-auto ${mediaQuery}`}
+    >
       {/* Header Day */}
       <div className="w-full justify-between items-center flex mb-5">
         <div className="flex justify-center items-center gap-5">
-          <h1 style={{ color: colors.primary }} className="text-[2rem] font-bold">
+          <h1
+            style={{ color: colors.primary }}
+            className="text-[2rem] font-bold"
+          >
             Day {currentDay}
           </h1>
           <div className="flex gap-3 blue-filter">
@@ -61,6 +67,25 @@ const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
       </div>
 
       <div className="w-full border border-black/10 px-5 py-8 rounded-2xl">
+        <div className="w-full">
+          <h1
+            style={{ color: colors.primary }}
+            className="font-bold text-[1rem] mb-3"
+          >
+            Pengunjung
+          </h1>
+
+          <input
+            style={{ backgroundColor: colors.secondary }}
+            type="number"
+            placeholder="ex: 4"
+            className="box-border px-5 py-3 h-full w-full outline-none rounded-[10px] border border-black/20 mb-5"
+            value={days[currentDay]?.visitorCount || ""}
+            onChange={(e) =>
+              setVisitorCount(currentDay, Number(e.target.value))
+            }
+          />
+        </div>
         <ChooseVehicle setDropdownOpen={setDropdownOpen} />
         <ChooseLocation setDropdownOpen={setDropdownOpen} />
         <ChooseDestination setDropdownOpen={setDropdownOpen} />
