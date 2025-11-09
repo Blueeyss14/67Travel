@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Assets } from "../../../res/assets";
 import FilledButton from "../../../shared/buttons/FilledButton";
@@ -37,7 +38,22 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
       return;
     }
 
-    navigate("/on-the-way");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to start destination?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Start",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+      background: "#fff",
+      confirmButtonColor: colors.primary,
+      cancelButtonColor: "#999",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/on-the-way");
+      }
+    });
   };
 
   const openChat = (e) => {
@@ -75,11 +91,15 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
     <>
       <Toaster />
       <div className="bg-white w-full h-20 flex justify-between z-99999 items-center gap-5 shadow-[1px_1px_15px_rgba(0,0,0,0.1)] box-border pr-10">
-        <div 
-        style={{backgroundColor: colors.primary}}
-        className="h-full justify-center flex flex-col items-start px-15 box-border [@media(max-width:1050px)]:px-5">
+        <div
+          style={{ backgroundColor: colors.primary }}
+          className="h-full justify-center flex flex-col items-start px-15 box-border [@media(max-width:1050px)]:px-5"
+        >
           <p style={{ color: colors.secondary }}>Total:</p>
-          <h1 style={{ color: colors.secondary }} className="font-bold text-lg [@media(max-width:800px)]:text-[0.9rem]">
+          <h1
+            style={{ color: colors.secondary }}
+            className="font-bold text-lg [@media(max-width:800px)]:text-[0.9rem]"
+          >
             Rp.{totalPrice.toLocaleString()}
           </h1>
         </div>

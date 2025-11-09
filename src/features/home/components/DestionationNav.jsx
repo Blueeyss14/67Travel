@@ -5,25 +5,22 @@ import IconButton from "../../../shared/buttons/IconButton";
 import { useNavigate } from "react-router-dom";
 import useDestinationStore from "../../Destionation/state/destionationStore";
 
-const DestionationNav = ({
-  showCalendar,
-  setShowCalendar,
-  setCalendarType,
-}) => {
+const DestionationNav = () => {
   const navigate = useNavigate();
-  const toggle = () => setShowCalendar(!showCalendar);
+  // const toggle = () => setShowCalendar(!showCalendar);
 
-  const { checkInDate, checkOutDate, searchDestinations  } = useDestinationStore();
+  const {searchDestinations  } = useDestinationStore();
+  // const { checkInDate, checkOutDate, searchDestinations  } = useDestinationStore();
 
-  const toggleCheckIn = () => {
-    setCalendarType("checkIn");
-    toggle();
-  };
+  // const toggleCheckIn = () => {
+  //   setCalendarType("checkIn");
+  //   toggle();
+  // };
 
-  const toggleCheckOut = () => {
-    setCalendarType("checkOut");
-    toggle();
-  };
+  // const toggleCheckOut = () => {
+  //   setCalendarType("checkOut");
+  //   toggle();
+  // };
 
   const handleSearch = () => {
     // if (!checkInDate) {

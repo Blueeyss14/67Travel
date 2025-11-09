@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showCalendar, setShowCalendar] = useState(false);
+  // const [showCalendar, setShowCalendar] = useState(false);
   const navigate = useNavigate();
   // const [calendarType, setCalendarType] = useState(null);
   const [isSmall, setIsSmall] = useState(false);
