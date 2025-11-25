@@ -114,7 +114,7 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
             onClick={startDestination}
             textSize="[@media(max-width:1050px)]:text-[0.9rem]"
             size="h-fit w-fit px-4 py-2"
-            text="Cetak"
+            text="Bayar"
           />
         </div>
       </div>

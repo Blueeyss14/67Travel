@@ -4,9 +4,9 @@ import FilledButton from "../../shared/buttons/FilledButton";
 
 const TicketPage = () => {
   return (
-    <div className="flex justify-center items-center box-border p-5">
+    <div className="flex flex-col justify-center items-center box-border p-5">
       <div
-        className="w-[60%] [@media(max-width:1100px)]:w-full h-full border border-black/15 rounded-[10px] flex flex-col justify-start items-center box-border p-10
+        className="mb-10 w-[60%] [@media(max-width:1100px)]:w-full h-full border border-black/15 rounded-[10px] flex flex-col justify-start items-center box-border p-10
       "
       >
         <h1
@@ -58,7 +58,7 @@ const TicketPage = () => {
 
         <table 
         id="table-detail"
-        class="border-collapse border w-full mt-10 mb-10">
+        class="border-collapse border w-full mt-10">
           <tr>
             <th>Rincian</th>
             <th>Detail</th>
@@ -84,11 +84,11 @@ const TicketPage = () => {
             <th className="text-start">Rp.3.600.000</th>
           </tr>
         </table>
+      </div>
         <FilledButton
         text="Cetak"
-        width='w-full'
+        width='w-[60%] [@media(max-width:1100px)]:w-full'
         />
-      </div>
     </div>
   );
 };
