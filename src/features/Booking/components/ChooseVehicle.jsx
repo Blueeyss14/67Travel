@@ -66,7 +66,7 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
               } shadow`}
             >
               <div className="flex items-center gap-3">
-                <div className="w-15 h-15 bg-amber-200 overflow-hidden rounded-lg">
+                <div className="w-15 h-15 overflow-hidden rounded-lg">
                   <img src={item.img} className="w-full h-full object-cover" />
                 </div>
                 <div className="w-full">

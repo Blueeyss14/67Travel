@@ -18,6 +18,8 @@ import BookmarkOutlinedIcon from "../../assets/icons/bookmark_outlined.png";
 import PriceIcon from "../../assets/icons/price.png";
 import UserIcon from "../../assets/icons/user.png";
 import LogoutIcon from "../../assets/icons/logout.png";
+import TicketIcon from "../../assets/icons/ticket.png";
+import CameraIcon from "../../assets/icons/camera.png";
 
 export const Assets = {
   CalendarIcon,
@@ -39,5 +41,7 @@ export const Assets = {
   BookmarkOutlinedIcon,
   PriceIcon,
   UserIcon,
-  LogoutIcon
+  LogoutIcon,
+  TicketIcon,
+  CameraIcon
 };

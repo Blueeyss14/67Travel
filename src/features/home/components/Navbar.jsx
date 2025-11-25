@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Assets } from "../../../res/assets";
 
-const Navbar = ({setIsOpen}) => {
+const Navbar = ({ setIsOpen }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,16 +28,8 @@ const Navbar = ({setIsOpen}) => {
         </div>
         <div
           className="flex items-center gap-3 cursor-pointer"
-          onClick={()=> setIsOpen(true)}
-          // onClick={() => document.getElementById("fileInput").click()}
+          onClick={() => setIsOpen(true)}
         >
-          {/* <div className="flex gap-8 mr-10">
-            {items.map((item, index) => (
-              <a key={index} href="">
-                {item.name}
-              </a>
-            ))}
-          </div> */}
           <div className="w-9 h-9 rounded-full overflow-hidden cursor-pointer">
             <img
               src="images/image1.jpg"
@@ -46,10 +38,6 @@ const Navbar = ({setIsOpen}) => {
             <input type="file" id="fileInput" style={{ display: "none" }} />
           </div>
           <h1 className="font-medium">Felicia</h1>
-          {/* <div className="flex gap-3">
-            <OutlineButton text="Regist" color="white" />
-            <FilledButton text="Login" />
-          </div> */}
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ const FilledButton = ({
   margin = "m-0",
   textSize = "text-base",
   onClick,
+  width
 }) => {
   const [isHover, setIsHover] = useState(false);
 
@@ -26,7 +27,7 @@ const FilledButton = ({
         transition: "background-color 0.2s ease-in-out",
         boxShadow: `0 0 10px ${glowColor}33, 0 0 20px ${glowColor}22`,
       }}
-      className={`${size} ${textSize} ${margin} rounded-lg cursor-pointer`}
+      className={`${size} ${textSize} ${margin} rounded-lg cursor-pointer ${width}`}
     >
       {text}
     </button>

@@ -4,6 +4,7 @@ import { useBookingStore } from "../state/useBookingStore";
 import ChooseVehicle from "../components/ChooseVehicle";
 import ChooseLocation from "../components/ChooseLocation";
 import ChooseDestination from "../components/chooseDestination";
+import ChooseDate from "../components/ChooseDate";
 
 const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
   const { currentDay, days, nextDay, prevDay, deleteDay, setVisitorCount } =
@@ -15,7 +16,13 @@ const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
       className={`${width} h-full box-border pt-5 px-5 overflow-hidden overflow-y-auto ${mediaQuery}`}
     >
       {/* Header Day */}
-      <div className="w-full justify-between items-center flex mb-5">
+      <h1
+        style={{ color: colors.primary }}
+        className="font-bold text-[1.7rem] mb-3"
+      >
+        Beli Tiket
+      </h1>
+      {/* <div className="w-full justify-between items-center flex mb-5">
         <div className="flex justify-center items-center gap-5">
           <h1
             style={{ color: colors.primary }}
@@ -64,9 +71,11 @@ const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="w-full border border-black/10 px-5 py-8 rounded-2xl">
+        <ChooseDate setDropdownOpen={setDropdownOpen} />
+
         <div className="w-full">
           <h1
             style={{ color: colors.primary }}
@@ -88,7 +97,7 @@ const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
         </div>
         <ChooseVehicle setDropdownOpen={setDropdownOpen} />
         <ChooseLocation setDropdownOpen={setDropdownOpen} />
-        <ChooseDestination setDropdownOpen={setDropdownOpen} />
+        {/* <ChooseDestination setDropdownOpen={setDropdownOpen} /> */}
       </div>
     </div>
   );

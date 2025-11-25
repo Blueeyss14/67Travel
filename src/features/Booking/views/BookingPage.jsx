@@ -10,6 +10,7 @@ import DetailBooking from "../../Booking/views/DetailBooking";
 import BottomBar from "../components/BottomBar";
 import { useBookingStore } from "../../Booking/state/useBookingStore";
 import { carouselImageData } from "../../home/data/carouselImageData";
+import FeedbackPage from "../../home/view/FeedbackPage";
 
 const BookingPage = () => {
   const { currentDay, days } = useBookingStore();
@@ -124,16 +125,18 @@ const BookingPage = () => {
                 <p className="gray-filter">Rp. {locationData.price}</p>
               </div>
             </div>
-
-            <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
-              {locationData.imgs.map((item, i) => (
-                <div
-                  key={i}
-                  className="h-full w-85 bg-gray-300 shrink-0 rounded-2xl overflow-hidden"
-                >
-                  <img src={item} className="w-full h-full object-cover" />
-                </div>
-              ))}
+            <div className="flex flex-col w-full">
+              <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
+                {locationData.imgs.map((item, i) => (
+                  <div
+                    key={i}
+                    className="h-full w-85 bg-gray-300 shrink-0 rounded-2xl overflow-hidden"
+                  >
+                    <img src={item} className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+              <FeedbackPage/>
             </div>
 
             <div className="pb-20">

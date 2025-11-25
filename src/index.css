@@ -82,3 +82,36 @@
 .scroll-gray::-webkit-scrollbar-button {
   display: none;
 }
+
+
+.custom-input {
+  border: none;
+  border-color: transparent;
+  background-color: white;
+  text-align: right;
+  color: #3868a7;
+  &::placeholder {
+    color: #3868a7;
+  }
+}
+.custom-days {
+  background-color: #c8daff;
+  .is-week-days {
+    color: #d20000;
+  }
+  .is-disabled {
+    color: #444;
+  }
+}
+.custom-header {
+  background-color: #538bff;
+}
+
+#table-detail td {
+  padding: 10px;
+  border: solid 1px black;
+}
+#table-detail th {
+  padding: 10px;
+  border: solid 1px black;
+}

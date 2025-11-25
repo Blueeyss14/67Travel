@@ -1,0 +1,21 @@
+# destination page
+- Nama Wisata : [
+                    nama_penginapan : {
+                                        "" : "",
+                                        "" : "",
+                    },
+
+                    kendaraan   : {
+                                        "name" : "mazda",
+                                        "price" : mazda,
+                                        "max" : 4,
+                    },
+                    pengunjung: 0,
+
+                    rating : {
+                        "user": "",
+                        "msg" : "your msg",
+                        "rating": 4.5
+                    }
+                    pilih_tanggal(timestamp) : date
+                ]

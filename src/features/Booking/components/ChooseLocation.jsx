@@ -10,7 +10,7 @@ const ChooseLocation = ({ setDropdownOpen }) => {
 
   const selectedLocation = days[currentDay]?.selectedLocation || {
     id: null,
-    name: "Pilih Lokasi",
+    name: "Pilih Akomodasi",
   };
 
   return (
@@ -19,7 +19,7 @@ const ChooseLocation = ({ setDropdownOpen }) => {
         style={{ color: colors.primary }}
         className="font-bold text-[1rem] mb-3"
       >
-        Pilih Lokasi
+        Pilih Akomodasi
       </h1>
 
       <Dropdown

@@ -5,10 +5,7 @@ import BlurBackground from "../../../shared/components/BlurBackground";
 import PromotionCard from "../../../shared/components/PromotionCard";
 import ExplorerPage from "./ExplorerPage";
 import DestionationNav from "../components/DestionationNav";
-// import useDestinationStore from "../../Destionation/state/destionationStore";
-import FeedbackPage from "./FeedbackPage";
 
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Assets } from "../../../res/assets";
 import colors from "../../../res/colors";
@@ -16,11 +13,8 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [showCalendar, setShowCalendar] = useState(false);
   const navigate = useNavigate();
-  // const [calendarType, setCalendarType] = useState(null);
   const [isSmall, setIsSmall] = useState(false);
-  // const { setCheckInDate, setCheckOutDate } = useDestinationStore();
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -40,6 +34,38 @@ const Home = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // function profileHandle() {
+  //   document.getElementById("fileInput").click();
+  // }
+
+  
+  function handleNavigation(navigation) {
+    navigate(navigation);
+  }
+
+  const items = [
+    {
+      label: "Edit Profile",
+      page: ()=> handleNavigation("/profile-page"),
+      icon: Assets.UserIcon,
+    },
+    {
+      label: "Bookmark",
+      page: () => handleNavigation("/bookmark-page"),
+      icon: Assets.BookmarkFilledIcon,
+    },
+    {
+      label: "Tiket",
+      page: () => handleNavigation("/ticket-list-page"),
+      icon: Assets.TicketIcon,
+    },
+    {
+      label: "Logout",
+      page: () => handleNavigation("/"),
+      icon: Assets.LogoutIcon,
+    },
+  ];
+
   const displayData = isSmall
     ? carouselImageData.slice(0, 1)
     : carouselImageData.slice(0, 2);
@@ -52,82 +78,46 @@ const Home = () => {
           onClick={() => setIsProfileOpen(false)}
           className="w-full h-full z-9999 fixed flex justify-end items-start box-border p-4 cursor-pointer"
         >
-          <div className="rounded-2xl p-2 mt-3 bg-white">
+          <div className="rounded-2xl p-2 mt-3 bg-white min-w-50">
+            <div className="w-full box-border p-2 bg-gray-200 rounded-[10px] mb-2 flex flex-col justify-center items-center">
+              <div className="flex flex-col items-center gap-2 cursor-pointer">
+                <div className="w-9 h-9 rounded-full overflow-hidden cursor-pointer">
+                  <img
+                    src="images/image1.jpg"
+                    className="w-full h-full object-cover"
+                  />
+                  <input
+                    type="file"
+                    id="fileInput"
+                    style={{ display: "none" }}
+                  />
+                </div>
+                <h1 className="font-medium text-center">Felicia</h1>
+              </div>
+              <p className="text-[0.8rem]">felicia@gmail.com</p>
+            </div>
             {/* PROFILE */}
-            <div
-              className="flex items-center gap-2 hover:bg-gray-200 p-3 rounded-2xl"
-              onClick={() => document.getElementById("fileInput").click()}
-            >
-              <img src={Assets.UserIcon} className="w-4 h-4 gray-filter" />
-              <p style={{ color: colors.hytam }} className="text-[0.9rem]">
-                Change Profile Picture
-              </p>
-            </div>
-            {/* BOOKMARK */}
-            <div
-              className="flex items-center gap-2 hover:bg-gray-200 p-3 rounded-2xl"
-              onClick={() => navigate("/destination-page")}
-            >
-              <img
-                src={Assets.BookmarkFilledIcon}
-                className="w-4 h-4 gray-filter"
-              />
-              <p style={{ color: colors.hytam }} className="text-[0.9rem]">
-                Bookmark
-              </p>
-            </div>
-            {/* LOGOUT */}
-            <div
-              className="flex items-center gap-2 hover:bg-gray-200 p-3 rounded-2xl"
-              onClick={() => navigate("/", { replace: true })}
-            >
-              <img src={Assets.LogoutIcon} className="w-4 h-4 gray-filter" />
-              <p style={{ color: colors.hytam }} className="text-[0.9rem]">
-                Logout
-              </p>
-            </div>
+            {items.map((item) => (
+              <div
+                className="flex items-center gap-2 hover:bg-gray-200 p-3 rounded-2xl"
+                onClick={item.page}
+              >
+                <img src={item.icon} className="w-4 h-4 gray-filter" />
+                <p style={{ color: colors.hytam }} className="text-[0.9rem]">
+                  {item.label}
+                </p>
+              </div>
+            ))}
           </div>
         </BlurBackground>
       )}
-      {/* {showCalendar && (
-        <BlurBackground
-          background="bg-black/20"
-          onClick={() => setShowCalendar(false)}
-          className="w-full h-full z-9999 absolute"
-        >
-          <div className="w-fit h-fit" onClick={(e) => e.stopPropagation()}>
-            <Calendar
-              onChange={(date) => {
-                if (calendarType === "checkIn") {
-                  setCheckInDate(date);
-                }
 
-                if (calendarType === "checkOut") {
-                  const { checkInDate } = useDestinationStore.getState();
-                  if (checkInDate && date < checkInDate) {
-                    alert("Tanggal check-out tidak boleh sebelum check-in!");
-                    return;
-                  }
-                  setCheckOutDate(date);
-                }
-
-                setShowCalendar(false);
-              }}
-              className="rounded-xl absolute top-100 left-115 p-2"
-            />
-          </div>
-        </BlurBackground>
-      )} */}
       <div>
         <Navbar setIsOpen={() => setIsProfileOpen(!isProfileOpen)} />
 
         <div className="w-full h-[70vh] relative overflow-hidden">
           <div className="bg-linear-to-b from-black/95 to-transparent w-full h-full absolute z-50 flex justify-center items-center flex-col">
-            <DestionationNav
-            // showCalendar={showCalendar}
-            // setShowCalendar={setShowCalendar}
-            // setCalendarType={setCalendarType}
-            />
+            <DestionationNav />
           </div>
           <BlurBackground className="absolute w-full h-full z-40"></BlurBackground>
           {carouselImageData.map((img, index) => (
@@ -160,7 +150,6 @@ const Home = () => {
       </div>
 
       <ExplorerPage />
-      <FeedbackPage />
     </div>
   );
 };

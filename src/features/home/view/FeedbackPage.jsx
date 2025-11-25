@@ -7,13 +7,13 @@ const FeedbackPage = () => {
     <div className="w-full flex flex-col justify-center items-start box-border">
       <h1
         style={{ color: colors.primary }}
-        className="font-bold text-5xl text-center [@media(max-width:800px)]:text-[2rem] my-10 ml-10"
+        className="font-bold text-[1.2rem] text-center [@media(max-width:800px)]:text-[1rem] mt-10 mb-5 ml-10"
       >
         Their FeedBack
       </h1>
       <div
         style={{ color: colors.hytam }}
-        className="w-full px-10 flex overflow-hidden overflow-x-auto gap-5 mb-10"
+        className="w-full px-10 flex overflow-hidden overflow-x-auto gap-5 my-0"
       >
         {ratingData.map((item) => (
           <div
