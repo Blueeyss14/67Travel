@@ -4,7 +4,7 @@ import colors from "../../../res/colors";
 import { useBookingStore } from "../state/useBookingStore";
 import { carouselImageData } from "../../home/data/carouselImageData";
 
-const ChooseLocation = ({ setDropdownOpen }) => {
+const ChooseAccomodation = ({ setDropdownOpen }) => {
   const { currentDay, days, setSelectedLocation } = useBookingStore();
   const isDay1 = currentDay === 1;
 
@@ -102,4 +102,4 @@ const ChooseLocation = ({ setDropdownOpen }) => {
   );
 };
 
-export default ChooseLocation;
+export default ChooseAccomodation;

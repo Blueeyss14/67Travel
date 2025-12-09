@@ -20,6 +20,14 @@ import UserIcon from "../../assets/icons/user.png";
 import LogoutIcon from "../../assets/icons/logout.png";
 import TicketIcon from "../../assets/icons/ticket.png";
 import CameraIcon from "../../assets/icons/camera.png";
+import MoreVertIcon from "../../assets/icons/more_vert.png";
+import NotificationIcon from "../../assets/icons/notification.png";
+
+import BookingSticker from "../../assets/stickers/booking.png";
+import MessageSticker from "../../assets/stickers/message.png";
+import NotificationSticker from "../../assets/stickers/notification.png";
+import PaymentSticker from "../../assets/stickers/payment.png";
+import ReminderSticker from "../../assets/stickers/reminder.png";
 
 export const Assets = {
   CalendarIcon,
@@ -43,5 +51,12 @@ export const Assets = {
   UserIcon,
   LogoutIcon,
   TicketIcon,
-  CameraIcon
+  CameraIcon,
+  MoreVertIcon,
+  NotificationIcon,
+  BookingSticker,
+  MessageSticker,
+  NotificationSticker,
+  PaymentSticker,
+  ReminderSticker,
 };

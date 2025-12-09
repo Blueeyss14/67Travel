@@ -2,9 +2,10 @@ import { Assets } from "../../../res/assets";
 import colors from "../../../res/colors";
 import { useBookingStore } from "../state/useBookingStore";
 import ChooseVehicle from "../components/ChooseVehicle";
-import ChooseLocation from "../components/ChooseLocation";
 import ChooseDestination from "../components/chooseDestination";
 import ChooseDate from "../components/ChooseDate";
+import ChooseAccomodation from "../components/ChooseAccomodation";
+import InputTextField from "../../../shared/TextField/InputTextField";
 
 const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
   const { currentDay, days, nextDay, prevDay, deleteDay, setVisitorCount } =
@@ -96,7 +97,7 @@ const DetailBooking = ({ setDropdownOpen, mediaQuery, width = "w-[35%]" }) => {
           />
         </div>
         <ChooseVehicle setDropdownOpen={setDropdownOpen} />
-        <ChooseLocation setDropdownOpen={setDropdownOpen} />
+        <ChooseAccomodation setDropdownOpen={setDropdownOpen} />
         {/* <ChooseDestination setDropdownOpen={setDropdownOpen} /> */}
       </div>
     </div>

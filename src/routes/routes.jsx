@@ -10,6 +10,7 @@ const TicketListPage = lazy(() => import("../features/Ticket/TicketListPage"));
 const TicketPage = lazy(() => import("../features/Ticket/TicketPage"));
 const BookmarkPage = lazy(() => import("../features/Bookmark/BookmarkPage"));
 const ProfilePage = lazy(() => import("../features/Profile/views/ProfilePage"));
+const NotificationPage = lazy(() => import("../features/Notification/views/Notification"));
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-screen">
@@ -30,6 +31,7 @@ const AppRoutes = () => {
         <Route path="/ticket-page" element={<TicketPage />} />
         <Route path="/bookmark-page" element={<BookmarkPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
+        <Route path="/notification-page" element={<NotificationPage />} />
       </Routes>
     </Suspense>
   );

@@ -37,43 +37,58 @@ const ProfilePage = ({ onToggle }) => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="max-w-md w-full">
-        <form className="mt-0 space-y-6" onSubmit={handleSubmit}>
-          <div className="w-full flex justify-center items-center">
-            <div className="w-25 h-25 rounded-full overflow-hidden">
-              <div className="w-full h-full relative">
-                <div className="absolute h-full w-full">
-                  <img src="images/image1.jpg" className="object-cover" />
-                </div>
-             
-                <div
-                  className="absolute h-full w-full p-8 cursor-pointer"
-                  onClick={() => document.getElementById("fileInput").click()}
-                >
-                  <img
-                    src={Assets.CameraIcon}
-                    className="object-cover gray-filter opacity-70"
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-6 md:p-8">
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="flex flex-col items-center">
+            <div className="relative group">
+              <div 
+                className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                onClick={() => document.getElementById("fileInput").click()}
+              >
+                <img 
+                  src="images/image1.jpg" 
+                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110" 
+                  alt="Profile"
+                />
+              </div>
+              
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-opacity-30 rounded-full transition-all duration-300 cursor-pointer"
+                   onClick={() => document.getElementById("fileInput").click()}>
+                <div className="bg-white p-3 rounded-full shadow-lg transform translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <img 
+                    src={Assets.CameraIcon} 
+                    className="w-6 h-6"
+                    alt="Edit photo"
                   />
                 </div>
               </div>
+              
+              {/* Click Hint */}
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Click to edit
+              </div>
             </div>
+
+            <h2
+              style={{ color: colors.hytam }}
+              className="mt-6 text-center text-2xl font-bold"
+            >
+              Felicia
+            </h2>
+            <p style={{ color: colors.hytam }} className="text-center text-sm opacity-75">
+              felicia@gmail.com
+            </p>
           </div>
-          <h2
-            style={{ color: colors.hytam }}
-            className="mt-2 text-center text-2xl font-semibold m-1"
-          >
-            Felicia
-          </h2>
-          <p style={{ color: colors.hytam }} className="text-center mb-5">
-            felicia@gmail.com
-          </p>
-          <div className="rounded-md space-y-4">
+
+          {/* Form Fields */}
+          <div className="space-y-4">
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-semibold text-gray-700 mb-2"
               >
                 Nama Lengkap
               </label>
@@ -82,16 +97,17 @@ const ProfilePage = ({ onToggle }) => {
                 name="name"
                 type="text"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-gray-50"
                 placeholder="Masukkan nama lengkap"
                 value={formData.name}
                 onChange={handleChange}
               />
             </div>
+
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-semibold text-gray-700 mb-2"
               >
                 Alamat Email
               </label>
@@ -100,16 +116,17 @@ const ProfilePage = ({ onToggle }) => {
                 name="email"
                 type="email"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-gray-50"
                 placeholder="Masukkan alamat email"
                 value={formData.email}
                 onChange={handleChange}
               />
             </div>
+
             <div>
               <label
                 htmlFor="noTelpon"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-semibold text-gray-700 mb-2"
               >
                 No. Telpon
               </label>
@@ -118,16 +135,17 @@ const ProfilePage = ({ onToggle }) => {
                 name="noTelpon"
                 type="tel"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-gray-50"
                 placeholder="Ex: 0811xxxxx"
                 value={formData.noTelpon}
                 onChange={handleChange}
               />
             </div>
+
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-semibold text-gray-700 mb-2"
               >
                 Password
               </label>
@@ -136,16 +154,17 @@ const ProfilePage = ({ onToggle }) => {
                 name="password"
                 type="password"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-gray-50"
                 placeholder="Buat password"
                 value={formData.password}
                 onChange={handleChange}
               />
             </div>
+
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-semibold text-gray-700 mb-2"
               >
                 Konfirmasi Password
               </label>
@@ -154,7 +173,7 @@ const ProfilePage = ({ onToggle }) => {
                 name="confirmPassword"
                 type="password"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-gray-50"
                 placeholder="Ulangi password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
@@ -162,16 +181,25 @@ const ProfilePage = ({ onToggle }) => {
             </div>
           </div>
 
+          {/* Submit Button */}
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer"
+              className="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg active:shadow-md"
             >
               Save Changes
             </button>
           </div>
         </form>
       </div>
+
+      {/* Hidden File Input */}
+      <input
+        type="file"
+        id="fileInput"
+        className="hidden"
+        accept="image/*"
+      />
     </div>
   );
 };

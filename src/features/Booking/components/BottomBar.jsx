@@ -8,6 +8,7 @@ import { locationData } from "../data/locationData";
 import { useBookingStore } from "../state/useBookingStore";
 import toast, { Toaster } from "react-hot-toast";
 import colors from "../../../res/colors";
+import PrimaryButton from "../../../shared/buttons/PrimaryButton";
 
 const BottomBar = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
@@ -110,12 +111,13 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
             className="w-8 h-8 cursor-pointer blue-filter"
             onClick={openChat}
           />
-          <FilledButton
+          {/* <FilledButton
             onClick={startDestination}
             textSize="[@media(max-width:1050px)]:text-[0.9rem]"
             size="h-fit w-fit px-4 py-2"
             text="Bayar"
-          />
+          /> */}
+          <PrimaryButton type="button" text="Bayar" />
         </div>
       </div>
     </>

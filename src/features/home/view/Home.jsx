@@ -3,13 +3,15 @@ import Navbar from "../components/Navbar";
 import { carouselImageData } from "../data/carouselImageData";
 import BlurBackground from "../../../shared/components/BlurBackground";
 import PromotionCard from "../../../shared/components/PromotionCard";
-import ExplorerPage from "./ExplorerPage";
+// import ExplorerPage from "./ExplorerPage";
 import DestionationNav from "../components/DestionationNav";
 
 import "react-calendar/dist/Calendar.css";
 import { Assets } from "../../../res/assets";
 import colors from "../../../res/colors";
 import { useNavigate } from "react-router-dom";
+import PromotionPage from "./PromotionPage";
+import FooterDetail from "./FooterDetail";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,7 +40,6 @@ const Home = () => {
   //   document.getElementById("fileInput").click();
   // }
 
-  
   function handleNavigation(navigation) {
     navigate(navigation);
   }
@@ -46,7 +47,7 @@ const Home = () => {
   const items = [
     {
       label: "Edit Profile",
-      page: ()=> handleNavigation("/profile-page"),
+      page: () => handleNavigation("/profile-page"),
       icon: Assets.UserIcon,
     },
     {
@@ -71,7 +72,7 @@ const Home = () => {
     : carouselImageData.slice(0, 2);
 
   return (
-    <div className="relative">
+    <div className="relative bg-slate-50">
       {isProfileOpen && (
         <BlurBackground
           background="bg-black/20"
@@ -149,7 +150,9 @@ const Home = () => {
         </div>
       </div>
 
-      <ExplorerPage />
+      {/* <ExplorerPage /> */}
+      <PromotionPage />
+      <FooterDetail />
     </div>
   );
 };

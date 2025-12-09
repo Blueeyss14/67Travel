@@ -5,7 +5,7 @@ export const ticketData = [
   },
   {
     label: "Waktu",
-    value: "790",
+    value: "Senin bla bla",
   },
   {
     label: "Kendaraan",

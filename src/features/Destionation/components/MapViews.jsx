@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import colors from "../../../res/colors";
+// import colors from "../../../res/colors";
 import useDestinationStore from "../state/destionationStore";
 import FilledButton from "../../../shared/buttons/FilledButton";
 
@@ -45,7 +45,7 @@ const MapViews = ({ userLocation }) => {
       </MapContainer>
 
       <div className="absolute top-55 left-1/2 -translate-x-1/2 w-11/12 h-50 z-9999 flex justify-center items-center">
-        <div className="bg-white rounded-2xl shadow-lg w-full p-3 flex items-center">
+        <div className="bg-white rounded-[15px] shadow-lg w-full p-3 flex items-center gap-3">
           <SearchLocation />
           <FilledButton onClick={handleSearch} text="Search" />
         </div>
@@ -69,10 +69,10 @@ const SearchLocation = () => {
     <input
       value={value}
       onChange={handleChange}
-      style={{ backgroundColor: colors.secondary }}
+      // style={{ backgroundColor: colors.secondary }}
       type="text"
       placeholder="Search Your Fav Location"
-      className={`box-border px-5 h-full w-full outline-none ml-3 rounded-[10px] [@media(max-width:950px)]:text-[0.9rem]`}
+      className={`box-border p-2 h-full w-full outline-none rounded-[10px] [@media(max-width:950px)]:text-[0.9rem] bg-slate-50`}
     />
   );
 };
