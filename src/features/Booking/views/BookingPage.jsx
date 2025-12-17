@@ -8,28 +8,24 @@ import TagComponent from "../../../shared/components/TagComponent";
 import BlurBackground from "../../../shared/components/BlurBackground";
 import DetailBooking from "../../Booking/views/DetailBooking";
 import BottomBar from "../components/BottomBar";
-import { useBookingStore } from "../../Booking/state/useBookingStore";
-import { carouselImageData } from "../../home/data/carouselImageData";
 import FeedbackPage from "../../home/view/FeedbackPage";
+import { useLocation } from "react-router-dom";
 
 const BookingPage = () => {
-  const { currentDay, days } = useBookingStore();
+  const location = useLocation();
+  const selectedLocation = location.state?.selectedLocation;
+
   const { userLocation } = useGeolocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
-
   const [isOpen, setIsOpen] = useState(false);
+
   const openChat = (e) => {
     e.stopPropagation();
     setIsOpen(!isOpen);
   };
 
-  const selectedLocation = days[currentDay]?.selectedLocation;
-  const locationData = carouselImageData.find(
-    (item) => item.id === selectedLocation?.id
-  );
-
-  if (!selectedLocation?.id || !locationData) {
+  if (!selectedLocation?.id) {
     return (
       <div className="flex items-center justify-center h-screen">
         <p>Belum ada destinasi yang dipilih</p>
@@ -37,9 +33,9 @@ const BookingPage = () => {
     );
   }
 
-  function clickBookmark() {
+  const clickBookmark = () => {
     setIsBookmark(!isBookmark);
-  }
+  };
 
   return (
     <div className="flex flex-col w-full h-screen scroll-gray">
@@ -66,10 +62,7 @@ const BookingPage = () => {
             </div>
 
             <div className="flex justify-between items-center mt-5 shrink-0">
-              <h1
-                style={{ color: colors.hytam }}
-                className="font-bold text-2xl"
-              >
+              <h1 style={{ color: colors.hytam }} className="font-bold text-2xl">
                 {selectedLocation.name}
               </h1>
               <img
@@ -81,25 +74,10 @@ const BookingPage = () => {
                 }
                 className="h-6 w-6 cursor-pointer"
               />
-              {/* <div className="flex items-center justify-center gap-2">
-                <div className="border border-black/10 rounded-2xl w-40 h-12 px-3 flex justify-center items-center">
-                  <p style={{ color: colors.hytam }} className="line-clamp-1">
-                    {originText}
-                  </p>
-                </div>
-                <div className="border border-black/10 h-12 w-12 rounded-2xl flex justify-center items-center">
-                  <img src={Assets.PlaneIcon} className="w-8 h-8 gray-filter" />
-                </div>
-                <div className="border border-black/10 rounded-2xl w-40 h-12 px-3 flex justify-center items-center">
-                  <p style={{ color: colors.hytam }} className="line-clamp-1">
-                    {destinationText}
-                  </p>
-                </div>
-              </div> */}
             </div>
 
             <div className="flex gap-2 my-3">
-              {locationData.facility.map((item, i) => (
+              {selectedLocation.facility.map((item, i) => (
                 <TagComponent key={i} tagName={item} />
               ))}
             </div>
@@ -107,7 +85,7 @@ const BookingPage = () => {
             <div className="flex flex-col w-full gap-1 mb-5">
               <div className="flex items-center gap-2">
                 <img src={Assets.StarIcon} className="w-5 h-5" />
-                <p className="gray-filter">{locationData.rating}</p>
+                <p className="gray-filter">{selectedLocation.rating}</p>
               </div>
 
               <div className="flex items-center gap-2 mt-1">
@@ -115,19 +93,20 @@ const BookingPage = () => {
                   src={Assets.LocationIcon}
                   className="w-4.5 h-4.5 gray-filter"
                 />
-                <p className="gray-filter">{locationData.location}</p>
+                <p className="gray-filter">{selectedLocation.location}</p>
               </div>
               <div className="flex items-center gap-2 mt-1">
                 <img
                   src={Assets.PriceIcon}
                   className="w-4.5 h-4.5 gray-filter"
                 />
-                <p className="gray-filter">Rp. {locationData.price}</p>
+                <p className="gray-filter">Rp. {selectedLocation.price}</p>
               </div>
             </div>
+
             <div className="flex flex-col w-full">
               <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
-                {locationData.imgs.map((item, i) => (
+                {selectedLocation.imgs.map((item, i) => (
                   <div
                     key={i}
                     className="h-full w-85 bg-gray-300 shrink-0 rounded-2xl overflow-hidden"
@@ -136,7 +115,7 @@ const BookingPage = () => {
                   </div>
                 ))}
               </div>
-              <FeedbackPage/>
+              <FeedbackPage ratings={selectedLocation.ratings} />
             </div>
 
             <div className="pb-20">

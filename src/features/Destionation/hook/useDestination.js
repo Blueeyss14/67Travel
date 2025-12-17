@@ -40,14 +40,16 @@ const useDestinations = () => {
           owner: item.owner,
           guest: item.maxOfGuest,
           rating: item.rating,
+          ratings: item.ratings || [],
           price: item.price,
           bg: item.thumbnailUrl
             ? `${config.api.replace("/api/", "/storage/")}${item.thumbnailUrl}`
             : "images/image1.jpg",
-          imgs: item.imageUrls.map(
+          imgs: (item.imageUrls || []).map(
             (img) => `${config.api.replace("/api/", "/storage/")}${img}`
           ),
-          facility: item.facilities,
+          facility: item.facilities || [],
+          description: item.description || "",
         }));
 
         setDestinations(formatted);
