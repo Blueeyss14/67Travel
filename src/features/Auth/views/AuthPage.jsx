@@ -7,7 +7,7 @@ import BlurBackground from "../../../shared/components/BlurBackground";
 import Login from "../components/Login";
 import Regist from "../components/Regist";
 
-import "react-calendar/dist/Calendar.css";
+// import "react-calendar/dist/Calendar.css";
 import colors from "../../../res/colors";
 
 const AuthPage = () => {
@@ -25,7 +25,7 @@ const AuthPage = () => {
 
   return (
     <div className="relative">
-      {/* Toast harus ada di sini biar muncul di atas semua komponen */}
+     
       <Toaster position="top-center" reverseOrder={false} />
 
       {showCalendar && (

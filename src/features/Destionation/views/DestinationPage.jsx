@@ -1,27 +1,27 @@
-import useDestinationStore from "../state/destionationStore";
-import FilledButton from "../../../shared/buttons/FilledButton";
-import { Assets } from "../../../res/assets";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Assets } from "../../../res/assets";
 import MapViews from "../components/MapViews";
 import useGeolocation from "../hook/useGeolocation";
-import { useNavigate } from "react-router-dom";
 import colors from "../../../res/colors";
 import BlurBackground from "../../../shared/components/BlurBackground";
 import TagComponent from "../../../shared/components/TagComponent";
-import { useBookingStore } from "../../Booking/state/useBookingStore";
 import PrimaryButton from "../../../shared/buttons/PrimaryButton";
+import useDestinations from "../hook/useDestination";
 
 const DestinationPage = () => {
   const navigate = useNavigate();
-  const { searchResults } = useDestinationStore();
-  const setSelectedLocation = useBookingStore(
-    (state) => state.setSelectedLocation
-  );
-  const setSelectedDestination = useBookingStore(
-    (state) => state.setSelectedDestination
-  );
+  const { destinations, loading } = useDestinations();
   const [isBookmark, setIsBookmark] = useState({});
-  const { userLocation, loading } = useGeolocation();
+  const { userLocation } = useGeolocation();
+
+  const toggleBookmark = (i) => {
+    setIsBookmark({ ...isBookmark, [i]: !isBookmark[i] });
+  };
+
+  const visitLocation = (item) => {
+    navigate("/booking-page", { state: { selectedLocation: item } });
+  };
 
   if (loading) {
     return (
@@ -42,35 +42,12 @@ const DestinationPage = () => {
     );
   }
 
-  const toggleBookmark = (i) => {
-    setIsBookmark({ ...isBookmark, [i]: !isBookmark[i] });
-  };
-
-  const visitLocation = (item) => {
-    setSelectedLocation(1, {
-      id: item.id,
-      name: item.label,
-      imgs: item.imgs,
-      bg: item.bg,
-      price: item.price,
-      guest: item.guest,
-      facility: item.facility,
-    });
-
-    setSelectedDestination(1, {
-      from: { id: null, name: "Pilih Wisata Asal" },
-      to: { id: null, name: "Pilih Wisata Tujuan" },
-    });
-
-    navigate("/booking-page");
-  };
-
   return (
     <div className="bg-slate-50">
       <MapViews userLocation={userLocation} />
       <div className="mt-20 grid grid-cols-4 [@media(max-width:1288px)]:grid-cols-3 [@media(max-width:950px)]:grid-cols-1 gap-5 mx-5 mb-5 ">
-        {searchResults.length > 0 ? (
-          searchResults.map((item, i) => (
+        {destinations.length > 0 ? (
+          destinations.map((item, i) => (
             <div
               key={i}
               className="flex flex-col p-5 border border-black/8 rounded-2xl gap-2"
@@ -88,9 +65,7 @@ const DestinationPage = () => {
                     className="rounded-full w-fit p-2 shadow cursor-pointer"
                   >
                     <img
-                      src={
-                        isBookmark[i] ? Assets.HeartFilled : Assets.HeartOutline
-                      }
+                      src={isBookmark[i] ? Assets.HeartFilled : Assets.HeartOutline}
                       className={`w-5 h-5 ${
                         !isBookmark[i] ? "gray-filter" : "red-filter jitter"
                       }`}
@@ -99,10 +74,7 @@ const DestinationPage = () => {
                 </div>
               </div>
               <div className="flex justify-between items-center mt-3">
-                <h1
-                  style={{ color: colors.hytam }}
-                  className="font-bold text-[1.2rem]"
-                >
+                <h1 style={{ color: colors.hytam }} className="font-bold text-[1.2rem]">
                   {item.label}
                 </h1>
                 <div className="flex items-center gap-2">
@@ -113,21 +85,13 @@ const DestinationPage = () => {
               <TagComponent tagName={item.owner} />
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                  <img
-                    src={Assets.LocationIcon}
-                    className="w-4 h-4 gray-filter"
-                    alt="Location"
-                  />
+                  <img src={Assets.LocationIcon} className="w-4 h-4 gray-filter" alt="Location" />
                 </div>
                 <span className="gray-filter text-sm">{item.location}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                  <img
-                    src={Assets.GroupIcon}
-                    className="w-4 h-4 gray-filter"
-                    alt="Guests"
-                  />
+                  <img src={Assets.GroupIcon} className="w-4 h-4 gray-filter" alt="Guests" />
                 </div>
                 <span className="gray-filter text-sm">{item.guest}</span>
               </div>
@@ -135,15 +99,9 @@ const DestinationPage = () => {
                 <div className="flex justify-between items-center">
                   <div>
                     <span className="text-xs text-gray-500">Mulai dari</span>
-                    <h3
-                      style={{ color: colors.orange }}
-                      className="font-bold text-xl"
-                    >
+                    <h3 style={{ color: colors.orange }} className="font-bold text-xl">
                       Rp {item.price}
-                      <span className="text-gray-500 text-sm font-normal">
-                        {" "}
-                        /hari
-                      </span>
+                      <span className="text-gray-500 text-sm font-normal"> /hari</span>
                     </h3>
                   </div>
                   <PrimaryButton
@@ -156,7 +114,7 @@ const DestinationPage = () => {
             </div>
           ))
         ) : (
-          <p>Tidak ada hasil ditemukan.</p>
+          <p>Tidak ada destinasi</p>
         )}
       </div>
     </div>

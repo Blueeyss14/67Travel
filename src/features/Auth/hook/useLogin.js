@@ -40,6 +40,12 @@ const useLogin = () => {
       }
 
       if (data.success) {
+        const token = data.data.token;
+        const user = data.data.user;
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
         toast.success(data.message || "Login berhasil!");
         navigate("/home");
       } else {
