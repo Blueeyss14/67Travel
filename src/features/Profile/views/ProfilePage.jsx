@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import colors from "../../../res/colors";
 import { Assets } from "../../../res/assets";
 
-const ProfilePage = ({ onToggle }) => {
+const ProfilePage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",

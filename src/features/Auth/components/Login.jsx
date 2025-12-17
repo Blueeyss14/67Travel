@@ -1,29 +1,7 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import colors from "../../../res/colors";
-
+import useLogin from "../hook/useLogin";
 const Login = ({ onToggle }) => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!formData.email || !formData.password) {
-      toast.error("Email dan password harus diisi!");
-      return;
-    }
-    navigate("/home");
-    toast.success("Login berhasil!");
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { formData, handleChange, handleSubmit } = useLogin();
 
   return (
     <div className="flex items-center justify-center">
