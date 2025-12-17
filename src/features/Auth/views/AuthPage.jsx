@@ -1,4 +1,6 @@
+// AuthPage.jsx
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast"; // <--- wajib ada biar toast muncul
 import { carouselImageData } from "../../home/data/carouselImageData";
 import BlurBackground from "../../../shared/components/BlurBackground";
 // import useDestinationStore from "../../Destionation/state/destionationStore";
@@ -23,6 +25,9 @@ const AuthPage = () => {
 
   return (
     <div className="relative">
+      {/* Toast harus ada di sini biar muncul di atas semua komponen */}
+      <Toaster position="top-center" reverseOrder={false} />
+
       {showCalendar && (
         <BlurBackground
           background="bg-black/20"

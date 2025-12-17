@@ -1,41 +1,10 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
+// Regist.jsx
 import colors from "../../../res/colors";
+import useRegister from "../hook/useRegister";
 
 const Regist = ({ onToggle }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    noTelpon: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (
-      !formData.name ||
-      !formData.email ||
-      formData.noTelpon ||
-      !formData.password ||
-      !formData.confirmPassword
-    ) {
-      toast.error("Semua field harus diisi!");
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Password tidak cocok!");
-      return;
-    }
-
-    toast.success("Registrasi berhasil!");
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { formData, handleChange, handleProfileChange, handleSubmit } =
+    useRegister();
 
   return (
     <div className="max-w-md w-full">
@@ -46,7 +15,32 @@ const Regist = ({ onToggle }) => {
         >
           Daftar Akun
         </h2>
+
         <div className="rounded-md space-y-4">
+          <div className="flex flex-col items-center">
+            <label
+              htmlFor="profile"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Foto Profil
+            </label>
+            <input
+              id="profile"
+              name="profile"
+              type="file"
+              accept="image/*"
+              onChange={handleProfileChange}
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            {formData.profile && (
+              <img
+                src={URL.createObjectURL(formData.profile)}
+                alt="preview"
+                className="mt-3 w-24 h-24 rounded-full object-cover border border-gray-300"
+              />
+            )}
+          </div>
+
           <div>
             <label
               htmlFor="name"
@@ -65,6 +59,7 @@ const Regist = ({ onToggle }) => {
               onChange={handleChange}
             />
           </div>
+
           <div>
             <label
               htmlFor="email"
@@ -83,6 +78,7 @@ const Regist = ({ onToggle }) => {
               onChange={handleChange}
             />
           </div>
+
           <div>
             <label
               htmlFor="noTelpon"
@@ -101,6 +97,7 @@ const Regist = ({ onToggle }) => {
               onChange={handleChange}
             />
           </div>
+
           <div>
             <label
               htmlFor="password"
@@ -119,6 +116,7 @@ const Regist = ({ onToggle }) => {
               onChange={handleChange}
             />
           </div>
+
           <div>
             <label
               htmlFor="confirmPassword"
