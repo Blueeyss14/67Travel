@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 const useDestinations = () => {
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isBookmark, setIsBookmark] = useState({});
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -24,9 +25,6 @@ const useDestinations = () => {
         });
 
         if (!res.ok) {
-          const text = await res.text();
-          console.error("Error fetch destinations:", text);
-          toast.error("Gagal mengambil data destinasi.");
           setLoading(false);
           return;
         }
@@ -42,6 +40,7 @@ const useDestinations = () => {
           rating: item.rating,
           ratings: item.ratings || [],
           price: item.price,
+          bookmark: item.bookmark,
           bg: item.thumbnailUrl
             ? `${config.api.replace("/api/", "/storage/")}${item.thumbnailUrl}`
             : "images/image1.jpg",
@@ -52,10 +51,13 @@ const useDestinations = () => {
           description: item.description || "",
         }));
 
+        const initial = {};
+        formatted.forEach((d, i) => {
+          initial[i] = d.bookmark;
+        });
+
+        setIsBookmark(initial);
         setDestinations(formatted);
-      } catch (err) {
-        console.error("Error fetch destinations:", err);
-        toast.error("Terjadi kesalahan saat mengambil data.");
       } finally {
         setLoading(false);
       }
@@ -64,7 +66,33 @@ const useDestinations = () => {
     fetchDestinations();
   }, []);
 
-  return { destinations, loading };
+  const toggleBookmark = async (index, destinationId) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const newValue = !isBookmark[index];
+    setIsBookmark({ ...isBookmark, [index]: newValue });
+
+    try {
+      const res = await fetch(
+        `${config.api}destinations/${destinationId}/toggle-bookmark`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ bookmark: newValue }),
+        }
+      );
+
+      if (!res.ok) throw new Error();
+    } catch {
+      setIsBookmark({ ...isBookmark, [index]: !newValue });
+    }
+  };
+
+  return { destinations, loading, isBookmark, toggleBookmark };
 };
 
 export default useDestinations;

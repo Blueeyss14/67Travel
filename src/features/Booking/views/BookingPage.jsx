@@ -11,6 +11,7 @@ import BottomBar from "../components/BottomBar";
 import FeedbackPage from "../../home/view/FeedbackPage";
 import { useLocation } from "react-router-dom";
 import Rating from "../components/Rating";
+import useDestinations from "../../Destionation/hook/useDestination";
 
 const BookingPage = () => {
   const location = useLocation();
@@ -18,8 +19,15 @@ const BookingPage = () => {
 
   const { userLocation } = useGeolocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isBookmark, setIsBookmark] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const { destinations, isBookmark, toggleBookmark } = useDestinations();
+
+  const index = destinations.findIndex(
+    (d) => d.id === selectedLocation?.id
+  );
+
+  const bookmarked = index !== -1 ? isBookmark[index] : false;
 
   const openChat = (e) => {
     e.stopPropagation();
@@ -34,15 +42,12 @@ const BookingPage = () => {
     );
   }
 
-  const clickBookmark = () => {
-    setIsBookmark(!isBookmark);
-  };
-
   return (
     <div className="flex flex-col w-full h-screen scroll-gray">
       <div className="absolute w-full h-full z-99999 overflow-hidden pointer-events-none">
         <Chat isOpen={isOpen} openChat={openChat} />
       </div>
+
       {(isOpen || dropdownOpen) && (
         <BlurBackground
           onClick={() => {
@@ -70,9 +75,12 @@ const BookingPage = () => {
                 {selectedLocation.label}
               </h1>
               <img
-                onClick={clickBookmark}
+                onClick={() =>
+                  index !== -1 &&
+                  toggleBookmark(index, selectedLocation.id)
+                }
                 src={
-                  isBookmark
+                  bookmarked
                     ? Assets.BookmarkFilledIcon
                     : Assets.BookmarkOutlinedIcon
                 }
@@ -99,6 +107,7 @@ const BookingPage = () => {
                 />
                 <p className="gray-filter">{selectedLocation.location}</p>
               </div>
+
               <div className="flex items-center gap-2 mt-1">
                 <img
                   src={Assets.PriceIcon}
@@ -112,6 +121,7 @@ const BookingPage = () => {
               <h1 className="py-3 text-black/80">
                 {selectedLocation.description}
               </h1>
+
               {Array.isArray(selectedLocation.imgs) &&
               selectedLocation.imgs.length > 0 ? (
                 <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
@@ -127,6 +137,7 @@ const BookingPage = () => {
               ) : (
                 <div></div>
               )}
+
               <FeedbackPage ratings={selectedLocation.ratings} />
               <Rating destinationId={selectedLocation.id} />
             </div>

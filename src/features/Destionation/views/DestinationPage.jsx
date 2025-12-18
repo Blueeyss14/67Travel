@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Assets } from "../../../res/assets";
 import MapViews from "../components/MapViews";
@@ -11,13 +10,8 @@ import useDestinations from "../hook/useDestination";
 
 const DestinationPage = () => {
   const navigate = useNavigate();
-  const { destinations, loading } = useDestinations();
-  const [isBookmark, setIsBookmark] = useState({});
+  const { destinations, loading, isBookmark, toggleBookmark } = useDestinations();
   const { userLocation } = useGeolocation();
-
-  const toggleBookmark = (i) => {
-    setIsBookmark({ ...isBookmark, [i]: !isBookmark[i] });
-  };
 
   const visitLocation = (item) => {
     navigate("/booking-page", {
@@ -61,7 +55,7 @@ const DestinationPage = () => {
                 />
                 <div className="absolute top-5 right-5">
                   <BlurBackground
-                    onClick={() => toggleBookmark(i)}
+                    onClick={() => toggleBookmark(i, item.id)}
                     blur="backdrop-blur-[5px]"
                     background="bg-white/30"
                     className="rounded-full w-fit p-2 shadow cursor-pointer"
