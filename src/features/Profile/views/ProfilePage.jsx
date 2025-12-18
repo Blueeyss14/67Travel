@@ -1,42 +1,17 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
 import colors from "../../../res/colors";
 import { Assets } from "../../../res/assets";
+import { config } from "../../../config/config";
+import useUserProfile from "../hook/useUserProfile";
 
 const ProfilePage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    noTelpon: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (
-      !formData.name ||
-      !formData.email ||
-      formData.noTelpon ||
-      !formData.password ||
-      !formData.confirmPassword
-    ) {
-      toast.error("Semua field harus diisi!");
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Password tidak cocok!");
-      return;
-    }
-
-    toast.success("Registrasi berhasil!");
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const {
+    user,
+    formData,
+    photo,
+    setPhoto,
+    handleChange,
+    handleSubmit,
+  } = useUserProfile();
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
@@ -44,29 +19,36 @@ const ProfilePage = () => {
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="flex flex-col items-center">
             <div className="relative group">
-              <div 
+              <div
                 className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
                 onClick={() => document.getElementById("fileInput").click()}
               >
-                <img 
-                  src="images/image1.jpg" 
-                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110" 
+                <img
+                  src={
+                    photo
+                      ? URL.createObjectURL(photo)
+                      : user?.profile_photo
+                      ? `${config.asset}storage/${user.profile_photo}`
+                      : "images/annonymous.png"
+                  }
+                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
                   alt="Profile"
                 />
               </div>
-              
-              <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-opacity-30 rounded-full transition-all duration-300 cursor-pointer"
-                   onClick={() => document.getElementById("fileInput").click()}>
+
+              <div
+                className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-opacity-30 rounded-full transition-all duration-300 cursor-pointer"
+                onClick={() => document.getElementById("fileInput").click()}
+              >
                 <div className="bg-white p-3 rounded-full shadow-lg transform translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <img 
-                    src={Assets.CameraIcon} 
+                  <img
+                    src={Assets.CameraIcon}
                     className="w-6 h-6"
                     alt="Edit photo"
                   />
                 </div>
               </div>
-              
-              {/* Click Hint */}
+
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Click to edit
               </div>
@@ -76,14 +58,16 @@ const ProfilePage = () => {
               style={{ color: colors.hytam }}
               className="mt-6 text-center text-2xl font-bold"
             >
-              Felicia
+              {user?.nama}
             </h2>
-            <p style={{ color: colors.hytam }} className="text-center text-sm opacity-75">
-              felicia@gmail.com
+            <p
+              style={{ color: colors.hytam }}
+              className="text-center text-sm opacity-75"
+            >
+              {user?.email}
             </p>
           </div>
 
-          {/* Form Fields */}
           <div className="space-y-4">
             <div>
               <label
@@ -153,7 +137,6 @@ const ProfilePage = () => {
                 id="password"
                 name="password"
                 type="password"
-                required
                 className="w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-gray-50"
                 placeholder="Buat password"
                 value={formData.password}
@@ -172,7 +155,6 @@ const ProfilePage = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
-                required
                 className="w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-gray-50"
                 placeholder="Ulangi password"
                 value={formData.confirmPassword}
@@ -181,7 +163,6 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          {/* Submit Button */}
           <div>
             <button
               type="submit"
@@ -193,12 +174,12 @@ const ProfilePage = () => {
         </form>
       </div>
 
-      {/* Hidden File Input */}
       <input
         type="file"
         id="fileInput"
         className="hidden"
         accept="image/*"
+        onChange={(e) => setPhoto(e.target.files[0])}
       />
     </div>
   );

@@ -10,6 +10,7 @@ import DetailBooking from "../../Booking/views/DetailBooking";
 import BottomBar from "../components/BottomBar";
 import FeedbackPage from "../../home/view/FeedbackPage";
 import { useLocation } from "react-router-dom";
+import Rating from "../components/Rating";
 
 const BookingPage = () => {
   const location = useLocation();
@@ -62,8 +63,11 @@ const BookingPage = () => {
             </div>
 
             <div className="flex justify-between items-center mt-5 shrink-0">
-              <h1 style={{ color: colors.hytam }} className="font-bold text-2xl">
-                {selectedLocation.name}
+              <h1
+                style={{ color: colors.hytam }}
+                className="font-bold text-2xl"
+              >
+                {selectedLocation.label}
               </h1>
               <img
                 onClick={clickBookmark}
@@ -105,17 +109,26 @@ const BookingPage = () => {
             </div>
 
             <div className="flex flex-col w-full">
-              <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
-                {selectedLocation.imgs.map((item, i) => (
-                  <div
-                    key={i}
-                    className="h-full w-85 bg-gray-300 shrink-0 rounded-2xl overflow-hidden"
-                  >
-                    <img src={item} className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
+              <h1 className="py-3 text-black/80">
+                {selectedLocation.description}
+              </h1>
+              {Array.isArray(selectedLocation.imgs) &&
+              selectedLocation.imgs.length > 0 ? (
+                <div className="w-full h-[200px] shrink-0 mt-3 flex items-center overflow-x-auto gap-2.5 cursor-pointer scroll-gray">
+                  {selectedLocation.imgs.map((item, i) => (
+                    <div
+                      key={i}
+                      className="h-full w-85 bg-gray-300 shrink-0 rounded-2xl overflow-hidden"
+                    >
+                      <img src={item} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div></div>
+              )}
               <FeedbackPage ratings={selectedLocation.ratings} />
+              <Rating destinationId={selectedLocation.id} />
             </div>
 
             <div className="pb-20">

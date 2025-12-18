@@ -12,6 +12,9 @@ import colors from "../../../res/colors";
 import { useNavigate } from "react-router-dom";
 import PromotionPage from "./PromotionPage";
 import FooterDetail from "./FooterDetail";
+import useUserProfile from "../../Profile/hook/useUserProfile";
+import { config } from "../../../config/config";
+import useLogout from "../../Auth/hook/useLogout";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,6 +22,14 @@ const Home = () => {
   const [isSmall, setIsSmall] = useState(false);
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+    const {
+    user,
+    photo,
+  } = useUserProfile();
+  const { logout } = useLogout();
+
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,7 +73,7 @@ const Home = () => {
     },
     {
       label: "Logout",
-      page: () => handleNavigation("/"),
+      page: logout,
       icon: Assets.LogoutIcon,
     },
   ];
@@ -84,7 +95,13 @@ const Home = () => {
               <div className="flex flex-col items-center gap-2 cursor-pointer">
                 <div className="w-9 h-9 rounded-full overflow-hidden cursor-pointer">
                   <img
-                    src="images/image1.jpg"
+                    src={
+                                        photo
+                                          ? URL.createObjectURL(photo)
+                                          : user?.profile_photo
+                                          ? `${config.asset}storage/${user.profile_photo}`
+                                          : "images/annonymous.png"
+                                      }
                     className="w-full h-full object-cover"
                   />
                   <input
@@ -93,9 +110,9 @@ const Home = () => {
                     style={{ display: "none" }}
                   />
                 </div>
-                <h1 className="font-medium text-center">Felicia</h1>
+                <h1 className="font-medium text-center">{user?.nama}</h1>
               </div>
-              <p className="text-[0.8rem]">felicia@gmail.com</p>
+              <p className="text-[0.8rem]">{user?.email}</p>
             </div>
             {/* PROFILE */}
             {items.map((item) => (
