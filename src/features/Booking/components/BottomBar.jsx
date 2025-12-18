@@ -1,92 +1,97 @@
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import { Assets } from "../../../res/assets";
-import FilledButton from "../../../shared/buttons/FilledButton";
-import { carouselImageData } from "../../home/data/carouselImageData";
-import { carData } from "../data/carData";
-import { locationData } from "../data/locationData";
-import { useBookingStore } from "../state/useBookingStore";
 import toast, { Toaster } from "react-hot-toast";
 import colors from "../../../res/colors";
 import PrimaryButton from "../../../shared/buttons/PrimaryButton";
+import { config } from "../../../config/config";
 
-const BottomBar = ({ isOpen, setIsOpen }) => {
-  const navigate = useNavigate();
-  const { days } = useBookingStore();
-
-  const startDestination = () => {
-    const allFilled = Object.values(days).every((day) => {
-      const { selectedCar, selectedLocation, selectedDestination } = day;
-      return (
-        selectedCar?.id &&
-        selectedLocation?.id &&
-        selectedDestination?.from?.id &&
-        selectedDestination?.to?.id
-      );
-    });
-
-    if (!allFilled) {
-      toast.error("Isi terlebih dahulu semua Day sebelum Check Out", {
-        position: "top-center",
-        style: {
-          borderRadius: "12px",
-          background: "#333",
-          color: "#fff",
-          padding: "12px 16px",
-          fontSize: "14px",
-        },
-      });
-      return;
-    }
-
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to start destination?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Start",
-      cancelButtonText: "Cancel",
-      reverseButtons: true,
-      background: "#fff",
-      confirmButtonColor: colors.primary,
-      cancelButtonColor: "#999",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate("/on-the-way");
-      }
-    });
-  };
-
+const BottomBar = ({ 
+  isOpen, 
+  setIsOpen,
+  destinationId,
+  vehicleId,
+  accommodationId,
+  expiredAt,
+  guestCount
+}) => {
   const openChat = (e) => {
     e.stopPropagation();
     setIsOpen(!isOpen);
   };
 
-  const parsePrice = (val) => {
-    if (!val) return 0;
-    return Number(String(val).replace(/[^\d]/g, "")) || 0;
+  const handleBayar = async () => {
+    if (!destinationId) {
+      toast.error("Destinasi belum dipilih!");
+      return;
+    }
+    
+    if (!vehicleId) {
+      toast.error("Kendaraan belum dipilih!");
+      return;
+    }
+    
+    if (!accommodationId) {
+      toast.error("Akomodasi belum dipilih!");
+      return;
+    }
+    
+    if (!expiredAt) {
+      toast.error("Tanggal belum dipilih!");
+      return;
+    }
+    
+    if (!guestCount || guestCount < 1) {
+      toast.error("Jumlah pengunjung belum diisi!");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Token tidak ditemukan, silahkan login.");
+        return;
+      }
+
+      const payload = {
+        destination_id: destinationId,
+        vehicle_id: vehicleId,
+        accommodation_id: accommodationId,
+        expired_at: expiredAt,
+        guest_count: guestCount
+      };
+
+      const res = await fetch(`${config.api}tickets`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        toast.error(errorData.message || "Gagal membuat tiket");
+        return;
+      }
+
+      const data = await res.json();
+
+      Swal.fire({
+        icon: "success",
+        title: "Tiket Berhasil Dibuat!",
+        html: `
+          <p>Kode Tiket: <strong>${data.ticket_code || ""}</strong></p>
+          <p>Total: <strong>Rp ${data.total_price?.toLocaleString() || 0}</strong></p>
+        `,
+        confirmButtonColor: colors.primary,
+      });
+
+    } catch (err) {
+      toast.error("Terjadi kesalahan saat membuat tiket");
+      console.error(err);
+    }
   };
-
-  const totalPrice = Object.values(days).reduce((acc, day) => {
-    const car = carData.find((c) => c.uuid === day.selectedCar?.id);
-    const loc = carouselImageData.find(
-      (l) => l.id === day.selectedLocation?.id
-    );
-    const from = locationData.find(
-      (l) => l.id === day.selectedDestination?.from?.id
-    );
-    const to = locationData.find(
-      (l) => l.id === day.selectedDestination?.to?.id
-    );
-
-    const dayTotal =
-      parsePrice(car?.price) +
-      parsePrice(loc?.price) +
-      parsePrice(from?.price) +
-      parsePrice(to?.price);
-
-    return acc + dayTotal;
-  }, 0);
 
   return (
     <>
@@ -101,7 +106,7 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
             style={{ color: colors.secondary }}
             className="font-bold text-lg [@media(max-width:800px)]:text-[0.9rem]"
           >
-            Rp.{totalPrice.toLocaleString()}
+            Rp.0
           </h1>
         </div>
 
@@ -111,13 +116,8 @@ const BottomBar = ({ isOpen, setIsOpen }) => {
             className="w-8 h-8 cursor-pointer blue-filter"
             onClick={openChat}
           />
-          {/* <FilledButton
-            onClick={startDestination}
-            textSize="[@media(max-width:1050px)]:text-[0.9rem]"
-            size="h-fit w-fit px-4 py-2"
-            text="Bayar"
-          /> */}
-          <PrimaryButton type="button" text="Bayar" />
+
+          <PrimaryButton type="button" text="Bayar" onClick={handleBayar} />
         </div>
       </div>
     </>

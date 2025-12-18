@@ -1,5 +1,4 @@
 import PickMap from "../components/PickMap";
-import useGeolocation from "../../Destionation/hook/useGeolocation";
 import colors from "../../../res/colors";
 import { Assets } from "../../../res/assets";
 import { useState } from "react";
@@ -17,9 +16,13 @@ const BookingPage = () => {
   const location = useLocation();
   const selectedLocation = location.state?.selectedLocation;
 
-  const { userLocation } = useGeolocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  
+  const [selectedVehicle, setSelectedVehicle] = useState({ id: null, name: "Pilih Kendaraan" });
+  const [selectedAccommodation, setSelectedAccommodation] = useState({ id: null, name: "Pilih Akomodasi" });
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [visitorCount, setVisitorCount] = useState(1);
 
   const { destinations, isBookmark, toggleBookmark } = useDestinations();
 
@@ -64,7 +67,7 @@ const BookingPage = () => {
         <div className="w-full h-full flex overflow-hidden">
           <div className="flex-1 h-full p-5 box-border flex flex-col overflow-y-auto">
             <div className="bg-gray-100 w-full h-[50%] shrink-0 overflow-hidden rounded-2xl border border-black/10">
-              <PickMap userLocation={userLocation} />
+              <PickMap selectedAccommodation={selectedLocation} />
             </div>
 
             <div className="flex justify-between items-center mt-5 shrink-0">
@@ -134,9 +137,7 @@ const BookingPage = () => {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div></div>
-              )}
+              ) : null}
 
               <FeedbackPage ratings={selectedLocation.ratings} />
               <Rating destinationId={selectedLocation.id} />
@@ -147,6 +148,14 @@ const BookingPage = () => {
                 width="w-full"
                 mediaQuery="[@media(min-width:1025px)]:hidden"
                 setDropdownOpen={setDropdownOpen}
+                selectedVehicle={selectedVehicle}
+                setSelectedVehicle={setSelectedVehicle}
+                selectedAccommodation={selectedAccommodation}
+                setSelectedAccommodation={setSelectedAccommodation}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                visitorCount={visitorCount}
+                setVisitorCount={setVisitorCount}
               />
             </div>
           </div>
@@ -154,11 +163,27 @@ const BookingPage = () => {
           <DetailBooking
             mediaQuery="[@media(max-width:1025px)]:hidden "
             setDropdownOpen={setDropdownOpen}
+            selectedVehicle={selectedVehicle}
+            setSelectedVehicle={setSelectedVehicle}
+            selectedAccommodation={selectedAccommodation}
+            setSelectedAccommodation={setSelectedAccommodation}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            visitorCount={visitorCount}
+            setVisitorCount={setVisitorCount}
           />
         </div>
       </div>
 
-      <BottomBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <BottomBar 
+        isOpen={isOpen} 
+        setIsOpen={setIsOpen}
+        destinationId={selectedLocation?.id}
+        vehicleId={selectedVehicle?.uuid}
+        accommodationId={selectedAccommodation?.uuid}
+        expiredAt={selectedDate}
+        guestCount={visitorCount}
+      />
     </div>
   );
 };

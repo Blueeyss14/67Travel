@@ -79,7 +79,7 @@ const Rating = ({ destinationId }) => {
       <textarea
         ref={descRef}
         placeholder="Berikan rating!"
-        className="h-30 w-full resize-none border-none outline-none bg-gray-200 rounded-2xl p-3"
+        className="h-30 w-full resize-none border-none outline-none bg-gray-50 rounded-2xl p-3"
         style={{ color: colors.hytam }}
       />
 

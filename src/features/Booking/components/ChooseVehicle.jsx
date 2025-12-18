@@ -1,18 +1,11 @@
 import Dropdown from "../../../shared/dropdown/Dropdown";
 import { Assets } from "../../../res/assets";
-import { carData } from "../data/carData";
 import colors from "../../../res/colors";
-import { useBookingStore } from "../state/useBookingStore";
-
+import useVehicle from "../hook/useVehicle";
 import toast from "react-hot-toast";
 
-const ChooseVehicle = ({ setDropdownOpen }) => {
-  const { currentDay, days, setSelectedCar } = useBookingStore();
-  const selectedCar = days[currentDay]?.selectedCar || {
-    id: null,
-    name: "Pilih Kendaraan",
-  };
-  const visitorCount = days[currentDay]?.visitorCount || 0;
+const ChooseVehicle = ({ setDropdownOpen, visitorCount = 1, selectedVehicle, setSelectedVehicle }) => {
+  const { vehicles } = useVehicle();
 
   const handleSelectCar = (item) => {
     if (visitorCount > item.maxPassenger) {
@@ -28,7 +21,7 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
       });
       return;
     }
-    setSelectedCar(currentDay, { id: item.uuid, name: item.name });
+    setSelectedVehicle(item);
   };
 
   return (
@@ -47,7 +40,7 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
         trigger={
           <button className="bg-white px-4 py-2 rounded-[10px] w-full border border-black/20 cursor-pointer hover:bg-gray-50">
             <div className="flex justify-between items-center">
-              <p style={{ color: colors.hytam }}>{selectedCar.name}</p>
+              <p style={{ color: colors.hytam }}>{selectedVehicle.name}</p>
               <img
                 src={Assets.LeftArrowIcon}
                 className="w-3 h-3 -rotate-90 gray-filter"
@@ -57,12 +50,12 @@ const ChooseVehicle = ({ setDropdownOpen }) => {
         }
       >
         <div style={{ color: colors.hytam }} className="bg-gray-100">
-          {carData.map((item) => (
+          {vehicles.map((item) => (
             <div
               key={item.uuid}
               onClick={() => handleSelectCar(item)}
               className={`p-5 hover:bg-gray-200 cursor-pointer flex flex-col w-full ${
-                selectedCar.id === item.uuid ? "bg-gray-200" : "bg-gray-50"
+                selectedVehicle.uuid === item.uuid ? "bg-gray-200" : "bg-gray-50"
               } shadow`}
             >
               <div className="flex items-center gap-3">
