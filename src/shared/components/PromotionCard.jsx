@@ -6,11 +6,13 @@ const PromotionCard = ({
   subTitle = "Subtitle",
   textButton = "Card",
   imageUrl = '',
+  onClick,
   description = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt alias quaerat amet vitae aperiam? Earum, quae, itaque eaque adipisci hic molestiae quibusdam dignissimos omnis deleniti placeat nesciuntinventore deserunt doloremque?",
 
 }) => {
   return (
     <div
+    onClick={onClick}
       className={`${width} shadow-2xl h-50 rounded-2xl bg-white overflow-hidden p-5 flex gap-5 pointer-events-auto`}
     >
       <div className="w-[40%] h-full bg-gray-500 rounded-2xl overflow-hidden">

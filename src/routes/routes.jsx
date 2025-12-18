@@ -1,16 +1,23 @@
 import { Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from "react";
 
 const AuthPage = lazy(() => import("../features/Auth/views/AuthPage"));
 const HomePage = lazy(() => import("../features/home/view/Home"));
-const DestinationView = lazy(() => import("../features/Destionation/views/DestinationPage"));
+const DestinationView = lazy(() =>
+  import("../features/Destionation/views/DestinationPage")
+);
 const BookingPage = lazy(() => import("../features/Booking/views/BookingPage"));
 const OnTheWay = lazy(() => import("../features/Booking/views/OnTheWay"));
 const TicketListPage = lazy(() => import("../features/Ticket/TicketListPage"));
 const TicketPage = lazy(() => import("../features/Ticket/TicketPage"));
 const BookmarkPage = lazy(() => import("../features/Bookmark/BookmarkPage"));
 const ProfilePage = lazy(() => import("../features/Profile/views/ProfilePage"));
-const NotificationPage = lazy(() => import("../features/Notification/views/Notification"));
+const NotificationPage = lazy(() =>
+  import("../features/Notification/views/Notification")
+);
+const PrintTicketPage = lazy(() =>
+  import("../features/Ticket/PrintTicketPage")
+);
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-screen">
@@ -32,6 +39,7 @@ const AppRoutes = () => {
         <Route path="/bookmark-page" element={<BookmarkPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/notification-page" element={<NotificationPage />} />
+        <Route path="/print-ticket" element={<PrintTicketPage />} />
       </Routes>
     </Suspense>
   );

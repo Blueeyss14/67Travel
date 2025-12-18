@@ -15,6 +15,7 @@ import FooterDetail from "./FooterDetail";
 import useUserProfile from "../../Profile/hook/useUserProfile";
 import { config } from "../../../config/config";
 import useLogout from "../../Auth/hook/useLogout";
+import useDestinations from "../../Destionation/hook/useDestination";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,13 +24,8 @@ const Home = () => {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-    const {
-    user,
-    photo,
-  } = useUserProfile();
+  const { user, photo } = useUserProfile();
   const { logout } = useLogout();
-
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,6 +50,11 @@ const Home = () => {
   function handleNavigation(navigation) {
     navigate(navigation);
   }
+  const visitLocation = (item) => {
+    navigate("/booking-page", {
+      state: { selectedLocation: item },
+    });
+  };
 
   const items = [
     {
@@ -78,9 +79,10 @@ const Home = () => {
     },
   ];
 
+  const { destinations, loading } = useDestinations();
   const displayData = isSmall
-    ? carouselImageData.slice(0, 1)
-    : carouselImageData.slice(0, 2);
+    ? destinations.slice(0, 1)
+    : destinations.slice(0, 2);
 
   return (
     <div className="relative bg-slate-50">
@@ -96,12 +98,12 @@ const Home = () => {
                 <div className="w-9 h-9 rounded-full overflow-hidden cursor-pointer">
                   <img
                     src={
-                                        photo
-                                          ? URL.createObjectURL(photo)
-                                          : user?.profile_photo
-                                          ? `${config.asset}storage/${user.profile_photo}`
-                                          : "images/annonymous.png"
-                                      }
+                      photo
+                        ? URL.createObjectURL(photo)
+                        : user?.profile_photo
+                        ? `${config.asset}storage/${user.profile_photo}`
+                        : "images/annonymous.png"
+                    }
                     className="w-full h-full object-cover"
                   />
                   <input
@@ -154,16 +156,32 @@ const Home = () => {
 
       <div className="w-full h-screen absolute top-0 left-0 z-99 pointer-events-none flex flex-col justify-end items-center">
         <div className="w-[90%] h-[60vh] flex items-center justify-center pointer-events-none gap-10">
-          {displayData.map((img, index) => (
-            <PromotionCard
-              key={index}
-              imageUrl={img.bg}
-              title={img.label}
-              subTitle={img.owner}
-              description={img.description}
-              textButton="Visit"
-            />
-          ))}
+          {loading ? (
+            <>
+              {Array.from({ length: 2 }).map((_, i) => (
+                <PromotionCard
+                key={i}
+                  imageUrl="images/image1.jpg"
+                  title="Tunggu gan"
+                  subTitle="Tunggu gan"
+                  description="Sedang memuat..."
+                  textButton="Tunggu"
+                />
+              ))}
+            </>
+          ) : (
+            displayData.map((img, index) => (
+              <PromotionCard
+                key={index}
+                imageUrl={img.bg}
+                title={img.label}
+                subTitle={img.owner}
+                description={img.description}
+                textButton="Visit"
+                onClick={() => visitLocation(img)}
+              />
+            ))
+          )}
         </div>
       </div>
 

@@ -1,104 +1,127 @@
 import colors from "../../../res/colors";
 import useLogin from "../hook/useLogin";
+
 const Login = ({ onToggle }) => {
   const { formData, handleChange, handleSubmit } = useLogin();
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="max-w-md w-full space-y-8">
-        <div>
+    <div className="max-w-md w-full">
+      <form className="space-y-4" onSubmit={handleSubmit}>
+        <div className="text-center mb-2">
           <h2
-            style={{ color: colors.hytam }}
-            className="mt-6 text-center text-3xl font-extrabold"
+            style={{ color: colors.secondary }}
+            className="text-2xl font-bold mb-1"
           >
-            Silahkan Login
+            Selamat Datang
           </h2>
+          <p className="text-xs text-white/70">Silahkan masuk ke akun Anda</p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md space-y-4">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Alamat Email
-              </label>
+
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs font-semibold mb-1 text-white/80">
+              Alamat Email
+            </label>
+            <div className="relative">
               <input
-                id="email"
                 name="email"
                 type="email"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                placeholder="Masukkan alamat email"
+                className="w-full px-3 py-2 text-sm bg-white/10 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white transition-colors placeholder-white/60 pl-10"
+                placeholder="email@contoh.com"
                 value={formData.email}
                 onChange={handleChange}
               />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                placeholder="Masukkan password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900 cursor-pointer"
-              >
-                Ingatkan saya
-              </label>
-            </div>
-
-            <div className="text-sm cursor-pointer">
-              <a
-                href="#"
-                className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
-              >
-                Lupa password?
-              </a>
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                <svg
+                  className="w-4 h-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white cursor-pointer bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-            >
-              Masuk
-            </button>
+            <label className="block text-xs font-semibold text-white/80 mb-1">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                name="password"
+                type="password"
+                required
+                className="w-full px-3 py-2 text-sm bg-white/10 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white transition-colors placeholder-white/60 pl-10"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                <svg
+                  className="w-4 h-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
-        </form>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Belum punya akun?{" "}
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <input
+              id="remember-me"
+              name="remember-me"
+              type="checkbox"
+              className="h-3.5 w-3.5 text-blue-600 focus:ring-1 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
+            />
+            <label
+              htmlFor="remember-me"
+              className="ml-2 block text-xs text-white/80 cursor-pointer"
+            >
+              Ingatkan saya
+            </label>
+          </div>
+        </div>
+
+        <div className="pt-2">
           <button
-            onClick={onToggle}
-            className="font-medium text-blue-600 hover:text-blue-500 transition-colors cursor-pointer"
+            type="submit"
+            className="w-full py-2.5 px-4 text-sm font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white placeholder-white/60 transition-colors cursor-pointer shadow-sm flex items-center justify-center gap-2"
           >
-            Daftar di sini
+            Masuk ke Akun
           </button>
-        </p>
-      </div>
+        </div>
+
+        <div className="pt-2 text-center">
+          <p className="text-xs text-white/70">
+            Belum punya akun?{" "}
+            <button
+              onClick={onToggle}
+              type="button"
+              className="font-semibold transition-colors cursor-pointer text-white/80 hover:text-white"
+            >
+              Daftar di sini
+            </button>
+          </p>
+        </div>
+      </form>
     </div>
   );
 };

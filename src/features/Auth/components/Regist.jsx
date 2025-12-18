@@ -1,4 +1,3 @@
-// Regist.jsx
 import colors from "../../../res/colors";
 import useRegister from "../hook/useRegister";
 
@@ -8,21 +7,59 @@ const Regist = ({ onToggle }) => {
 
   return (
     <div className="max-w-md w-full">
-      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <h2
-          style={{ color: colors.hytam }}
-          className="mt-6 text-center text-3xl font-extrabold"
-        >
-          Daftar Akun
-        </h2>
+      <form className="space-y-4" onSubmit={handleSubmit}>
+        <div className="text-center mb-2">
+          <h2
+            style={{ color: colors.secondary }}
+            className="text-2xl font-bold mb-1"
+          >
+            Daftar Akun
+          </h2>
+          <p className="text-xs text-white/70">Buat akun baru Anda</p>
+        </div>
 
-        <div className="rounded-md space-y-4">
-          <div className="flex flex-col items-center">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="relative shrink-0">
+            {formData.profile ? (
+              <img
+                src={URL.createObjectURL(formData.profile)}
+                alt="preview"
+                className="w-16 h-16 rounded-full object-cover border-2 border-white shadow"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200">
+                <svg
+                  className="w-8 h-8 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+            )}
             <label
               htmlFor="profile"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="absolute -bottom-1 -right-1 bg-blue-600 text-white p-1.5 rounded-full cursor-pointer shadow-sm hover:bg-blue-700 transition-colors"
             >
-              Foto Profil
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                />
+              </svg>
             </label>
             <input
               id="profile"
@@ -30,133 +67,122 @@ const Regist = ({ onToggle }) => {
               type="file"
               accept="image/*"
               onChange={handleProfileChange}
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="hidden"
             />
-            {formData.profile && (
-              <img
-                src={URL.createObjectURL(formData.profile)}
-                alt="preview"
-                className="mt-3 w-24 h-24 rounded-full object-cover border border-gray-300"
+          </div>
+          <div className="flex-col">
+            <label className="block text-xs font-semibold mb-1 text-white/90">
+              Foto Profil
+            </label>
+            <p className="text-xs text-white/70">
+              Upload foto profil
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-white/80 mb-1">
+                Nama Lengkap
+              </label>
+              <input
+                name="name"
+                type="text"
+                required
+                className="w-full px-3 py-2 text-sm bg-white/10 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white transition-colors placeholder-white/60"
+                placeholder="Nama lengkap"
+                value={formData.name}
+                onChange={handleChange}
               />
-            )}
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-white/80 mb-1">
+                Email
+              </label>
+              <input
+                name="email"
+                type="email"
+                required
+                className="w-full px-3 py-2 text-sm bg-white/10 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white transition-colors placeholder-white/60"
+                placeholder="email@contoh.com"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Nama Lengkap
+            <label className="block text-xs font-semibold text-white/80 mb-1">
+              No. Telepon
             </label>
             <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              placeholder="Masukkan nama lengkap"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Alamat Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              placeholder="Masukkan alamat email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="noTelpon"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              No. Telpon
-            </label>
-            <input
-              id="noTelpon"
               name="noTelpon"
               type="tel"
               required
-              className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              placeholder="Ex: 0811xxxxx"
+              className="w-full px-3 py-2 text-sm bg-white/10 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white transition-colors placeholder-white/60"
+              placeholder="0811xxxxx"
               value={formData.noTelpon}
               onChange={handleChange}
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              placeholder="Buat password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-white/80 mb-1">
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                required
+                className="w-full px-3 py-2 text-sm bg-white/10 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white transition-colors placeholder-white/60"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Konfirmasi Password
-            </label>
-            <input
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              required
-              className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              placeholder="Ulangi password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
+            <div>
+              <label className="block text-xs font-semibold text-white/80 mb-1">
+                Konfirmasi
+              </label>
+              <input
+                name="confirmPassword"
+                type="password"
+                required
+                className="w-full px-3 py-2 text-sm bg-white/10 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white transition-colors placeholder-white/60"
+                placeholder="••••••••"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </div>
 
-        <div>
+        <div className="pt-2">
           <button
             type="submit"
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer"
+            className="w-full py-2.5 px-4 text-sm font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white placeholder-white/60 transition-colors cursor-pointer shadow-sm flex items-center justify-center gap-2"
           >
-            Daftar
+            Daftar Sekarang
           </button>
         </div>
+
+        <div className="pt-2 text-center">
+          <p className="text-xs text-white/70">
+            Sudah punya akun?{" "}
+            <button
+              onClick={onToggle}
+              type="button"
+              className="font-semibold text-white/80 hover:text-whitetransition-colors cursor-pointer"
+            >
+              Masuk di sini
+            </button>
+          </p>
+        </div>
       </form>
-      <div>
-        <p className="mt-5 text-center text-sm text-gray-600">
-          Sudah punya akun?{" "}
-          <button
-            onClick={onToggle}
-            className="font-medium text-blue-600 hover:text-blue-500 transition-colors cursor-pointer"
-          >
-            Masuk di sini
-          </button>
-        </p>
-      </div>
     </div>
   );
 };

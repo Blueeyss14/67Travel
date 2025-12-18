@@ -8,7 +8,7 @@ import Login from "../components/Login";
 import Regist from "../components/Regist";
 
 // import "react-calendar/dist/Calendar.css";
-import colors from "../../../res/colors";
+// import colors from "../../../res/colors";
 
 const AuthPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,8 +39,8 @@ const AuthPage = () => {
         <div className="w-full h-screen relative overflow-hidden">
           <div className="bg-linear-to-b from-black/95 to-transparent w-full h-full absolute z-50 flex justify-center items-center flex-col">
             <div
-              style={{ backgroundColor: colors.secondary }}
-              className="box-border p-8 rounded-xl shadow-2xl max-w-md w-full mx-4"
+              // style={{ backgroundColor: colors.secondary }}
+              className="box-border p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 overflow-y-auto max-h-[90vh] bg-white/10 backdrop-blur-[20px] border-2 border-white/10"
             >
               {isLogin ? (
                 <Login onToggle={() => setIsLogin(false)} />
