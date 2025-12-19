@@ -1,28 +1,49 @@
-export const chatData = [
-  {
-    profile: "/images/image1.jpg",
-    message: "Halo, saya butuh bantuan.",
-    isUser: true,
-    role : "Telyu Sigma"
-  },
-  {
-    profile: "/images/image1.jpg",
-    message: "Halo! Ada yang bisa kami bantu?",
-    isUser: false,
-    role : "Mimin"
-  },
-  {
-    profile: "/images/image1.jpg",
-    message: "Saya ingin tahu status pesanan saya.",
-    isUser: true,
-    role : "Telyu Sigma"
-  },
-];
+import { config } from "../../../config/config";
 
-export function mapChat(rawData) {
-  return rawData.map((item) => ({
-    profile: item.profile,
-    message: item.message,
-    isUser: item.isUser
-  }));
+function formatHour(timestamp) {
+  const date = new Date(timestamp);
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
+export function mapMessagesFromApi(rawData, { user, photo }) {
+  if (!Array.isArray(rawData)) return [];
+
+  const baseProfile =
+    photo
+      ? URL.createObjectURL(photo)
+      : user?.profile_photo
+      ? `${config.asset}storage/${user.profile_photo}`
+      : "/images/annonymous.png";
+
+  const userName = user?.nama ?? "You";
+
+  return rawData
+    .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+    .flatMap((item) => {
+      const msgs = [];
+
+      if (item.userMessage) {
+        msgs.push({
+          profile: baseProfile,
+          message: item.userMessage,
+          isUser: true,
+          role: userName,
+          timestamp: formatHour(item.timestamp),
+        });
+      }
+
+      if (item.adminMessage) {
+        msgs.push({
+          profile: "/images/image1.jpg",
+          message: item.adminMessage,
+          isUser: false,
+          role: "Admin",
+          timestamp: formatHour(item.timestamp),
+        });
+      }
+
+      return msgs;
+    });
 }
