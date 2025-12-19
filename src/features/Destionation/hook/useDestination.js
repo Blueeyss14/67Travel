@@ -41,12 +41,14 @@ const useDestinations = () => {
           ratings: item.ratings || [],
           price: item.price,
           bookmark: item.bookmark,
-          bg: item.thumbnailUrl
-            ? `${config.api.replace("/api/", "/storage/")}${item.thumbnailUrl}`
-            : "images/image1.jpg",
-          imgs: (item.imageUrls || []).map(
-            (img) => `${config.api.replace("/api/", "/storage/")}${img}`
-          ),
+          // bg: item.thumbnailUrl
+          //   ? `${config.api.replace("/api/", "/storage/")}${item.thumbnailUrl}`
+          //   : "images/image1.jpg",
+          // imgs: (item.imageUrls || []).map(
+          //   (img) => `${config.api.replace("/api/", "/storage/")}${img}`
+          // ),
+          bg: item.thumbnailUrl || "images/image1.jpg",
+          imgs: item.imageUrls || [],
           facility: item.facilities || [],
           description: item.description || "",
         }));

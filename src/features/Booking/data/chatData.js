@@ -1,4 +1,4 @@
-import { config } from "../../../config/config";
+// import { config } from "../../../config/config";
 
 function formatHour(timestamp) {
   const date = new Date(timestamp);
@@ -11,10 +11,15 @@ export function mapMessagesFromApi(rawData, { user, photo }) {
   if (!Array.isArray(rawData)) return [];
 
   const baseProfile =
+    // photo
+    //   ? URL.createObjectURL(photo)
+    //   : user?.profile_photo
+    //   ? `${config.asset}storage/${user.profile_photo}`
+    //   : "/images/annonymous.png";
     photo
       ? URL.createObjectURL(photo)
       : user?.profile_photo
-      ? `${config.asset}storage/${user.profile_photo}`
+      ? user.profile_photo
       : "/images/annonymous.png";
 
   const userName = user?.nama ?? "You";

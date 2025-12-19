@@ -26,9 +26,10 @@ const useVehicle = (currentDay = 0, visitorCount = 1) => {
             name: v.name,
             price: v.price,
             maxPassenger: v.maxPassenger,
+            // img: v.thumbnailUrl
+            //   ? `${config.asset}storage/${v.thumbnailUrl}`
+            //   : "",
             img: v.thumbnailUrl
-              ? `${config.asset}storage/${v.thumbnailUrl}`
-              : "",
           }));
           setVehicles(formatted);
         } else {

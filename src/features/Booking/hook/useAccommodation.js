@@ -25,7 +25,8 @@ const useAccomodation = (currentDay = 0) => {
             price: v.price,
             latitude: v.latitude,
             longitude: v.longitude,
-            img: v.thumbnail ? `${config.asset}storage/${v.thumbnail}` : "",
+            // img: v.thumbnail ? `${config.asset}storage/${v.thumbnail}` : "",
+            img: v.thumbnail,
           }));
           setAccommodations(formatted);
         } else {

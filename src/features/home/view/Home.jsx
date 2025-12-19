@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import PromotionPage from "./PromotionPage";
 import FooterDetail from "./FooterDetail";
 import useUserProfile from "../../Profile/hook/useUserProfile";
-import { config } from "../../../config/config";
+// import { config } from "../../../config/config";
 import useLogout from "../../Auth/hook/useLogout";
 import useDestinations from "../../Destionation/hook/useDestination";
 
@@ -101,8 +101,13 @@ const Home = () => {
                       photo
                         ? URL.createObjectURL(photo)
                         : user?.profile_photo
-                        ? `${config.asset}storage/${user.profile_photo}`
+                        ? user.profile_photo
                         : "images/annonymous.png"
+                      // photo
+                      //   ? URL.createObjectURL(photo)
+                      //   : user?.profile_photo
+                      //   ? `${config.asset}storage/${user.profile_photo}`
+                      //   : "images/annonymous.png"
                     }
                     className="w-full h-full object-cover"
                   />

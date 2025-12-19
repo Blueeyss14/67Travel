@@ -57,7 +57,7 @@ const Chat = ({ isOpen, openChat }) => {
             {!item.isUser && (
               <div className="flex justify-center items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-gray-300 overflow-hidden">
-                  <img src={item.profile} />
+                  <img src={item.profile} className="w-full h-full object-cover" />
                 </div>
                 <div className="bg-white p-3 rounded-2xl shadow text-[0.9rem]">
                   <p style={{ color: colors.hytam }} className="font-bold">
@@ -77,7 +77,7 @@ const Chat = ({ isOpen, openChat }) => {
                   <p style={{ color: colors.hytam }}>{item.message}</p>
                 </div>
                 <div className="h-10 w-10 rounded-full bg-gray-300 overflow-hidden">
-                  <img src={item.profile} />
+                  <img src={item.profile} className="w-full h-full object-cover" />
                 </div>
               </div>
             )}

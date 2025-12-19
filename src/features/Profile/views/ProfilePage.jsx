@@ -1,6 +1,6 @@
 import colors from "../../../res/colors";
 import { Assets } from "../../../res/assets";
-import { config } from "../../../config/config";
+// import { config } from "../../../config/config";
 import useUserProfile from "../hook/useUserProfile";
 
 const ProfilePage = () => {
@@ -25,10 +25,15 @@ const ProfilePage = () => {
               >
                 <img
                   src={
+                    // photo
+                    //   ? URL.createObjectURL(photo)
+                    //   : user?.profile_photo
+                    //   ? `${config.asset}storage/${user.profile_photo}`
+                    //   : "images/annonymous.png"
                     photo
                       ? URL.createObjectURL(photo)
                       : user?.profile_photo
-                      ? `${config.asset}storage/${user.profile_photo}`
+                      ? user.profile_photo
                       : "images/annonymous.png"
                   }
                   className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
