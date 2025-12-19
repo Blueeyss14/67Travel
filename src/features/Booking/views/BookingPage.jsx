@@ -18,19 +18,28 @@ const BookingPage = () => {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  
-  const [selectedVehicle, setSelectedVehicle] = useState({ id: null, name: "Pilih Kendaraan" });
-  const [selectedAccommodation, setSelectedAccommodation] = useState({ id: null, name: "Pilih Akomodasi" });
+
+  const [selectedVehicle, setSelectedVehicle] = useState({
+    id: null,
+    name: "Pilih Kendaraan",
+  });
+  const [selectedAccommodation, setSelectedAccommodation] = useState({
+    id: null,
+    name: "Pilih Akomodasi",
+  });
   const [selectedDate, setSelectedDate] = useState(null);
   const [visitorCount, setVisitorCount] = useState(1);
 
   const { destinations, isBookmark, toggleBookmark } = useDestinations();
 
-  const index = destinations.findIndex(
-    (d) => d.id === selectedLocation?.id
-  );
+  const index = destinations.findIndex((d) => d.id === selectedLocation?.id);
 
   const bookmarked = index !== -1 ? isBookmark[index] : false;
+
+  const total =
+    (selectedLocation?.price || 0) * visitorCount +
+    (selectedVehicle?.price || 0) +
+    (selectedAccommodation?.price || 0);
 
   const openChat = (e) => {
     e.stopPropagation();
@@ -79,8 +88,7 @@ const BookingPage = () => {
               </h1>
               <img
                 onClick={() =>
-                  index !== -1 &&
-                  toggleBookmark(index, selectedLocation.id)
+                  index !== -1 && toggleBookmark(index, selectedLocation.id)
                 }
                 src={
                   bookmarked
@@ -175,14 +183,15 @@ const BookingPage = () => {
         </div>
       </div>
 
-      <BottomBar 
-        isOpen={isOpen} 
+      <BottomBar
+        isOpen={isOpen}
         setIsOpen={setIsOpen}
         destinationId={selectedLocation?.id}
         vehicleId={selectedVehicle?.uuid}
         accommodationId={selectedAccommodation?.uuid}
         expiredAt={selectedDate}
         guestCount={visitorCount}
+        total={total}
       />
     </div>
   );

@@ -18,6 +18,9 @@ const NotificationPage = lazy(() =>
 const PrintTicketPage = lazy(() =>
   import("../features/Ticket/PrintTicketPage")
 );
+const SuccessPayment = lazy(() =>
+  import("../features/Ticket/SuccessPayment")
+);
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-screen">
@@ -40,6 +43,7 @@ const AppRoutes = () => {
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/notification-page" element={<NotificationPage />} />
         <Route path="/print-ticket" element={<PrintTicketPage />} />
+        <Route path="/success-payment" element={<SuccessPayment />} />
       </Routes>
     </Suspense>
   );
