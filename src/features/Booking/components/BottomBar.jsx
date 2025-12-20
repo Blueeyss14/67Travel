@@ -90,6 +90,31 @@ const BottomBar = ({
       const data = await res.json();
       
       localStorage.setItem("latestTicket", JSON.stringify(data));
+
+      const existingNotifications = localStorage.getItem(`notifications_${token}`);
+      const notifications = existingNotifications ? JSON.parse(existingNotifications) : [];
+      
+      const newNotifications = [
+        {
+          id: Date.now() + Math.random(),
+          title: "Pembayaran Berhasil",
+          message: `Pembayaran tiket ${data.ticket_code} sebesar Rp ${total.toLocaleString("id-ID")} telah berhasil diproses`,
+          time: "Baru saja",
+          type: "payment",
+          read: false,
+        },
+        {
+          id: Date.now() + Math.random() + 1,
+          title: "Tiket Berhasil Dibuat",
+          message: `Tiket ${data.ticket_code} untuk ${data.destination_name} berhasil dibuat`,
+          time: "Baru saja",
+          type: "booking",
+          read: false,
+        },
+        ...notifications
+      ];
+
+      localStorage.setItem(`notifications_${token}`, JSON.stringify(newNotifications));
       
       navigate("/success-payment");
 
@@ -110,7 +135,6 @@ const BottomBar = ({
     <>
       <Toaster />
       
-      {/* Confirm Modal */}
       {showConfirmModal && (
         <div className="fixed inset-0 z-999999 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full">

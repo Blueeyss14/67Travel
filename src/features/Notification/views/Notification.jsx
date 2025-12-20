@@ -1,49 +1,56 @@
-import { useState } from "react";
-import { Assets } from "../../../res/assets"
+import { useState, useEffect } from "react";
+import { Assets } from "../../../res/assets";
+import useTickets from "../../Ticket/hook/useTicket";
+import useTicketExpiryNotifier from "../hook/useTicketExpiryNotifier";
+import colors from "../../../res/colors";
 
 const Notification = () => {
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "New Message",
-      message: "You have a new message from Atmin",
-      time: "2 min ago",
-      type: "message",
-      read: false,
-    },
-    {
-      id: 2,
-      title: "Booking Confirmed",
-      message: "User booking at Hotel Telyu Sigma has been confirmed",
-      time: "1 hour ago",
-      type: "booking",
-      read: false,
-    },
-    {
-      id: 3,
-      title: "Payment Successful",
-      message: "Payment for order #12345 has been processed",
-      time: "3 hours ago",
-      type: "payment",
-      read: true,
-    },
-    {
-      id: 4,
-      title: "New Feature",
-      message: "Check out our new destination recommendations",
-      time: "1 day ago",
-      type: "system",
-      read: true,
-    },
-    {
-      id: 5,
-      title: "Reminder",
-      message: "Don't forget to complete your profile",
-      time: "2 days ago",
-      type: "reminder",
-      read: true,
-    },
-  ]);
+  const [notifications, setNotifications] = useState(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return [];
+    const saved = localStorage.getItem(`notifications_${token}`);
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      localStorage.setItem(`notifications_${token}`, JSON.stringify(notifications));
+    }
+  }, [notifications]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const handleStorageChange = () => {
+      const saved = localStorage.getItem(`notifications_${token}`);
+      if (saved) {
+        setNotifications(JSON.parse(saved));
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    const interval = setInterval(() => {
+      const saved = localStorage.getItem(`notifications_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (JSON.stringify(parsed) !== JSON.stringify(notifications)) {
+          setNotifications(parsed);
+        }
+      }
+    }, 500);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [notifications]);
+
+  const { tickets } = useTickets();
+  
+  useTicketExpiryNotifier(tickets, setNotifications);
 
   const getIcon = (type) => {
     switch (type) {
@@ -85,9 +92,13 @@ const Notification = () => {
   return (
     <div className="w-full p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Notifications</h1>
+        <h1 
+        style={{color: colors.primary}}
+        className="text-2xl font-bold">Notifications</h1>
         <div className="flex items-center gap-4">
-          <span className="bg-blue-500 text-white text-sm px-2 py-1 rounded-full">
+          <span 
+          style={{backgroundColor: colors.primary}}
+          className="text-white text-sm px-2 py-1 rounded-full">
             {notifications.filter((n) => !n.read).length} new
           </span>
           {notifications.length > 0 && (
@@ -168,10 +179,10 @@ const Notification = () => {
       {notifications.length === 0 && (
         <div className="flex flex-col justify-center items-center py-8">
           <img src={Assets.NotificationSticker} className="w-10 h-10" />
-          <h3 className="text-lg font-semibold text-gray-600">
+          <h3 className="text-lg font-semibold text-gray-600 mt-3">
             No notifications
           </h3>
-          <p className="text-gray-500">You're all caught up!</p>
+          <p className="text-gray-500">Tidak ada notifikasi</p>
         </div>
       )}
     </div>

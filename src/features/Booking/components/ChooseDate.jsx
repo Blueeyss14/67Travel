@@ -31,6 +31,7 @@ const ChooseDate = ({ selectedDate, setSelectedDate }) => {
           label="Pilih tanggal dan waktu"
           value={selectedDate ? dayjs(selectedDate) : null}
           onChange={handleDateChange}
+          timeSteps={{ hours: 1, minutes: 1 }}
           renderInput={(params) => (
             <TextField
               {...params}

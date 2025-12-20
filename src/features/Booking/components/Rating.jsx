@@ -62,10 +62,15 @@ const Rating = ({ destinationId }) => {
         <div className="h-10 w-10 bg-gray-200 rounded-full overflow-hidden">
           <img
             src={
+              // photo
+              //   ? URL.createObjectURL(photo)
+              //   : user?.profile_photo
+              //   ? `${config.asset}storage/${user.profile_photo}`
+              //   : "images/annonymous.png"
               photo
                 ? URL.createObjectURL(photo)
                 : user?.profile_photo
-                ? `${config.asset}storage/${user.profile_photo}`
+                ? user.profile_photo
                 : "images/annonymous.png"
             }
             className="w-full h-full object-cover"
