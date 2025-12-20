@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 // import colors from "../../../res/colors";
-import useDestinationStore from "../state/destionationStore";
 import FilledButton from "../../../shared/buttons/FilledButton";
+
 
 const RecenterMap = ({ lat, lng }) => {
   const map = useMap();
@@ -12,13 +12,14 @@ const RecenterMap = ({ lat, lng }) => {
   return null;
 };
 
-const MapViews = ({ userLocation }) => {
-  const { searchDestinations } =
-    useDestinationStore();
+
+const MapViews = ({ userLocation, onSearch }) => {
+  const [searchValue, setSearchValue] = useState("");
 
   const handleSearch = () => {
-    searchDestinations();
+    onSearch(searchValue);
   };
+
   return (
     <div className="w-full h-80 relative">
       <MapContainer
@@ -44,9 +45,10 @@ const MapViews = ({ userLocation }) => {
         <RecenterMap lat={userLocation.lat} lng={userLocation.lng} />
       </MapContainer>
 
+
       <div className="absolute top-55 left-1/2 -translate-x-1/2 w-11/12 h-50 z-9999 flex justify-center items-center">
         <div className="bg-white rounded-[15px] shadow-lg w-full p-3 flex items-center gap-3">
-          <SearchLocation />
+          <SearchLocation value={searchValue} onChange={setSearchValue} />
           <FilledButton onClick={handleSearch} text="Search" />
         </div>
       </div>
@@ -54,20 +56,19 @@ const MapViews = ({ userLocation }) => {
   );
 };
 
-export default MapViews;
 
-const SearchLocation = () => {
-  const [value, setValue] = useState("");
-  const { setSearchQuery } = useDestinationStore();
+const SearchLocation = ({ value, onChange }) => {
+  const [inputValue, setInputValue] = useState(value || "");
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-    setSearchQuery(e.target.value);
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    onChange(newValue);
   };
 
   return (
     <input
-      value={value}
+      value={inputValue}
       onChange={handleChange}
       // style={{ backgroundColor: colors.secondary }}
       type="text"
@@ -76,3 +77,6 @@ const SearchLocation = () => {
     />
   );
 };
+
+
+export default MapViews;

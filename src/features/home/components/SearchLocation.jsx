@@ -1,19 +1,21 @@
 import { useState } from "react";
 import colors from "../../../res/colors";
-import useDestinationStore from "../../Destionation/state/destionationStore";
+// import useDestinationStore from "../../Destionation/state/destionationStore";
 
-const SearchLocation = () => {
-  const [value, setValue] = useState("");
-  const { setSearchQuery } = useDestinationStore();
+const SearchLocation = ({ value, onChange }) => {
+  const [inputValue, setInputValue] = useState(value || "");
+
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-    setSearchQuery(e.target.value);
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    onChange(newValue);
   };
+
 
   return (
     <input
-      value={value}
+      value={inputValue}
       onChange={handleChange}
       style={{ backgroundColor: colors.secondary }}
       type="text"
@@ -22,5 +24,6 @@ const SearchLocation = () => {
     />
   );
 };
+
 
 export default SearchLocation;

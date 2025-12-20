@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { config } from "../../../config/config";
 import toast from "react-hot-toast";
 
-const useDestinations = () => {
+
+const useDestinations = (searchQuery = "") => {
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isBookmark, setIsBookmark] = useState({});
+  const [allDestinations, setAllDestinations] = useState([]);
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -58,6 +60,7 @@ const useDestinations = () => {
           initial[i] = d.bookmark;
         });
 
+        setAllDestinations(formatted);
         setIsBookmark(initial);
         setDestinations(formatted);
       } finally {
@@ -67,6 +70,20 @@ const useDestinations = () => {
 
     fetchDestinations();
   }, []);
+
+  useEffect(() => {
+    if (!searchQuery || searchQuery === "") {
+      setDestinations(allDestinations);
+      return;
+    }
+
+    const filtered = allDestinations.filter((item) =>
+      item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.location.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    setDestinations(filtered);
+  }, [searchQuery, allDestinations]);
 
   const toggleBookmark = async (index, destinationId) => {
     const token = localStorage.getItem("token");
@@ -96,5 +113,6 @@ const useDestinations = () => {
 
   return { destinations, loading, isBookmark, toggleBookmark };
 };
+
 
 export default useDestinations;

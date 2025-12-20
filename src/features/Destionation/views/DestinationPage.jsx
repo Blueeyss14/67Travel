@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Assets } from "../../../res/assets";
 import MapViews from "../components/MapViews";
 import useGeolocation from "../hook/useGeolocation";
@@ -7,17 +7,32 @@ import BlurBackground from "../../../shared/components/BlurBackground";
 import TagComponent from "../../../shared/components/TagComponent";
 import PrimaryButton from "../../../shared/buttons/PrimaryButton";
 import useDestinations from "../hook/useDestination";
+import { useState, useEffect } from "react";
+
 
 const DestinationPage = () => {
   const navigate = useNavigate();
-  const { destinations, loading, isBookmark, toggleBookmark } = useDestinations();
+  const location = useLocation();
   const { userLocation } = useGeolocation();
+  const [searchValue, setSearchValue] = useState("");
+  const { destinations, loading, isBookmark, toggleBookmark } = useDestinations(searchValue);
+
+  useEffect(() => {
+    const initialSearch = location.state?.searchValue || "";
+    setSearchValue(initialSearch);
+  }, [location.state]);
 
   const visitLocation = (item) => {
     navigate("/booking-page", {
       state: { selectedLocation: item },
     });
   };
+
+
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  };
+
 
   if (loading) {
     return (
@@ -38,9 +53,10 @@ const DestinationPage = () => {
     );
   }
 
+
   return (
     <div className="bg-slate-50">
-      <MapViews userLocation={userLocation} />
+      <MapViews userLocation={userLocation} onSearch={handleSearch} />
       <div className="mt-20 grid grid-cols-4 [@media(max-width:1288px)]:grid-cols-3 [@media(max-width:950px)]:grid-cols-1 gap-5 mx-5 mb-5 ">
         {destinations.length > 0 ? (
           destinations.map((item, i) => (
@@ -135,5 +151,7 @@ const DestinationPage = () => {
     </div>
   );
 };
+
+
 
 export default DestinationPage;
