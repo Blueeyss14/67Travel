@@ -244,8 +244,9 @@ const TicketListPage = () => {
                 Tiket yang Anda beli akan muncul di sini
               </p>
               <button
+              style={{backgroundColor: colors.primary}}
                 onClick={() => navigate("/destination-page")}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-sm"
+                className="px-6 py-3 text-white rounded-lg font-semiboldtransition-colors shadow-sm cursor-pointer"
               >
                 Cari Tiket
               </button>
