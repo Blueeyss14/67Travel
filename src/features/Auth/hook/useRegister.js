@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { config } from "../../../config/config";
 
 const useRegister = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     profile: null,
     name: "",
@@ -43,6 +44,7 @@ const useRegister = () => {
     }
 
     try {
+      setLoading(true);
       const payload = new FormData();
       payload.append("profile_photo", formData.profile);
       payload.append("nama", formData.name);
@@ -78,6 +80,8 @@ const useRegister = () => {
       }
     } catch (err) {
       toast.error(`Gagal registrasi! ${err}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,6 +90,7 @@ const useRegister = () => {
     handleChange,
     handleProfileChange,
     handleSubmit,
+    loading
   };
 };
 

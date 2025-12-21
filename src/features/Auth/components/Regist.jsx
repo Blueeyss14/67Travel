@@ -2,7 +2,7 @@ import colors from "../../../res/colors";
 import useRegister from "../hook/useRegister";
 
 const Regist = ({ onToggle }) => {
-  const { formData, handleChange, handleProfileChange, handleSubmit } =
+  const { formData, handleChange, handleProfileChange, handleSubmit, loading } =
     useRegister();
 
   return (
@@ -166,7 +166,7 @@ const Regist = ({ onToggle }) => {
             type="submit"
             className="w-full py-2.5 px-4 text-sm font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-[20px] border border-white/20 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:border-white placeholder-white/60 transition-colors cursor-pointer shadow-sm flex items-center justify-center gap-2"
           >
-            Daftar Sekarang
+            {loading ? "Memproses..." : "Daftar Sekarang"}
           </button>
         </div>
 

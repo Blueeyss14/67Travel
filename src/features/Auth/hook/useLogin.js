@@ -5,6 +5,7 @@ import { config } from "../../../config/config";
 
 const useLogin = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,6 +24,8 @@ const useLogin = () => {
     }
 
     try {
+      setLoading(true);
+
       const res = await fetch(`${config.api}user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -53,6 +56,8 @@ const useLogin = () => {
       }
     } catch (err) {
       toast.error(`Login gagal! ${err}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,6 +65,7 @@ const useLogin = () => {
     formData,
     handleChange,
     handleSubmit,
+    loading,
   };
 };
 

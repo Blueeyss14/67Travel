@@ -117,7 +117,7 @@ const SuccessPayment = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Kendaraan</p>
-                    <p className="font-semibold text-gray-900">ID: {ticketData.vehicle_id}</p>
+                    <p className="font-semibold text-gray-900">{ticketData.vehicle_name}</p>
                   </div>
                 </div>
 
@@ -129,7 +129,7 @@ const SuccessPayment = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Akomodasi</p>
-                    <p className="font-semibold text-gray-900">ID: {ticketData.accommodation_id}</p>
+                    <p className="font-semibold text-gray-900">{ticketData.accommodation_name}</p>
                   </div>
                 </div>
               </div>

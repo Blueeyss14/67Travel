@@ -14,12 +14,14 @@ const useLogout = () => {
     }
 
     try {
+      
       await fetch(`${config.api}user/logout`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      
     } catch (e) {
         console.log(e);
     }

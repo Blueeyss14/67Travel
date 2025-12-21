@@ -13,7 +13,7 @@ const FooterDetail = () => {
                 </div>
                 <div>
                   <p className="font-medium">Gena</p>
-                  <p className="text-xs text-gray-400">103032300084</p>
+                  <p className="text-xs text-gray-400">103032330095</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
@@ -22,7 +22,7 @@ const FooterDetail = () => {
                 </div>
                 <div>
                   <p className="font-medium">Arik Pramudya</p>
-                  <p className="text-xs text-gray-400">103032300084</p>
+                  <p className="text-xs text-gray-400">103032300173</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
@@ -31,7 +31,7 @@ const FooterDetail = () => {
                 </div>
                 <div>
                   <p className="font-medium">Salsabila</p>
-                  <p className="text-xs text-gray-400">103032300084</p>
+                  <p className="text-xs text-gray-400">103032330153</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
@@ -49,7 +49,7 @@ const FooterDetail = () => {
                 </div>
                 <div>
                   <p className="font-medium">Dafi Fala Tansa</p>
-                  <p className="text-xs text-gray-400">103032300084</p>
+                  <p className="text-xs text-gray-400">103032300067</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
@@ -58,7 +58,7 @@ const FooterDetail = () => {
                 </div>
                 <div>
                   <p className="font-medium">Ahmad Faizal</p>
-                  <p className="text-xs text-gray-400">103032300084</p>
+                  <p className="text-xs text-gray-400">103032330105</p>
                 </div>
               </div>
             </div>
