@@ -126,6 +126,13 @@ const BookingPage = () => {
                 />
                 <p className="gray-filter">Rp. {selectedLocation.price}</p>
               </div>
+              <div className="flex items-center gap-2 mt-1">
+                <img
+                  src={Assets.GroupIcon}
+                  className="w-4.5 h-4.5 gray-filter"
+                />
+                <p className="gray-filter">{selectedLocation.guest}</p>
+              </div>
             </div>
 
             <div className="flex flex-col w-full">

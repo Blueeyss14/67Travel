@@ -4,7 +4,7 @@ import { useUserChat } from "../hook/useUserChat";
 import { useState } from "react";
 
 const Chat = ({ isOpen, openChat }) => {
-  const { messages, sendUserMessage, loading } = useUserChat();
+  const { messages, sendUserMessage, loading, refreshMessages } = useUserChat();
   const [inputText, setInputText] = useState("");
 
   const handleSend = () => {
@@ -22,20 +22,31 @@ const Chat = ({ isOpen, openChat }) => {
     >
       <div
         onClick={openChat}
-        className="flex items-center gap-5 box-border p-5 pointer-events-auto cursor-pointer shadow-[1px_1px_1px_rgba(0,0,0,0.1)]"
+        className="flex items-center justify-between gap-5 box-border p-5 pointer-events-auto cursor-pointer shadow-[1px_1px_1px_rgba(0,0,0,0.1)]"
       >
-        <img
-          src={Assets.LeftArrowIcon}
-          className="w-4 h-4 pointer-events-auto blue-filter"
-        />
-        <h1
-          style={{ color: colors.primary }}
-          className="font-bold text-[1.2rem]"
-        >
-          Admin
-        </h1>
+        <div className="flex justify-center items-center gap-5">
+          <img
+            src={Assets.LeftArrowIcon}
+            className="w-4 h-4 pointer-events-auto blue-filter"
+          />
+          <h1
+            style={{ color: colors.primary }}
+            className="font-bold text-[1.2rem]"
+          >
+            Admin
+          </h1>
+        </div>
+        <div className="bg-gray-50 p-3 rounded-full shadow cursor-pointer">
+          <img
+            onClick={(e) => {
+              e.stopPropagation();
+              refreshMessages();
+            }}
+            src={Assets.RefreshIcon}
+            className="w-4 h-4"
+          />
+        </div>
       </div>
-
       <div className="w-full flex-1 overflow-hidden overflow-y-auto flex flex-col justify-end bg-blue-200/10">
         {loading && (
           <div className="h-full  from-gray-50 to-white p-4">
@@ -57,7 +68,10 @@ const Chat = ({ isOpen, openChat }) => {
             {!item.isUser && (
               <div className="flex justify-center items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-gray-300 overflow-hidden">
-                  <img src={item.profile} className="w-full h-full object-cover" />
+                  <img
+                    src={item.profile}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="bg-white p-3 rounded-2xl shadow text-[0.9rem]">
                   <p style={{ color: colors.hytam }} className="font-bold">
@@ -77,7 +91,10 @@ const Chat = ({ isOpen, openChat }) => {
                   <p style={{ color: colors.hytam }}>{item.message}</p>
                 </div>
                 <div className="h-10 w-10 rounded-full bg-gray-300 overflow-hidden">
-                  <img src={item.profile} className="w-full h-full object-cover" />
+                  <img
+                    src={item.profile}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             )}

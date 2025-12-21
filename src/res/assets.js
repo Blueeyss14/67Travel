@@ -22,6 +22,7 @@ import TicketIcon from "../../assets/icons/ticket.png";
 import CameraIcon from "../../assets/icons/camera.png";
 import MoreVertIcon from "../../assets/icons/more_vert.png";
 import NotificationIcon from "../../assets/icons/notification.png";
+import RefreshIcon from "../../assets/icons/refresh.png";
 
 import BookingSticker from "../../assets/stickers/booking.png";
 import MessageSticker from "../../assets/stickers/message.png";
@@ -59,4 +60,5 @@ export const Assets = {
   NotificationSticker,
   PaymentSticker,
   ReminderSticker,
+  RefreshIcon,
 };

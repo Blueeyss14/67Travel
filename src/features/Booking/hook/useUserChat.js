@@ -42,6 +42,18 @@ export const useUserChat = () => {
     return data;
   };
 
+  const refreshMessages = async () => {
+    try {
+      setLoading(true);
+      const raw = await fetchMyMessages();
+      setMessages(mapMessagesFromApi(raw, { user, photo }));
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const init = async () => {
       try {
@@ -96,6 +108,8 @@ export const useUserChat = () => {
       },
     });
 
+    refreshMessages();
+
     if (!chatRes.ok) return;
     const data = await chatRes.json();
     setMessages(mapMessagesFromApi(data, { user, photo }));
@@ -105,5 +119,6 @@ export const useUserChat = () => {
     messages,
     loading,
     sendUserMessage,
+    refreshMessages,
   };
 };
