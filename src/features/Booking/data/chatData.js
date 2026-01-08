@@ -41,7 +41,7 @@ export function mapMessagesFromApi(rawData, { user, photo }) {
 
       if (item.adminMessage) {
         msgs.push({
-          profile: "/images/image1.jpg",
+          profile: "/images/konatsuu.jpg",
           message: item.adminMessage,
           isUser: false,
           role: "Admin",
